@@ -1,9 +1,9 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import './styles/global.css';
-import Main from './pages/Main.jsx';
+import RouteApp from './Routes';
 
 const mainElement = document.querySelector('#root');
 const root = createRoot(mainElement);
 
-root.render(<Main />);
+root.render(<RouteApp />);

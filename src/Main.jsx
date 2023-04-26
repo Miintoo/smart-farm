@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const Main = () => {
+function Main() {
   const [book, setBook] = useState(0);
   return (
     <>
@@ -8,6 +8,6 @@ const Main = () => {
       <button onClick={() => setBook((prev) => prev + 1)}>증가</button>
     </>
   );
-};
+}
 
 export default Main;
