@@ -1,9 +1,12 @@
 import React from 'react';
-import { createRoot } from 'react-dom/client';
-import './styles/global.css';
-import RouteApp from './Routes';
+import ReactDOM from 'react-dom/client';
+import Router from './Router';
 
-const mainElement = document.querySelector('#root');
-const root = createRoot(mainElement);
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <Router />
+  </React.StrictMode>
+);
 
-root.render(<RouteApp />);
+
