@@ -23,7 +23,7 @@ const Status = styled.div`
 `;
 
 const StatusImage = styled.img`
-  margin-left: 3%;
+  margin-left: 5%;
 `;
 
 const StatusMessage = styled.p`
@@ -31,7 +31,7 @@ const StatusMessage = styled.p`
   font-size: 2.25rem;
   line-height: 2rem;
   color: #c6a692;
-  margin: 0.4% 0 0 2%;
+  margin: 0.4% 0 0 3%;
 `;
 
 export default sensorStatus;
