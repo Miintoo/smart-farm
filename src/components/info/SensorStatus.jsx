@@ -11,15 +11,16 @@ function sensorStatus() {
 }
 
 const Status = styled.div`
-  box-sizing: border-box;
   display: flex;
   align-items: center;
-  border: 2px solid #c6a692;
-  background: #ffffff;
-  border-radius: 10px;
-  margin-left: 3%;
-  height: 100%;
+  box-sizing: border-box;
+  border: 0.125rem solid #c6a692;
+  border-radius: 0.625rem;
   width: 100%;
+  height: 100%;
+  margin-left: 3%;
+
+  background: #ffffff;
 `;
 
 const StatusImage = styled.img`
@@ -27,11 +28,13 @@ const StatusImage = styled.img`
 `;
 
 const StatusMessage = styled.p`
+  margin: 0.4% 0 0 3%;
+
+  color: #c6a692;
+
   font-family: 'Jua';
   font-size: 2.25rem;
   line-height: 2rem;
-  color: #c6a692;
-  margin: 0.4% 0 0 3%;
 `;
 
 export default sensorStatus;
