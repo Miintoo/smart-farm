@@ -11,6 +11,7 @@ function sensorStatus() {
 }
 
 const Status = styled.div`
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   border: 2px solid #c6a692;
