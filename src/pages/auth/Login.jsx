@@ -163,5 +163,6 @@ const InfoButtonItem = styled.li`
 `;
 
 const AlertSmall = styled.small`
+  font-family: 'Jua';
   color: red;
 `;
