@@ -23,7 +23,6 @@ export default function Login() {
       <LoginTitle>로그인</LoginTitle>
       <LoginForm onSubmit={handleSubmit(onSubmit)}>
         <LoginInputBox
-          type="email"
           name="email"
           placeholder="email"
           aria-invalid={!isDirty ? undefined : errors.email ? 'true' : 'false'}
@@ -37,7 +36,6 @@ export default function Login() {
         />
         {errors.email && <AlertSmall>{errors.email.message}</AlertSmall>}
         <LoginInputBox
-          type="password"
           name="password"
           placeholder="password"
           aria-invalid={!isDirty ? undefined : errors.password ? 'true' : 'false'}
@@ -98,7 +96,7 @@ const LoginTitle = styled.h2`
 
 const LoginForm = styled.form`
   width: 45%;
-  margin: 0 auto 2.8rem;
+  margin: 0 auto 1.6rem;
 
   ${mediaQuery[1]} {
     width: 80%;
