@@ -18,7 +18,6 @@ export default function Login() {
   // 로그인시 처리 로직
   const onSubmit = async () => {
     // axios.post('url주소', data).then((response) => {});
-    alert('로그인 됐습니다.');
   };
   return (
     <LoginBox>
@@ -71,13 +70,14 @@ export default function Login() {
 
 // css 부분
 const LoginBox = styled.div`
+  width: 46rem;
+  height: 33rem;
+
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 46rem;
-  height: 33rem;
-  vertical-align: middle;
+
   border: 0.6rem solid #c6a692;
 
   ${mediaQuery[1]} {
