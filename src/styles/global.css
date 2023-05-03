@@ -134,11 +134,11 @@ button {
   cursor: pointer;
 }
 
-/* @font-face {
+@font-face {
   font-family: 'Jua';
 
   src: url('./fonts/Jua-Regular.ttf');
 
   font-weight: 400;
   font-style: normal;
-} */
+}

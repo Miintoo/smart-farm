@@ -3,6 +3,9 @@ import { useForm } from 'react-hook-form';
 // import axios from 'axios';
 import styled from '@emotion/styled';
 
+const breakpoints = [360, 768, 1024];
+const mediaQuery = breakpoints.map((breakPoint) => `@media (max-width: ${breakPoint}px)`);
+
 export default function Login() {
   const {
     register,
@@ -13,6 +16,7 @@ export default function Login() {
   // 로그인시 처리 로직
   const onSubmit = async () => {
     // axios.post('url주소', data).then((response) => {});
+    alert('로그인 됐습니다.');
   };
   return (
     <LoginBox>
@@ -65,44 +69,66 @@ const LoginBox = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 50rem;
-  height: 35rem;
+  width: 46rem;
+  height: 33rem;
   vertical-align: middle;
-  border: 3px solid #c6a692;
+  border: 0.6rem solid #c6a692;
+
+  ${mediaQuery[1]} {
+    width: 80vw;
+    height: 46rem;
+  }
+
+  ${mediaQuery[0]} {
+    border: none;
+  }
 `;
 
 const LoginTitle = styled.h2`
   height: 7rem;
-  text-align: center;
-  font-size: 3rem;
-  font-weight: bold;
   margin-top: 4rem;
+
+  text-align: center;
+  font-family: 'Jua';
+  font-size: 4rem;
+  font-weight: 400;
+
   color: #c6a692;
 `;
 
 const LoginForm = styled.form`
   width: 45%;
   margin: 0 auto 2.8rem;
+
+  ${mediaQuery[1]} {
+    width: 80%;
+  }
+
+  ${mediaQuery[0]} {
+    width: 100%;
+  }
 `;
 
 const LoginInputBox = styled.input`
   width: 100%;
   height: 4rem;
-  margin-bottom: 0.5rem;
+  margin: 0.5rem 0 0.2rem 0;
   padding-left: 0.5rem;
   border: 0.15rem solid rgba(0, 0, 0, 0.1);
   border-radius: 0.2rem;
-  font-size: 1.2rem;
+
+  font-family: 'Jua';
+  font-size: 1.1rem;
 `;
 
 const LoginButton = styled.button`
   width: 100%;
   height: 3.8rem;
-
   margin-top: 2rem;
 
+  font-family: 'Jua';
   font-size: 1.6rem;
-  font-weight: bold;
+  font-weight: 200;
   color: #c6a692;
   background-color: white;
 
@@ -118,9 +144,25 @@ const InfoButtonContainer = styled.ul`
   font-size: 0.8rem;
   font-weight: bold;
   opacity: 0.3;
+
+  ${mediaQuery[1]} {
+    width: 80%;
+  }
+
+  ${mediaQuery[0]} {
+    width: 100%;
+  }
 `;
 
-const InfoButtonItem = styled.li``;
+const InfoButtonItem = styled.li`
+  font-family: 'Jua';
+
+  cursor: pointer;
+  &:hover {
+    transition: 0.2s ease-out;
+    color: #c6a692;
+  }
+`;
 
 const AlertSmall = styled.small`
   color: red;
