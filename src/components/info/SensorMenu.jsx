@@ -30,22 +30,22 @@ const NavWrapper = styled.div`
 
 const UL = styled.ul`
   display: flex;
-  gap: 10vw;
+  gap: 12vw;
 `;
 
 const Li = styled.li`
   > a {
-    padding: 1rem 2.5rem 0.7rem;
+    padding: 1.5rem 3.5rem 1.1rem;
 
     color: #c6a692;
 
     font-family: 'Jua', sans-serif;
-    font-size: 2.5rem;
-    line-height: 3.125rem;
+    font-size: 3.2rem;
+    line-height: 2.5rem;
     text-decoration: none;
 
     &.active {
-      border-radius: 20px;
+      border-radius: 2rem;
 
       background: #c6a692;
       color: #ffffff;
