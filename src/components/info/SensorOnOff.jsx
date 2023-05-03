@@ -2,7 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 
-function SensorOnOff({ actuatorType }) {
+export default function SensorOnOff({ actuatorType }) {
   const actuatorState = 1; // actuator on/off 값 받아와서 useState로 관리 0: 꺼짐, 1: 켜짐
   const onOffStatus = [
     {
@@ -32,9 +32,9 @@ const Status = styled.button`
   align-items: center;
   width: 100%;
   height: 100%;
-  border: 0.125rem solid #c6a692;
-  border-radius: 0.625rem;
-  margin-left: 3%;
+  border: 0.2rem solid #c6a692;
+  border-radius: 1rem;
+  margin-left: 1.6rem;
 
   background: #ffffff;
 
@@ -42,19 +42,15 @@ const Status = styled.button`
 `;
 
 const StatusImage = styled.img`
-  margin-left: 5%;
-  width: 4.1875rem;
-  height: 4rem;
+  margin-left: 3.6rem;
 `;
 
 const StatusMessage = styled.p`
-  margin: 0.4% 0 0 3%;
+  margin: 0.3rem 0 0 2.5rem;
 
   color: ${(props) => (props.isActive ? '#c6a692' : '#A9A8A8')};
 
   font-family: 'Jua';
-  font-size: 2.25rem;
-  line-height: 2rem;
+  font-size: 3.6rem;
+  line-height: 4.5rem;
 `;
-
-export default SensorOnOff;
