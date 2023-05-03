@@ -2,11 +2,13 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 // import axios from 'axios';
 import styled from '@emotion/styled';
+import { useNavigate } from 'react-router-dom';
 
 const breakpoints = [360, 768, 1024];
 const mediaQuery = breakpoints.map((breakPoint) => `@media (max-width: ${breakPoint}px)`);
 
 export default function Login() {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -53,7 +55,13 @@ export default function Login() {
         </LoginButton>
       </LoginForm>
       <InfoButtonContainer>
-        <InfoButtonItem>회원가입</InfoButtonItem>
+        <InfoButtonItem
+          onClick={() => {
+            navigate('/register');
+          }}
+        >
+          회원가입
+        </InfoButtonItem>
         <InfoButtonItem>아이디찾기</InfoButtonItem>
         <InfoButtonItem>비밀번호찾기</InfoButtonItem>
       </InfoButtonContainer>
