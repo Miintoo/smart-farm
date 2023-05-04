@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import SensorMenu from '../../components/info/SensorMenu';
 import SensorStatus from '../../components/info/SensorStatus';
 import SensorOnOff from '../../components/info/SensorOnOff';
+import SensorInfo from '../../components/info/SensorInfo';
 
 export default function SoilInfo() {
   const deviceName = '상추';
@@ -15,6 +16,9 @@ export default function SoilInfo() {
           <SensorStatus />
           <SensorOnOff actuatorType="펌프" />
         </SensorInfoWrapper>
+        <SensorGraphWrapper>
+          <SensorInfo />
+        </SensorGraphWrapper>
       </Wrapper>
     </>
   );
@@ -50,4 +54,12 @@ const SensorInfoWrapper = styled.div`
   width: calc(100% - 4.8rem);
   height: 10rem;
   margin: 5.6rem 2.4rem;
+`;
+
+const SensorGraphWrapper = styled.div`
+  position: absolute;
+
+  width: calc(100% - 4.8rem);
+  height: 76%;
+  margin: 17.2rem 2.4rem;
 `;

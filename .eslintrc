@@ -4,6 +4,9 @@
   "plugins": ["prettier"],
   "rules": {
     "react/jsx-filename-extension": ["error", { "extensions": [".js", ".jsx"] }],
+    "import/no-extraneous-dependencies": ["off"], // dependency import 에러 off 설정
+    "react/jsx-props-no-spreading": ["off"], //jsx에서 spread 문법 사용유무 설정
+    "no-nested-ternary": "off", // 중첩 삼항 연산자 사용 가능 설정
     "prettier/prettier": [
       "error",
       {
