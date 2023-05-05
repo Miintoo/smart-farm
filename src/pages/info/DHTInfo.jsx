@@ -10,18 +10,14 @@ export default function DHTInfo() {
 
   const deviceName = '상추';
 
-  useEffect(
-    () => {
-      const test = setInterval(() => {
-        setTemp(Math.floor(Math.random() * 100));
-        setHumid(Math.floor(Math.random() * 100));
-      }, 2000);
+  useEffect(() => {
+    const test = setInterval(() => {
+      setTemp(Math.floor(Math.random() * 100));
+      setHumid(Math.floor(Math.random() * 100));
+    }, 2000);
 
-      return () => clearInterval(test);
-    },
-    [temp],
-    [humid]
-  );
+    return () => clearInterval(test);
+  }, [temp, humid]);
 
   return (
     <>
@@ -49,6 +45,7 @@ export default function DHTInfo() {
 const Wrapper = styled.div`
   position: relative;
   width: 90vw;
+  /* max-width: 129.6rem; */
   height: 85vh;
   border-radius: 1rem;
   margin: 0 auto;

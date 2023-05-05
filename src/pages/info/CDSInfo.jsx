@@ -3,11 +3,44 @@ import styled from '@emotion/styled';
 import SensorMenu from '../../components/info/SensorMenu';
 import SensorStatus from '../../components/info/SensorStatus';
 import SensorOnOff from '../../components/info/SensorOnOff';
-import SensorInfo from '../../components/info/SensorInfo';
+// import SensorInfo from '../../components/info/SensorInfo';
+import chart from '../../components/info/C3Gauge';
 
 export default function CDSInfo() {
   const [cds, setCDS] = useState(70);
   const deviceName = '상추';
+  // const trigger = chart();
+  chart();
+
+  // setTimeout(function () {
+  //   trigger.load({
+  //     columns: [['data', 10]]
+  //   });
+  // }, 1000);
+
+  // setTimeout(function () {
+  //   trigger.load({
+  //     columns: [['data', 50]]
+  //   });
+  // }, 2000);
+
+  // setTimeout(function () {
+  //   trigger.load({
+  //     columns: [['data', 70]]
+  //   });
+  // }, 3000);
+
+  // setTimeout(function () {
+  //   trigger.load({
+  //     columns: [['data', 0]]
+  //   });
+  // }, 4000);
+
+  // setTimeout(function () {
+  //   trigger.load({
+  //     columns: [['data', 100]]
+  //   });
+  // }, 5000);
 
   useEffect(() => {
     const test = setInterval(() => {
@@ -32,7 +65,8 @@ export default function CDSInfo() {
             <img alt="조도 정보" src="/images/question.png" />
           </InfoModal>
           <GraphWrapper>
-            <SensorInfo sensorData={cds} sensorName="조도" unit="lux" />
+            <div id="gaugechart" />
+            {/* <SensorInfo sensorData={cds} sensorName="조도" unit="lux" /> */}
           </GraphWrapper>
         </SensorInfoWrapper>
       </Wrapper>
@@ -46,6 +80,7 @@ const Wrapper = styled.div`
   height: 85vh;
   border-radius: 1rem;
   margin: 0 auto;
+  max-width: 129.6rem;
 
   background: #f0e7e2;
 `;

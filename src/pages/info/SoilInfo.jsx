@@ -46,6 +46,7 @@ const Wrapper = styled.div`
   height: 85vh;
   border-radius: 1rem;
   margin: 0 auto;
+  /* max-width: 129.6rem; */
 
   background: #f0e7e2;
 `;
