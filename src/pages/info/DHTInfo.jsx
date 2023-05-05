@@ -1,13 +1,27 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
 import SensorMenu from '../../components/info/SensorMenu';
 import SensorStatus from '../../components/info/SensorStatus';
 import SensorInfo from '../../components/info/SensorInfo';
 
 export default function DHTInfo() {
+  const [temp, setTemp] = useState(26);
+  const [humid, setHumid] = useState(70);
+
   const deviceName = '상추';
-  const temp = 26;
-  const humid = 60;
+
+  useEffect(
+    () => {
+      const test = setInterval(() => {
+        setTemp(Math.floor(Math.random() * 100));
+        setHumid(Math.floor(Math.random() * 100));
+      }, 2000);
+
+      return () => clearInterval(test);
+    },
+    [temp],
+    [humid]
+  );
 
   return (
     <>
@@ -23,8 +37,8 @@ export default function DHTInfo() {
             <img alt="온습도 정보" src="/images/question.png" />
           </InfoModal>
           <GraphWrapper>
-            <SensorInfo sensorData={temp} sensorName="온도" />
-            <SensorInfo sensorData={humid} sensorName="습도" />
+            <SensorInfo sensorData={temp} sensorName="온도" unit="º" />
+            <SensorInfo sensorData={humid} sensorName="습도" unit="%" />
           </GraphWrapper>
         </SensorInfoWrapper>
       </Wrapper>
