@@ -134,6 +134,9 @@ button {
   cursor: pointer;
 }
 
+html {
+  font-size: 62.5%;
+}
 @font-face {
   font-family: 'Jua';
 
