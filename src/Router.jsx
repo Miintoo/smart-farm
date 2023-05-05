@@ -4,6 +4,7 @@ import Login from './pages/auth/Login';
 import DHTInfo from './pages/info/DHTInfo';
 import SoilInfo from './pages/info/SoilInfo';
 import CDSInfo from './pages/info/CDSInfo';
+import Register from './pages/auth/Register';
 
 export default function Router() {
   return (
@@ -13,6 +14,7 @@ export default function Router() {
         <Route path="/dht" element={<DHTInfo />} />
         <Route path="/soil" element={<SoilInfo />} />
         <Route path="/lux" element={<CDSInfo />} />
+        <Route path="/register" exact element={<Register />} />
       </Routes>
     </BrowserRouter>
   );
