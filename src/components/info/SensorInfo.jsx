@@ -71,7 +71,7 @@ const TextContainer = styled.div`
   width: 40%;
   top: 55%;
 
-  > p:first-child {
+  > p:first-of-type {
     padding-bottom: 1rem;
     font-size: 2rem;
     line-height: 2.4rem;
