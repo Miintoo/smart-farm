@@ -1,32 +1,38 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import mediaQuery from '../../utils/breakPointUI';
 
 export default function Register() {
   return (
     <RegisterBox>
       <RegisterTitle>환영합니다!</RegisterTitle>
       <RegisterForm>
-        <InputLabel htmlFor="email">
-          이메일
-          <InputBox id="email" type="text" />
-          {/* <select name="" id="" /> */}
-        </InputLabel>
-        <InputLabel htmlFor="password">
-          비밀번호
-          <InputBox id="password" type="text" />
-        </InputLabel>
-        <InputLabel htmlFor="password-confirm">
-          비밀번호 확인
-          <InputBox id="password-confirm" type="text" />
-        </InputLabel>
-        <InputLabel htmlFor="name">
-          이름
-          <InputBox id="name" type="text" />
-        </InputLabel>
-        <InputLabel htmlFor="phone-number">
-          전화번호
-          <InputBox id="phone-number" type="text" />
-        </InputLabel>
+        <InputLabel htmlFor="email">이메일</InputLabel>
+        <EmailBox>
+          <InputEmailBox id="email" type="text" />
+          <EmailSelectBox name="address" id="email">
+            <option value="" selected>
+              선택
+            </option>
+            <option value="naver.com">naver.com</option>
+            <option value="google.com">google.com</option>
+            <option value="daum.com">daum.com</option>
+          </EmailSelectBox>
+        </EmailBox>
+        <InputLabel htmlFor="password">비밀번호</InputLabel>
+        <InputBox id="password" type="text" />
+        <InputLabel htmlFor="password-confirm">비밀번호 확인</InputLabel>
+        <InputBox id="password-confirm" type="text" />
+        <NamePhoneBox>
+          <NameBox>
+            <InputNameLabel htmlFor="name">이름</InputNameLabel>
+            <InputNameBox id="name" type="text" />
+          </NameBox>
+          <PhoneBox>
+            <InputPhoneLabel htmlFor="phone-number">전화번호</InputPhoneLabel>
+            <InputBox id="phone-number" type="text" />
+          </PhoneBox>
+        </NamePhoneBox>
         <InputButton type="submit">가입하기</InputButton>
       </RegisterForm>
     </RegisterBox>
@@ -34,8 +40,8 @@ export default function Register() {
 }
 
 const RegisterBox = styled.div`
-  width: 60vw;
-  height: 74vh;
+  width: 62vw;
+  height: 60vh;
   margin: auto;
 
   position: absolute;
@@ -44,13 +50,21 @@ const RegisterBox = styled.div`
   transform: translate(-50%, -50%);
 
   border: 0.6rem solid #c6a692;
+
+  ${mediaQuery[1]} {
+    width: 78vw;
+  }
+
+  ${mediaQuery[0]} {
+    border: none;
+  }
 `;
 
 const RegisterTitle = styled.h2`
-  margin-top: 2.4rem;
+  margin-top: 5rem;
 
   font-family: 'Jua';
-  font-size: 4rem;
+  font-size: 4.4rem;
   font-weight: 400;
   text-align: center;
 
@@ -59,33 +73,98 @@ const RegisterTitle = styled.h2`
 
 const RegisterForm = styled.form`
   width: 60%;
-  margin: 3rem auto;
+  margin: 6rem auto;
 
   font-family: 'Jua';
-`;
 
-const InputLabel = styled.label`
-  font-size: 1.6rem;
-  color: #6c5d53;
+  ${mediaQuery[1]} {
+    width: 80%;
+  }
 
-  nth-child(1) {
-    color: black;
+  ${mediaQuery[0]} {
+    width: 100%;
   }
 `;
 
-// const InputEmailBox = styled.div``;
+const EmailBox = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const NamePhoneBox = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const NameBox = styled.div`
+  width: 50%;
+`;
+
+const PhoneBox = styled.div`
+  width: 50%;
+`;
+
+const InputLabel = styled.label`
+  display: block;
+  font-size: 2rem;
+  color: #6c5d53;
+
+  ${mediaQuery[1]} {
+    font-size: 1.4rem;
+  }
+`;
+
+const InputNameLabel = styled(InputLabel)`
+  width: 50%;
+`;
+const InputPhoneLabel = styled(InputLabel)`
+  width: 50%;
+`;
+
 const InputBox = styled.input`
   width: 100%;
-  height: 2rem;
+  height: 2.8rem;
 
   margin: 0.4rem 0 1.4rem 0;
 
-  border: 0.15rem solid rgba(0, 0, 0, 0.1);
+  border: 0.2rem solid rgba(0, 0, 0, 0.2);
   border-radius: 0.2rem;
+`;
+
+const InputEmailBox = styled(InputBox)`
+  width: 60%;
+  margin-right: 1.2rem;
+`;
+
+const InputNameBox = styled(InputBox)`
+  width: 70%;
+`;
+
+const EmailSelectBox = styled.select`
+  width: 30%;
+  height: 2.8rem;
+  margin: 0.4rem 0 1.4rem 0;
+
+  font-size: 1.4rem;
+  font-family: 'Jua';
+
+  ${mediaQuery[1]} {
+    font-size: 1.1rem;
+  }
 `;
 
 const InputButton = styled.button`
   width: 100%;
+  height: 4rem;
 
+  margin-top: 2.4rem;
+
+  border: 0.4rem solid #c6a692;
+  border-radius: 3rem;
+  background-color: white;
+
+  font-size: 1.9rem;
   font-family: 'Jua';
+
+  color: #c6a692;
 `;

@@ -3,9 +3,7 @@ import { useForm } from 'react-hook-form';
 // import axios from 'axios';
 import styled from '@emotion/styled';
 import { useNavigate } from 'react-router-dom';
-
-const breakpoints = [360, 768, 1024];
-const mediaQuery = breakpoints.map((breakPoint) => `@media (max-width: ${breakPoint}px)`);
+import mediaQuery from '../../utils/breakPointUI';
 
 export default function Login() {
   const navigate = useNavigate();
