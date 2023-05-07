@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import styled from '@emotion/styled';
 import { useNavigate } from 'react-router-dom';
 import mediaQuery from '../../utils/breakPointUI';
+import validation from '../../utils/validation';
 
 export default function Login() {
   const navigate = useNavigate();
@@ -25,26 +26,14 @@ export default function Login() {
           name="email"
           placeholder="email"
           aria-invalid={!isDirty ? undefined : errors.email ? 'true' : 'false'}
-          {...register('email', {
-            required: '이메일은 필수 입력입니다.',
-            pattern: {
-              value: /\S+@\S+\.\S+/,
-              message: '이메일 형식에 맞지 않습니다.'
-            }
-          })}
+          {...register('email', validation('email'))}
         />
         {errors.email && <AlertSmall>{errors.email.message}</AlertSmall>}
         <LoginInputBox
           name="password"
           placeholder="password"
           aria-invalid={!isDirty ? undefined : errors.password ? 'true' : 'false'}
-          {...register('password', {
-            required: '비밀번호는 필수 입력입니다.',
-            minLength: {
-              value: 8,
-              message: '8자리 이상 비밀번호를 사용하세요.'
-            }
-          })}
+          {...register('password', validation('password'))}
         />
         {errors.password && <AlertSmall role="alert">{errors.password.message}</AlertSmall>}
         <LoginButton type="submit" disabled={isSubmitting}>
