@@ -24,8 +24,9 @@ export default function SensorInfoTemplate({ deviceName, sensorName, unit, senso
         </SensorStatusWrapper>
         <SensorInfoWrapper>
           <InfoModal>
-            {sensorName} 정보
+            {sensorName !== '토양수분' && sensorName !== '조도' ? '온습도 정보' : `${sensorName} 정보`}
             <img alt={`${sensorName} 정보`} src="/images/question.png" />
+            <img alt={`${sensorName} 상세`} src="/images/rightArrow.png" />
           </InfoModal>
           <GraphWrapper>
             {sensorName !== '토양수분' && sensorName !== '조도' ? (
@@ -45,10 +46,11 @@ export default function SensorInfoTemplate({ deviceName, sensorName, unit, senso
 
 SensorInfoTemplate.propTypes = {
   deviceName: PropTypes.string.isRequired,
-  sensorName: PropTypes.string.isRequired,
+  sensorName: PropTypes.oneOfType([PropTypes.string, PropTypes.array]).isRequired,
   unit: PropTypes.string.isRequired,
-  sensorData: PropTypes.number.isRequired
+  sensorData: PropTypes.oneOfType([PropTypes.number, PropTypes.array]).isRequired
 };
+
 const Wrapper = styled.div`
   position: relative;
   width: 90vw;
@@ -86,7 +88,7 @@ const SensorInfoWrapper = styled.div`
   position: absolute;
 
   width: calc(100% - 4.8rem);
-  height: 76%;
+  height: calc(85vh - 19.5rem);
   border: 0.2rem solid #c6a692;
   border-radius: 1rem;
   margin: 17.2rem 2.4rem;
@@ -106,10 +108,18 @@ const InfoModal = styled.div`
   font-size: 2rem;
   line-height: 2.5rem;
 
-  > img {
+  > img:first-of-type {
     position: absolute;
 
     margin: -0.1rem 0 0 1rem;
+
+    cursor: pointer;
+  }
+
+  > img:last-child {
+    position: absolute;
+
+    margin: -0.1rem 0 0 5.4rem;
 
     cursor: pointer;
   }
