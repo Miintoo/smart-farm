@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 // import axios from 'axios';
 import styled from '@emotion/styled';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import mediaQuery from '../../utils/breakPointUI';
 import validation from '../../utils/validation';
 
@@ -15,8 +16,12 @@ export default function Login() {
   } = useForm();
 
   // 로그인시 처리 로직
-  const onSubmit = async () => {
-    // axios.post('url주소', data).then((response) => {});
+  const onSubmit = async (data) => {
+    try {
+      await axios.post('http://34.64.88.23/api/login', data);
+    } catch (error) {
+      Error('axios 로그인 실패');
+    }
   };
   return (
     <LoginBox>

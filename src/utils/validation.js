@@ -15,6 +15,10 @@ export default function validation(action) {
           value: 8,
           message: '8자리 이상 비밀번호를 사용하세요.'
         }
+        // pattern: {
+        //   value: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]$/,
+        //   message: '하나이상의 문자 및 숫자 특수문자를 포함 해주세요.'
+        // }
       };
     case 'name':
       return {
