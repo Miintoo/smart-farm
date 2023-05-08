@@ -5,9 +5,9 @@ import { Doughnut } from 'react-chartjs-2';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-export default function sensorInfo({ sensorData, sensorName, unit }) {
+export default function sensorInfo({ sensorData, sensorName }) {
   let gaugeColor = '#ced4da';
-
+  // console.log(Doughnut);
   if (sensorData < 30) {
     gaugeColor = '#FF0000';
   } else if (sensorData < 60) {
@@ -22,12 +22,38 @@ export default function sensorInfo({ sensorData, sensorName, unit }) {
     labels: '',
     datasets: [
       {
-        label: `현재 ${sensorName} `,
+        label: `${sensorName} `,
         data: [sensorData, 100 - sensorData],
         backgroundColor: [gaugeColor, '#ced4da'],
         borderWidth: 1
       }
     ]
+  };
+
+  // chart 가운데 text 구현
+  const deviceValue = {
+    id: 'deviceValue',
+    beforeDatasetsDraw(chart) {
+      const { ctx } = chart;
+      const chartData = chart.data;
+
+      ctx.save();
+      ctx.font = 'bold 2rem sans-serif';
+      ctx.fillStyle = 'black';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+
+      ctx.fillText(
+        `${chartData.datasets[0].label}`,
+        chart.getDatasetMeta(0).data[0].x / 0.98,
+        chart.getDatasetMeta(0).data[0].y / 1.3
+      );
+      ctx.fillText(
+        `${chartData.datasets[0].data[0]}`,
+        chart.getDatasetMeta(0).data[0].x,
+        chart.getDatasetMeta(0).data[0].y / 1.08
+      );
+    }
   };
 
   const options = {
@@ -37,8 +63,9 @@ export default function sensorInfo({ sensorData, sensorName, unit }) {
     rotation: -90, // -90도 부터 그래프 시작
     circumference: 180, // 180도만큼 보여줌
     // animation: false, // 기본 애니메이션 동작 x
-    cutout: 60, // 차트의 굵기 조정(값이 클수록 좁고, 작을수록 넓음)
-    hover: data.datasets.data,
+    cutout: '55%', // 차트의 굵기 조정(값이 클수록 좁고, 작을수록 넓음)
+    // hover: data === data.datasets[0].data[0],
+    // responsive: true,
     plugins: {
       tooltip: {
         enabled: false // tooltip 사용 x
@@ -48,14 +75,7 @@ export default function sensorInfo({ sensorData, sensorName, unit }) {
 
   return (
     <Wrapper>
-      <Doughnut data={data} options={options} />
-      <TextContainer>
-        <p>{sensorName}</p>
-        <p>
-          {sensorData}
-          {unit}
-        </p>
-      </TextContainer>
+      <Doughnut data={data} options={options} plugins={[deviceValue]} />
     </Wrapper>
   );
 }
@@ -63,29 +83,4 @@ export default function sensorInfo({ sensorData, sensorName, unit }) {
 const Wrapper = styled.div`
   width: 40%;
   height: 40%;
-`;
-
-const TextContainer = styled.div`
-  position: absolute;
-  margin: auto;
-  width: 40%;
-  top: 55%;
-
-  > p:first-of-type {
-    padding-bottom: 1rem;
-    font-size: 2rem;
-    line-height: 2.4rem;
-    text-align: center;
-
-    color: black;
-  }
-
-  > p:last-child {
-    font-size: 03rem;
-    line-height: 2rem;
-    margin-left: 0.7rem;
-    text-align: center;
-
-    color: black;
-  }
 `;
