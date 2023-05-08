@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import SensorMenu from '../../components/info/SensorMenu';
 import SensorStatus from '../../components/info/SensorStatus';
 import SensorOnOff from '../../components/info/SensorOnOff';
-// import SensorInfo from '../../components/info/SensorInfo';
+import SensorInfo from '../../components/info/SensorInfo';
 
 export default function CDSInfo() {
   const [cds, setCDS] = useState(70);
@@ -31,7 +31,9 @@ export default function CDSInfo() {
             조도 정보
             <img alt="조도 정보" src="/images/question.png" />
           </InfoModal>
-          <GraphWrapper>{/* <SensorInfo sensorData={cds} sensorName="조도" unit="lux" /> */}</GraphWrapper>
+          <GraphWrapper>
+            <SensorInfo sensorData={cds} sensorName="조도" unit="lux" />
+          </GraphWrapper>
         </SensorInfoWrapper>
       </Wrapper>
     </>
