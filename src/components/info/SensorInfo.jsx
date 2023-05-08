@@ -1,11 +1,8 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 
-ChartJS.register(ArcElement, Tooltip, Legend);
-
-export default function sensorInfo({ sensorData, sensorName }) {
+export default function sensorInfo({ sensorData, sensorName, unit }) {
   let gaugeColor = '#ced4da';
   // console.log(Doughnut);
   if (sensorData < 30) {
@@ -45,11 +42,11 @@ export default function sensorInfo({ sensorData, sensorName }) {
 
       ctx.fillText(
         `${chartData.datasets[0].label}`,
-        chart.getDatasetMeta(0).data[0].x / 0.98,
+        chart.getDatasetMeta(0).data[0].x,
         chart.getDatasetMeta(0).data[0].y / 1.3
       );
       ctx.fillText(
-        `${chartData.datasets[0].data[0]}`,
+        `${chartData.datasets[0].data[0]}${unit}`,
         chart.getDatasetMeta(0).data[0].x,
         chart.getDatasetMeta(0).data[0].y / 1.08
       );
