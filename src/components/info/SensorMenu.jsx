@@ -3,18 +3,27 @@ import { NavLink } from 'react-router-dom';
 import styled from '@emotion/styled';
 import mediaQuery from '../../utils/breakPointUI';
 
-function sensorMenu() {
+function sensorMenu({ menuType }) {
+  let customLink = [];
+
+  if (menuType === 'info') {
+    customLink = ['/dht', '/soil', '/lux'];
+  } else {
+    // menuType === "detail"
+    customLink = ['/dht/detail', '/soil/detail', '/lux/detail'];
+  }
+
   return (
     <NavWrapper>
       <UL>
         <Li>
-          <NavLink to="/dht">온습도</NavLink>
+          <NavLink to={customLink[0]}>온습도</NavLink>
         </Li>
         <Li>
-          <NavLink to="/soil">토양수분</NavLink>
+          <NavLink to={customLink[1]}>토양수분</NavLink>
         </Li>
         <Li>
-          <NavLink to="/lux">조도</NavLink>
+          <NavLink to={customLink[2]}>조도</NavLink>
         </Li>
       </UL>
     </NavWrapper>

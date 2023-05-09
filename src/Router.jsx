@@ -8,6 +8,9 @@ import MyPage from './pages/main/MyPage';
 import DHTInfo from './pages/info/DHTInfo';
 import SoilInfo from './pages/info/SoilInfo';
 import CDSInfo from './pages/info/CDSInfo';
+import DHTDetail from './pages/info/DHTDetail';
+import SoilDetail from './pages/info/SoilDetail';
+import CDSDetail from './pages/info/CDSDetail';
 
 export default function Router() {
   // useEffect(() => {
@@ -26,6 +29,9 @@ export default function Router() {
         <Route path="/dht" element={<DHTInfo />} />
         <Route path="/soil" element={<SoilInfo />} />
         <Route path="/lux" element={<CDSInfo />} />
+        <Route path="/dht/detail" element={<DHTDetail />} />
+        <Route path="/soil/detail" element={<SoilDetail />} />
+        <Route path="/lux/detail" element={<CDSDetail />} />
       </Routes>
     </BrowserRouter>
   );

@@ -38,7 +38,6 @@ export default function sensorInfo({ sensorData, sensorName, unit }) {
       const chartData = chart.data;
 
       ctx.save();
-      console.log(window.innerWidth);
 
       if (window.innerWidth <= 360) {
         ctx.font = '0.8rem sans-serif';

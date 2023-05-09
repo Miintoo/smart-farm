@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
+import { useLocation, useNavigate } from 'react-router-dom';
 import SensorMenu from './SensorMenu';
 import SensorStatus from './SensorStatus';
 import SensorOnOff from './SensorOnOff';
@@ -11,6 +12,8 @@ import mediaQuery from '../../utils/breakPointUI';
 export default function SensorInfoTemplate({ deviceName, sensorName, unit, sensorData }) {
   const [isDht, setIsDht] = useState(false);
   const dhtProps = isDht ? { dht: true } : {};
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     if (sensorName === '온습도') {
@@ -18,12 +21,16 @@ export default function SensorInfoTemplate({ deviceName, sensorName, unit, senso
     }
   }, []);
 
+  const handleClick = () => {
+    navigate(`${location.pathname}/detail`);
+  };
+
   return (
     <>
       {/* <Container> */}
       <Sidebar />
       <InfoContainer>
-        <SensorMenu />
+        <SensorMenu menuType="info" />
         <Wrapper>
           <DeviceName>디바이스: {deviceName}</DeviceName>
           <SensorStatusWrapper {...dhtProps}>
@@ -34,7 +41,9 @@ export default function SensorInfoTemplate({ deviceName, sensorName, unit, senso
             <InfoModal>
               {sensorName} 정보
               <img alt={`${sensorName} 정보`} src="/images/question.png" />
-              <img alt={`${sensorName} 상세`} src="/images/rightArrow.png" />
+              <button type="button" onClick={handleClick}>
+                <img alt={`${sensorName} 상세`} src="/images/rightArrow.png" />
+              </button>
             </InfoModal>
             <GraphWrapper>
               {isDht ? (
@@ -115,7 +124,6 @@ const SensorStatusWrapper = styled.div`
   ${mediaQuery[2]} {
     flex-direction: column;
     gap: 1rem;
-
     height: ${(props) => (props.dht ? '12%' : '22%')};
   }
 
@@ -138,11 +146,11 @@ const SensorInfoWrapper = styled.div`
 
   ${mediaQuery[2]} {
     bottom: 2.5rem;
+
     height: ${(props) => (props.dht ? 'calc(85vh - 12% - 9.5rem)' : 'calc(85vh - 22% - 9.5rem)')};
   }
 
   ${mediaQuery[0]} {
-    bottom: 2.5rem;
     height: ${(props) => (props.dht ? 'calc(85vh - 9% - 9.5rem)' : 'calc(85vh - 21% - 9.5rem)')};
   }
 `;
@@ -161,22 +169,22 @@ const InfoModal = styled.div`
 
   > img:first-of-type {
     position: absolute;
-
     margin: -0.1rem 0 0 1rem;
 
     cursor: pointer;
   }
 
-  > img:last-child {
+  > button {
     position: absolute;
+    border: none;
+    margin: -0.2rem 0 0 4.7rem;
 
-    margin: -0.1rem 0 0 5.4rem;
-
-    cursor: pointer;
+    background: #fff;
   }
 
   ${mediaQuery[0]} {
     right: 7rem;
+
     margin-top: 1.5rem;
 
     font-size: 1.4rem;
@@ -212,8 +220,8 @@ const GraphWrapper = styled.div`
   }
 
   ${mediaQuery[0]} {
-    margin-top: 3rem;
     flex-direction: column;
     justify-content: space-evenly;
+    margin-top: 3rem;
   }
 `;
