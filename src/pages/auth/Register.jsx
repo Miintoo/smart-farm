@@ -5,7 +5,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import mediaQuery from '../../utils/breakPointUI';
 import validation from '../../utils/validation';
-import AuthModalOneButton from '../../components/auth-form/AuthModalOneButton';
+import AuthModalOneButton from '../../components/common/ModalOneButton';
 
 export default function Register() {
   const navigate = useNavigate();
@@ -35,7 +35,7 @@ export default function Register() {
   return (
     <>
       <RegisterBox>
-        <RegisterTitle>환영합니다!</RegisterTitle>
+        <RegisterTitle onClick={() => setIsOpen(true)}>환영합니다!</RegisterTitle>
         <RegisterForm onSubmit={handleSubmit(onSubmit)}>
           <InputLabel htmlFor="email">이메일</InputLabel>
           <InputEmailBox
@@ -92,7 +92,6 @@ export default function Register() {
           </InputButton>
         </RegisterForm>
       </RegisterBox>
-      {isOpen ? <ModalBackdrop onClick={handleClick} /> : ''}
       {isOpen ? (
         <AuthModalOneButton title="회원가입이 완료 되었습니다!" buttonDescription="확인" onClick={handleClick} />
       ) : (
@@ -221,16 +220,4 @@ const AlertSmall = styled.small`
   font-family: 'Jua';
   font-size: 1.2rem;
   color: red;
-`;
-
-const ModalBackdrop = styled.div`
-  position: fixed;
-  z-index: 2;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  background-color: rgba(0, 0, 0, 0.4);
-
-  pointer-events: none;
 `;

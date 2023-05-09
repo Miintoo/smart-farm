@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import mediaQuery from '../../utils/breakPointUI';
 import validation from '../../utils/validation';
+import loginSuccess from '../../utils/auth/loginSuccess';
 
 export default function Login() {
   const navigate = useNavigate();
@@ -18,11 +19,15 @@ export default function Login() {
   // 로그인시 처리 로직
   const onSubmit = async (data) => {
     try {
-      await axios.post('http://34.64.88.23/api/login', data);
+      const accessToken = await axios.post('http://34.64.88.23/api/login', data);
+      console.log(accessToken);
+
+      loginSuccess(accessToken);
     } catch (error) {
       Error('axios 로그인 실패');
     }
   };
+
   return (
     <LoginBox>
       <LoginTitle>로그인</LoginTitle>
@@ -36,6 +41,7 @@ export default function Login() {
         {errors.email && <AlertSmall>{errors.email.message}</AlertSmall>}
         <LoginInputBox
           name="password"
+          type="password"
           placeholder="password"
           aria-invalid={!isDirty ? undefined : errors.password ? 'true' : 'false'}
           {...register('password', validation('password'))}
@@ -62,8 +68,8 @@ export default function Login() {
 
 // css 부분
 const LoginBox = styled.div`
-  width: 46rem;
-  height: 33rem;
+  width: 60rem;
+  height: 48rem;
 
   position: absolute;
   top: 50%;
@@ -71,6 +77,11 @@ const LoginBox = styled.div`
   transform: translate(-50%, -50%);
 
   border: 0.6rem solid #c6a692;
+
+  ${mediaQuery[2]} {
+    width: 60rem;
+    height: 48rem;
+  }
 
   ${mediaQuery[1]} {
     width: 80vw;
@@ -84,18 +95,24 @@ const LoginBox = styled.div`
 
 const LoginTitle = styled.h2`
   height: 7rem;
-  margin-top: 4rem;
+  margin-top: 9rem;
+  margin-bottom: 2rem;
 
   text-align: center;
   font-family: 'Jua';
-  font-size: 4rem;
-  font-weight: 400;
+  font-size: 6rem;
 
   color: #c6a692;
+
+  ${mediaQuery[1]} {
+    margin-top: 8.8rem;
+    margin-bottom: 0rem;
+    font-size: 4rem;
+  }
 `;
 
 const LoginForm = styled.form`
-  width: 45%;
+  width: 53%;
   margin: 0 auto 1.6rem;
 
   ${mediaQuery[1]} {
@@ -109,23 +126,27 @@ const LoginForm = styled.form`
 
 const LoginInputBox = styled.input`
   width: 100%;
-  height: 4rem;
+  height: 4.9rem;
   margin: 0.5rem 0 0.2rem 0;
-  padding-left: 0.5rem;
+  padding-left: 1.2rem;
   border: 0.15rem solid rgba(0, 0, 0, 0.1);
   border-radius: 0.2rem;
 
   font-family: 'Jua';
-  font-size: 1.1rem;
+  font-size: 2rem;
+
+  ${mediaQuery[0]} {
+    font-size: 1.4rem;
+  }
 `;
 
 const LoginButton = styled.button`
   width: 100%;
-  height: 3.8rem;
+  height: 4.8rem;
   margin-top: 2rem;
 
   font-family: 'Jua';
-  font-size: 1.6rem;
+  font-size: 2.6rem;
   font-weight: 200;
   color: #c6a692;
   background-color: white;
@@ -153,7 +174,9 @@ const InfoButtonContainer = styled.ul`
 `;
 
 const InfoButtonItem = styled.li`
+  margin-top: 1.2rem;
   font-family: 'Jua';
+  font-size: 1.4rem;
 
   cursor: pointer;
   &:hover {
