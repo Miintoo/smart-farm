@@ -1,9 +1,10 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { Doughnut } from 'react-chartjs-2';
-import { Chart as ChartJS, ArcElement } from 'chart.js';
+import { Chart as ChartJS, ArcElement, Legend } from 'chart.js';
+import mediaQuery from '../../utils/breakPointUI';
 
-ChartJS.register(ArcElement);
+ChartJS.register(ArcElement, Legend);
 export default function sensorInfo({ sensorData, sensorName, unit }) {
   let gaugeColor = '#ced4da';
   // console.log(Doughnut);
@@ -21,7 +22,7 @@ export default function sensorInfo({ sensorData, sensorName, unit }) {
     labels: '',
     datasets: [
       {
-        label: `${sensorName} `,
+        label: `${sensorName}`,
         data: [sensorData, 100 - sensorData],
         backgroundColor: [gaugeColor, '#ced4da'],
         borderWidth: 1
@@ -37,7 +38,13 @@ export default function sensorInfo({ sensorData, sensorName, unit }) {
       const chartData = chart.data;
 
       ctx.save();
-      ctx.font = 'bold 2rem sans-serif';
+      console.log(window.innerWidth);
+
+      if (window.innerWidth <= 360) {
+        ctx.font = '0.8rem sans-serif';
+      } else {
+        ctx.font = 'bold 1.5rem sans-serif';
+      }
       ctx.fillStyle = 'black';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
@@ -61,10 +68,9 @@ export default function sensorInfo({ sensorData, sensorName, unit }) {
     maintainAspectRatio: false,
     rotation: -90, // -90도 부터 그래프 시작
     circumference: 180, // 180도만큼 보여줌
-    // animation: false, // 기본 애니메이션 동작 x
     cutout: '55%', // 차트의 굵기 조정(값이 클수록 좁고, 작을수록 넓음)
     // hover: data === data.datasets[0].data[0],
-    // responsive: true,
+    responsive: true,
     plugins: {
       tooltip: {
         enabled: false // tooltip 사용 x
@@ -81,5 +87,14 @@ export default function sensorInfo({ sensorData, sensorName, unit }) {
 
 const Wrapper = styled.div`
   width: 40%;
-  height: 40%;
+  /* height: 40%; */
+
+  ${mediaQuery[1]} {
+    width: 50%;
+  }
+
+  ${mediaQuery[0]} {
+    width: 80%;
+    /* height: 7.2rem; */
+  }
 `;

@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from '@emotion/styled';
+import mediaQuery from '../../utils/breakPointUI';
 
 function sensorMenu() {
   return (
@@ -31,6 +32,18 @@ const NavWrapper = styled.div`
 const UL = styled.ul`
   display: flex;
   gap: 12vw;
+
+  ${mediaQuery[2]} {
+    gap: 8.5vw;
+  }
+
+  ${mediaQuery[1]} {
+    gap: 10vw;
+  }
+
+  ${mediaQuery[0]} {
+    gap: 6vw;
+  }
 `;
 
 const Li = styled.li`
@@ -49,6 +62,31 @@ const Li = styled.li`
 
       background: #c6a692;
       color: #ffffff;
+    }
+
+    ${mediaQuery[2]} {
+      font-size: 3rem;
+      line-height: 2.5rem;
+    }
+
+    ${mediaQuery[1]} {
+      padding: 0.9rem 1rem 0.5rem;
+      font-size: 2.8rem;
+      line-height: 2.3rem;
+
+      &.active {
+        border-radius: 1.3rem;
+      }
+    }
+
+    ${mediaQuery[0]} {
+      padding: 0.7rem 1rem 0.5rem;
+      font-size: 2rem;
+      line-height: 2rem;
+
+      &.active {
+        border-radius: 1.1rem;
+      }
     }
   }
 `;

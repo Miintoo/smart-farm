@@ -20,7 +20,5 @@ export default function DHTInfo() {
     return () => clearInterval(test);
   }, [temp, humid]);
 
-  return (
-    <SensorInfoTemplate deviceName={deviceName} sensorName={['온도', '습도']} unit="º" sensorData={[temp, humid]} />
-  );
+  return <SensorInfoTemplate deviceName={deviceName} sensorName="온습도" unit="º" sensorData={[temp, humid]} />;
 }
