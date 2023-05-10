@@ -9,6 +9,7 @@ export default function DHTInfo() {
   const deviceName = '상추';
 
   useEffect(() => {
+    // 최초 데이터 받아오기
     const fetchData = async () => {
       try {
         const response = await axios.get('http://34.64.88.23/api/devices/dht', {
@@ -30,6 +31,7 @@ export default function DHTInfo() {
 
     fetchData();
 
+    // 일정 주기로 데이터 받아오기
     const intervalData = setInterval(async () => {
       try {
         const response = await axios.get('http://34.64.88.23/api/devices/dht', {
@@ -49,6 +51,7 @@ export default function DHTInfo() {
       }
     }, 5000);
 
+    // 인터벌 삭제
     return () => {
       clearInterval(intervalData);
     };
