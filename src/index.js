@@ -5,7 +5,6 @@ import Router from './Router';
 import './styles/global.css';
 
 axios.defaults.baseURL = 'http://34.64.88.23/';
-axios.defaults.withCredentials = true;
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

@@ -10,6 +10,7 @@ import loginSuccess from '../../utils/auth/loginSuccess';
 
 export default function Login() {
   const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -19,10 +20,9 @@ export default function Login() {
   // 로그인시 처리 로직
   const onSubmit = async (data) => {
     try {
-      const accessToken = await axios.post('http://34.64.88.23/api/login', data);
-      console.log(accessToken);
-
-      loginSuccess(accessToken);
+      const accessToken = await axios.post('/api/login', data);
+      loginSuccess(accessToken.data.data);
+      navigate('/main');
     } catch (error) {
       Error('axios 로그인 실패');
     }

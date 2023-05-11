@@ -35,7 +35,7 @@ export default function Register() {
   return (
     <>
       <RegisterBox>
-        <RegisterTitle onClick={() => setIsOpen(true)}>환영합니다!</RegisterTitle>
+        <RegisterTitle>환영합니다!</RegisterTitle>
         <RegisterForm onSubmit={handleSubmit(onSubmit)}>
           <InputLabel htmlFor="email">이메일</InputLabel>
           <InputEmailBox
