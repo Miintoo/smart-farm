@@ -40,7 +40,7 @@ export default function Sidebar({ users }) {
 
 const SidebarContainer = styled.div`
   width: 27%;
-  height: 60rem;
+  height: 75vh;
   background-color: #dfd2ca;
 `;
 

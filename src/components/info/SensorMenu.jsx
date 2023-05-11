@@ -34,40 +34,28 @@ const NavWrapper = styled.div`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-
-  height: 12vh;
+  height: 14vh;
+  margin: 0 auto;
 `;
 
 const UL = styled.ul`
   display: flex;
-  gap: 12vw;
-
-  ${mediaQuery[2]} {
-    gap: 8.5vw;
-  }
-
-  ${mediaQuery[1]} {
-    gap: 10vw;
-  }
-
-  ${mediaQuery[0]} {
-    gap: 6vw;
-  }
+  gap: 10rem;
 `;
 
 const Li = styled.li`
   > a {
-    padding: 1.5rem 3.5rem 1.1rem;
+    padding: 1rem 2rem 0.8rem;
 
     color: #c6a692;
 
     font-family: 'Jua', sans-serif;
-    font-size: 3.2rem;
-    line-height: 2.5rem;
+    font-size: 2.6rem;
+    line-height: 2.6rem;
     text-decoration: none;
 
     &.active {
-      border-radius: 2rem;
+      border-radius: 1.5rem;
 
       background: #c6a692;
       color: #ffffff;

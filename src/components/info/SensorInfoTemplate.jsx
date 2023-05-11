@@ -1,24 +1,24 @@
-import React, { useState, useEffect } from 'react';
-import styled from '@emotion/styled';
-import PropTypes from 'prop-types';
-import { useLocation, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useNavigate, useLocation } from 'react-router-dom';
+import styled from '@emotion/styled';
+import Sidebar from '../common/Sidebar';
+import ModalOneButton from '../common/ModalOneButton';
 import SensorMenu from './SensorMenu';
 import SensorStatus from './SensorStatus';
 import SensorOnOff from './SensorOnOff';
 import SensorInfo from './SensorInfo';
-import Sidebar from '../common/Sidebar';
-import mediaQuery from '../../utils/breakPointUI';
-import ModalOneButton from '../common/ModalOneButton';
 
-export default function SensorInfoTemplate({ deviceName, sensorName, unit, sensorData }) {
-  const [isDht, setIsDht] = useState(false);
-  const [users, setUsers] = useState({});
-  const [isOpen, setIsOpen] = useState(false);
-
-  const dhtProps = isDht ? { dht: true } : {};
+export default function SensorInfoTemplate2({ sensorName, sensorData, unit }) {
   const navigate = useNavigate();
   const location = useLocation();
+
+  const [users, setUsers] = useState({});
+  const [isOpen, setIsOpen] = useState(false);
+  const [deviceName, setDeviceName] = useState('');
+  const [isDht, setIsDht] = useState(false);
+
+  const dhtProps = isDht ? { dht: true } : {};
 
   const takeUser = async () => {
     try {
@@ -34,109 +34,112 @@ export default function SensorInfoTemplate({ deviceName, sensorName, unit, senso
       setIsDht(true);
     }
     takeUser();
+    setDeviceName(location.state.device.name);
   }, []);
-
-  const handleClick = () => {
-    navigate(`${location.pathname}/detail`);
-  };
 
   const handleModalClick = () => {
     setIsOpen(false);
     navigate('/');
   };
 
+  const handleClick = () => {
+    navigate(`${location.pathname}/detail`);
+  };
+
   return (
     <>
-      {/* <Container> */}
-      <Sidebar users={users} />
-      <InfoContainer>
-        <SensorMenu menuType="info" />
-        <Wrapper>
-          <DeviceName>디바이스: {deviceName}</DeviceName>
-          <SensorStatusWrapper {...dhtProps}>
-            <SensorStatus />
-            {isDht ? '' : <SensorOnOff actuatorType="펌프" />}
-          </SensorStatusWrapper>
-          <SensorInfoWrapper {...dhtProps}>
-            <InfoModal>
-              {sensorName} 정보
-              <img alt={`${sensorName} 정보`} src="/images/question.png" />
-              <button type="button" onClick={handleClick}>
-                <img alt={`${sensorName} 상세`} src="/images/rightArrow.png" />
-              </button>
-            </InfoModal>
-            <GraphWrapper>
-              {isDht ? (
-                <>
-                  <SensorInfo sensorData={sensorData[0]} sensorName="온도" unit="º" />
-                  <SensorInfo sensorData={sensorData[1]} sensorName="습도" unit="%" />
-                </>
-              ) : (
-                <SensorInfo sensorData={sensorData} sensorName={sensorName} unit={unit} />
-              )}
-            </GraphWrapper>
-          </SensorInfoWrapper>
-        </Wrapper>
-        {isOpen ? (
-          <ModalOneButton title="인가된 사용자가 아닙니다." buttonDescription="확인" onClick={handleModalClick} />
-        ) : (
-          ''
-        )}
-      </InfoContainer>
+      <Container>
+        <Sidebar users={users} />
+        {/* <Wrapper> */}
+        <ContentWrapper>
+          <SensorMenu menuType="info" />
+          <DeviceInfoWrapper>
+            <DeviceName>디바이스: {deviceName}</DeviceName>
+            <SensorStatusWrapper {...dhtProps}>
+              <SensorStatus />
+              {isDht ? '' : <SensorOnOff actuatorType="펌프" />}
+            </SensorStatusWrapper>
 
-      {/* </Container> */}
+            <SensorInfoWrapper {...dhtProps}>
+              <InfoModal>
+                {sensorName} 정보
+                <img alt={`${sensorName} 정보`} src="/images/question.png" />
+                <button type="button" onClick={handleClick}>
+                  <img alt={`${sensorName} 상세`} src="/images/rightArrow.png" />
+                </button>
+              </InfoModal>
+              <GraphWrapper>
+                {isDht ? (
+                  <>
+                    <SensorInfo sensorData={sensorData[0]} sensorName="온도" unit="º" />
+                    <SensorInfo sensorData={sensorData[1]} sensorName="습도" unit="%" />
+                  </>
+                ) : (
+                  <SensorInfo sensorData={sensorData} sensorName={sensorName} unit={unit} />
+                )}
+              </GraphWrapper>
+            </SensorInfoWrapper>
+          </DeviceInfoWrapper>
+        </ContentWrapper>
+        {/* </Wrapper> */}
+      </Container>
+      {isOpen ? (
+        <ModalOneButton title="인가된 사용자가 아닙니다." buttonDescription="확인" onClick={handleModalClick} />
+      ) : (
+        ''
+      )}
     </>
   );
 }
 
-SensorInfoTemplate.propTypes = {
-  deviceName: PropTypes.string.isRequired,
-  sensorName: PropTypes.oneOfType([PropTypes.string, PropTypes.array]).isRequired,
-  unit: PropTypes.string.isRequired,
-  sensorData: PropTypes.oneOfType([PropTypes.number, PropTypes.array]).isRequired
-};
+const Container = styled.div`
+  display: flex;
+  width: 60vw;
 
-const InfoContainer = styled.div`
-  width: 83vw;
-  height: 100vh;
-  margin-left: 17vw;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 
-  ${mediaQuery[3]} {
-    width: 100vw;
-    margin-left: 0;
-  }
+  border: 0.5rem solid #c6a692;
 `;
-const Wrapper = styled.div`
+
+// const Wrapper = styled.div`
+//   position: relative;
+//   margin: 0 auto;
+//   width: 100%;
+// `;
+
+const ContentWrapper = styled.div`
   position: relative;
-  width: 75vw;
-  height: 85vh;
+
+  width: 100%;
+  /* position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); */
+`;
+
+const DeviceInfoWrapper = styled.div`
+  position: relative;
+  width: 90%;
+  height: 55rem;
   border-radius: 1rem;
   margin: 0 auto;
-  max-width: 129.6rem;
 
   background: #f0e7e2;
-
-  ${mediaQuery[3]} {
-    width: 90vw;
-  }
 `;
 
 const DeviceName = styled.p`
   position: absolute;
 
-  width: 100%;
-  margin: 1.7rem 0 0 2.6rem;
+  margin: 2rem 0 0 2.6rem;
 
   color: #c6a692;
 
-  font-family: 'Jua';
-  font-size: 2.4rem;
-  line-height: 3rem;
-
-  ${mediaQuery[0]} {
-    font-size: 1.8rem;
-    line-height: 2rem;
-  }
+  font-family: 'Jua', sans-serif;
+  font-size: 2rem;
+  line-height: 1.8rem;
 `;
 
 const SensorStatusWrapper = styled.div`
@@ -145,57 +148,43 @@ const SensorStatusWrapper = styled.div`
   display: flex;
   width: calc(100% - 4.8rem);
   height: 10rem;
+  /* height: 13%; */
+
   margin: 5.6rem 2.4rem;
-
-  ${mediaQuery[2]} {
-    flex-direction: column;
-    gap: 1rem;
-    height: ${(props) => (props.dht ? '12%' : '22%')};
-  }
-
-  ${mediaQuery[0]} {
-    margin: 4.8rem 2.4rem;
-    height: ${(props) => (props.dht ? '10%' : '23%')};
-  }
 `;
 
 const SensorInfoWrapper = styled.div`
   position: absolute;
 
   width: calc(100% - 4.8rem);
-  height: calc(85vh - 19.5rem);
+  height: 38rem;
+  /* height: 65%; */
+
+  max-height: calc(75vh - 9rem);
   border: 0.2rem solid #c6a692;
   border-radius: 1rem;
-  margin: 17.2rem 2.4rem 0;
+  margin: 14.5rem 0 0 2.4rem;
 
   background: #ffffff;
-
-  ${mediaQuery[2]} {
-    bottom: 2.5rem;
-
-    height: ${(props) => (props.dht ? 'calc(85vh - 12% - 9.5rem)' : 'calc(85vh - 22% - 9.5rem)')};
-  }
-
-  ${mediaQuery[0]} {
-    height: ${(props) => (props.dht ? 'calc(85vh - 9% - 9.5rem)' : 'calc(85vh - 21% - 9.5rem)')};
-  }
 `;
 
 const InfoModal = styled.div`
   position: absolute;
   right: 10rem;
 
-  margin-top: 2.6rem;
+  margin-top: 1.5rem;
 
   color: #c6a692;
 
   font-family: 'Jua', sans-serif;
-  font-size: 2rem;
+  font-size: 1.5rem;
   line-height: 2.5rem;
 
   > img:first-of-type {
     position: absolute;
-    margin: -0.1rem 0 0 1rem;
+    margin: 0.2rem 0 0 1rem;
+    width: 2rem;
+    height: 2rem;
 
     cursor: pointer;
   }
@@ -203,29 +192,14 @@ const InfoModal = styled.div`
   > button {
     position: absolute;
     border: none;
-    margin: -0.2rem 0 0 4.7rem;
+
+    margin: 0.2rem 0 0 5rem;
 
     background: #fff;
-  }
 
-  ${mediaQuery[0]} {
-    right: 7rem;
-
-    margin-top: 1.5rem;
-
-    font-size: 1.4rem;
-    line-height: 1.5rem;
-
-    > img:first-of-type {
+    > img {
       width: 1.8rem;
       height: 1.8rem;
-      margin-top: -0.3rem;
-    }
-
-    > img:last-child {
-      width: 1.5rem;
-      height: 1.5rem;
-      margin: -0.2rem 0 0 4rem;
     }
   }
 `;
@@ -239,15 +213,4 @@ const GraphWrapper = styled.div`
   width: calc(100% - 4.8rem);
   height: 85%;
   margin: 5rem 0 0 2.4rem;
-
-  ${mediaQuery[2]} {
-    flex-direction: column;
-    justify-content: space-evenly;
-  }
-
-  ${mediaQuery[0]} {
-    flex-direction: column;
-    justify-content: space-evenly;
-    margin-top: 3rem;
-  }
 `;

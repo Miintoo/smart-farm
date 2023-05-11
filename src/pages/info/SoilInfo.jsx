@@ -3,7 +3,6 @@ import SensorInfoTemplate from '../../components/info/SensorInfoTemplate';
 
 export default function SoilInfo() {
   const [soil, setSoil] = useState(70);
-  const deviceName = '상추';
 
   useEffect(() => {
     const test = setInterval(() => {
@@ -15,7 +14,7 @@ export default function SoilInfo() {
 
   return (
     <>
-      <SensorInfoTemplate deviceName={deviceName} sensorName="토양수분" unit="%" sensorData={soil} />;
+      <SensorInfoTemplate sensorName="토양수분" unit="%" sensorData={soil} />;
     </>
   );
 }

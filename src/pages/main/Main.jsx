@@ -25,7 +25,6 @@ export default function Main() {
     try {
       const usersDevice = await axios.get('/api/devices');
       setDevices([...devices, ...usersDevice.data.data]);
-      console.log(usersDevice);
     } catch (error) {
       throw Error('디바이스를 불러올 수 없습니다.');
     }
