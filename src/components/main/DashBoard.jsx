@@ -1,10 +1,15 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { useNavigate } from 'react-router-dom';
 
 export default function DashBoard({ device }) {
+  const navigate = useNavigate();
+  const handleDeviceClick = () => {
+    navigate('/dht', { state: { device } });
+  };
   return (
     <Container>
-      <DeviceInfo>
+      <DeviceInfo onClick={handleDeviceClick}>
         <DeviceName>{device.name}</DeviceName>
         <SerialNumber>{device.deviceId}</SerialNumber>
       </DeviceInfo>

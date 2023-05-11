@@ -2,33 +2,53 @@ import React, { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 import { useLocation, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import SensorMenu from './SensorMenu';
 import SensorStatus from './SensorStatus';
 import SensorOnOff from './SensorOnOff';
 import SensorInfo from './SensorInfo';
 import Sidebar from '../common/Sidebar';
 import mediaQuery from '../../utils/breakPointUI';
+import ModalOneButton from '../common/ModalOneButton';
 
 export default function SensorInfoTemplate({ deviceName, sensorName, unit, sensorData }) {
   const [isDht, setIsDht] = useState(false);
+  const [users, setUsers] = useState({});
+  const [isOpen, setIsOpen] = useState(false);
+
   const dhtProps = isDht ? { dht: true } : {};
   const navigate = useNavigate();
   const location = useLocation();
+
+  const takeUser = async () => {
+    try {
+      const usersData = await axios.get('/api/users');
+      setUsers(usersData.data);
+    } catch (error) {
+      setIsOpen(true);
+    }
+  };
 
   useEffect(() => {
     if (sensorName === '온습도') {
       setIsDht(true);
     }
+    takeUser();
   }, []);
 
   const handleClick = () => {
     navigate(`${location.pathname}/detail`);
   };
 
+  const handleModalClick = () => {
+    setIsOpen(false);
+    navigate('/');
+  };
+
   return (
     <>
       {/* <Container> */}
-      <Sidebar />
+      <Sidebar users={users} />
       <InfoContainer>
         <SensorMenu menuType="info" />
         <Wrapper>
@@ -57,7 +77,13 @@ export default function SensorInfoTemplate({ deviceName, sensorName, unit, senso
             </GraphWrapper>
           </SensorInfoWrapper>
         </Wrapper>
+        {isOpen ? (
+          <ModalOneButton title="인가된 사용자가 아닙니다." buttonDescription="확인" onClick={handleModalClick} />
+        ) : (
+          ''
+        )}
       </InfoContainer>
+
       {/* </Container> */}
     </>
   );
