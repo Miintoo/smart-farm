@@ -13,7 +13,6 @@ export default function DHTInfo() {
   const { deviceId } = query;
   const { deviceName } = query;
 
-  console.log(query);
   const infoContent = {
     sensor: ['온도', '습도'],
     good: ['15~20도', '75~85%'],
@@ -30,13 +29,9 @@ export default function DHTInfo() {
           }
         });
 
-        console.log('dataArr', response.data.data);
-        console.log('data', response.data.data[response.data.data.length - 1]);
-
         const currentData = response.data.data[response.data.data.length - 1];
         setTemp(currentData.temperature);
         setHumid(currentData.humidity);
-        // setDevice(location.state.device);
       } catch (error) {
         throw new Error('온습도 값을 받아오지 못했습니다.');
       }
@@ -52,9 +47,6 @@ export default function DHTInfo() {
             deviceId: 1
           }
         });
-
-        console.log('dataArr1', response.data.data);
-        console.log('data1', response.data.data[response.data.data.length - 1]);
 
         const currentData = response.data.data[response.data.data.length - 1];
         setTemp(currentData.temperature);

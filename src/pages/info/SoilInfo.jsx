@@ -22,9 +22,6 @@ export default function SoilInfo() {
           }
         });
 
-        console.log('dataArr', response.data.data);
-        console.log('data', response.data.data[response.data.data.length - 1]);
-
         const currentData = response.data.data[response.data.data.length - 1];
         setSolid(currentData.solid);
       } catch (error) {
@@ -42,9 +39,6 @@ export default function SoilInfo() {
             deviceId
           }
         });
-
-        console.log('dataArr1', response.data.data);
-        console.log('data1', response.data.data[response.data.data.length - 1]);
 
         const currentData = response.data.data[response.data.data.length - 1];
         setSolid(currentData.solid);

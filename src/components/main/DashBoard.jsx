@@ -4,8 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function DashBoard({ device }) {
   const navigate = useNavigate();
-  console.log(device);
-  console.log(device.name);
+
   const handleDeviceClick = () => {
     navigate(`/dht?deviceName=${device.name}&deviceId=${device.deviceId}`);
   };
