@@ -30,7 +30,7 @@ const StatusImage = styled.img`
 `;
 
 const StatusMessage = styled.p`
-  margin: 0rem 0 0 2.5rem;
+  margin: 0.2rem 0 0 1.8rem;
 
   color: #c6a692;
 

@@ -8,15 +8,10 @@ export default function DHTInfo() {
   const location = useLocation();
   const [temp, setTemp] = useState(0);
   const [humid, setHumid] = useState(0);
-  // const [device, setDevice] = useState('');
 
   const query = queryString.parse(location.search);
   const { deviceId } = query;
   const { deviceName } = query;
-
-  // const deviceName = location.search;
-  // const [searchParams, setSearchParams] = useSearchParams();
-  // const deviceName = useParams();
 
   console.log(query);
   const infoContent = {
@@ -50,29 +45,29 @@ export default function DHTInfo() {
     fetchData();
 
     // 일정 주기로 데이터 받아오기
-    // const intervalData = setInterval(async () => {
-    //   try {
-    //     const response = await instance.get('/devices/dht', {
-    //       params: {
-    //         deviceId: 1
-    //       }
-    //     });
+    const intervalData = setInterval(async () => {
+      try {
+        const response = await instance.get('/devices/dht', {
+          params: {
+            deviceId: 1
+          }
+        });
 
-    //     console.log('dataArr1', response.data.data);
-    //     console.log('data1', response.data.data[response.data.data.length - 1]);
+        console.log('dataArr1', response.data.data);
+        console.log('data1', response.data.data[response.data.data.length - 1]);
 
-    //     const currentData = response.data.data[response.data.data.length - 1];
-    //     setTemp(currentData.temperature);
-    //     setHumid(currentData.humidity);
-    //   } catch (error) {
-    //     Error('온습도 값을 받아오지 못했습니다.');
-    //   }
-    // }, 5000);
+        const currentData = response.data.data[response.data.data.length - 1];
+        setTemp(currentData.temperature);
+        setHumid(currentData.humidity);
+      } catch (error) {
+        throw new Error('온습도 값을 받아오지 못했습니다.');
+      }
+    }, 5000);
 
-    // // 인터벌 삭제
-    // return () => {
-    //   clearInterval(intervalData);
-    // };
+    // 인터벌 삭제
+    return () => {
+      clearInterval(intervalData);
+    };
   }, []);
 
   return (
