@@ -33,7 +33,7 @@ export default function DHTInfo() {
         setTemp(currentData.temperature);
         setHumid(currentData.humidity);
       } catch (error) {
-        throw new Error('온습도 값을 받아오지 못했습니다.');
+        Error(error);
       }
     };
 
@@ -52,7 +52,7 @@ export default function DHTInfo() {
         setTemp(currentData.temperature);
         setHumid(currentData.humidity);
       } catch (error) {
-        throw new Error('온습도 값을 받아오지 못했습니다.');
+        Error('온습도 값을 받아오지 못했습니다.');
       }
     }, 5000);
 

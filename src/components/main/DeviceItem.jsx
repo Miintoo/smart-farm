@@ -1,11 +1,17 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { useNavigate } from 'react-router-dom';
 import mediaQuery from '../../utils/breakPointUI';
 
 export default function DeviceItem({ device }) {
+  const navigate = useNavigate();
+
+  const handleDeviceClick = () => {
+    navigate(`/dht?deviceName=${device.name}&deviceId=${device.deviceId}`);
+  };
   return (
     <Container>
-      <DeviceInfo>
+      <DeviceInfo onClick={handleDeviceClick}>
         <DeviceName>{device.name}</DeviceName>
         <SerialNumber>{device.deviceId}</SerialNumber>
       </DeviceInfo>

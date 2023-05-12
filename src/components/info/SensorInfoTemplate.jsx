@@ -108,14 +108,14 @@ export default function SensorInfoTemplate({ deviceName, deviceId, sensorName, s
 }
 
 const Container = styled.div`
-  display: flex;
-  width: 60vw;
-
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 
+  display: flex;
+  width: 60vw;
+  height: 75vh;
   border: 0.5rem solid #c6a692;
 `;
 
@@ -127,7 +127,7 @@ const Container = styled.div`
 
 const ContentWrapper = styled.div`
   position: relative;
-
+  flex: 1;
   width: 100%;
   /* position: absolute;
   top: 50%;
