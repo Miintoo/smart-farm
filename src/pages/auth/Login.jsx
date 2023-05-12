@@ -20,7 +20,7 @@ export default function Login() {
   // 로그인시 처리 로직
   const onSubmit = async (data) => {
     try {
-      const accessToken = await axios.post('/api/login', data);
+      const accessToken = await axios.post('/login', data);
       loginSuccess(accessToken.data.data);
       navigate('/main');
     } catch (error) {

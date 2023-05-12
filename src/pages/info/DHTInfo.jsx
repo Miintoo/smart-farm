@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { useLocation } from 'react-router-dom';
+import instance from '../../utils/auth/interceptor';
 import SensorInfoTemplate from '../../components/info/SensorInfoTemplate';
 
 export default function DHTInfo() {
@@ -10,7 +10,6 @@ export default function DHTInfo() {
   // const [device, setDevice] = useState('');
 
   const infoContent = {
-    subTitle: '화분 주변의 온도와 습도를 측정하여 보여줍니다.',
     sensor: ['온도', '습도'],
     good: ['15~20도', '75~85%'],
     normal: ['10~14도, 21~25도', '65~74%, 86~95%']
@@ -22,7 +21,7 @@ export default function DHTInfo() {
     // 최초 데이터 받아오기
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://reactjs.kr/api/devices/dht', {
+        const response = await instance.get('/devices/dht', {
           params: {
             deviceId: device.deviceId
           }
@@ -45,7 +44,7 @@ export default function DHTInfo() {
     // 일정 주기로 데이터 받아오기
     // const intervalData = setInterval(async () => {
     //   try {
-    //     const response = await axios.get('https://reactjs.kr/api/devices/dht', {
+    //     const response = await instance.get('/devices/dht', {
     //       params: {
     //         deviceId: 1
     //       }

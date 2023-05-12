@@ -4,7 +4,8 @@ import axios from 'axios';
 import Router from './Router';
 import './styles/global.css';
 
-axios.defaults.baseURL = 'https://reactjs.kr';
+axios.defaults.baseURL = 'https://reactjs.kr/api';
+axios.defaults.withCredentials = true;
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

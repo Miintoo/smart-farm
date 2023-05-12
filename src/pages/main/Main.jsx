@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import styled from '@emotion/styled';
+import instance from '../../utils/auth/interceptor';
 import Sidebar from '../../components/common/Sidebar';
 import DashBoard from '../../components/main/DashBoard';
 import ModalOneButton from '../../components/common/ModalOneButton';
@@ -14,7 +14,7 @@ export default function Main() {
 
   const takeUser = async () => {
     try {
-      const usersData = await axios.get('/api/users');
+      const usersData = await instance.get('/users');
       setUsers(usersData.data);
     } catch (error) {
       setIsOpen(true);
@@ -23,7 +23,7 @@ export default function Main() {
 
   const takeDevice = async () => {
     try {
-      const usersDevice = await axios.get('/api/devices');
+      const usersDevice = await instance.get('/devices');
       setDevices([...devices, ...usersDevice.data.data]);
     } catch (error) {
       throw Error('디바이스를 불러올 수 없습니다.');

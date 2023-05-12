@@ -9,7 +9,7 @@ export default function Sidebar({ users }) {
   const [isOpen, setIsOpen] = useState(false);
   const handleLogout = async () => {
     try {
-      await axios.get('/api/logout');
+      await axios.get('/logout');
       setIsOpen(true);
     } catch (error) {
       throw Error('로그아웃이 성공하지 않았습니다.');

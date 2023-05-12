@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { useNavigate, useLocation } from 'react-router-dom';
 import styled from '@emotion/styled';
+import instance from '../../utils/auth/interceptor';
 import Sidebar from '../common/Sidebar';
 import ModalOneButton from '../common/ModalOneButton';
 import SensorMenu from './SensorMenu';
 import SensorStatus from './SensorStatus';
 import SensorOnOff from './SensorOnOff';
 import SensorInfo from './SensorInfo';
-import SensorInfoModal from './SensorInfoModal';
 
 export default function SensorInfoTemplate({ sensorName, sensorData, unit, infoContent }) {
   const navigate = useNavigate();
@@ -24,14 +23,13 @@ export default function SensorInfoTemplate({ sensorName, sensorData, unit, infoC
 
   const takeUser = async () => {
     try {
-      const usersData = await axios.get('/api/users');
+      const usersData = await instance.get('/users');
       setUsers(usersData.data);
     } catch (error) {
       setIsOpen(true);
     }
   };
 
-  console.log(infoContent);
   useEffect(() => {
     if (sensorName === '온습도') {
       setIsDht(true);
@@ -98,7 +96,7 @@ export default function SensorInfoTemplate({ sensorName, sensorData, unit, infoC
         ''
       )}
       {infoOpen ? (
-        <SensorInfoModal
+        <ModalOneButton
           title={sensorName}
           buttonDescription="확인"
           onClick={handleInfoModalClick}

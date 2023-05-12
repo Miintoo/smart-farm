@@ -1,12 +1,53 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
 
-export default function ModalOneButton({ title, buttonDescription, onClick }) {
+export default function ModalOneButton({ title, buttonDescription, onClick, infoContent }) {
+  const [isDht, setIsDht] = useState(false);
+
+  useEffect(() => {
+    if (title === '온습도') {
+      setIsDht(true);
+    }
+  }, []);
+
   return (
     <>
       <Container>
         <ContentContainer>
           <Title>{title}</Title>
+          {infoContent && (
+            <StatusStandard>
+              [ 상태 기준 ]
+              {isDht ? (
+                <Status>
+                  <img alt="좋음상태" src="images/smile.png" />
+                  <p>좋음 : </p>
+                  <p>{infoContent.good[0]}</p>
+                  <p>/</p>
+                  <p>{infoContent.good[1]}</p>
+                </Status>
+              ) : (
+                <Status>{infoContent.good[0]}</Status>
+              )}
+              {isDht ? (
+                <Status>
+                  <img alt="보통상태" src="images/normal.png" />
+                  <p>보통 : </p>
+                  <p>{infoContent.normal[0]}</p>
+                  <p>/</p>
+                  <p>{infoContent.normal[1]}</p>
+                </Status>
+              ) : (
+                <Status>{infoContent.normal[0]}</Status>
+              )}
+              <Status>
+                <img alt="나쁨상태" src="images/Bad.png" />
+                <p>나쁨 : </p>
+                <p>위 기준에 해당하지 않는 경우</p>
+              </Status>
+            </StatusStandard>
+          )}
+
           <ButtonTitle onClick={onClick}>{buttonDescription}</ButtonTitle>
         </ContentContainer>
       </Container>
@@ -54,13 +95,45 @@ const Title = styled.h2`
   color: #c6a692;
 `;
 
+const StatusStandard = styled.div`
+  margin: 0.5rem 0 0 3rem;
+
+  color: #c6a692;
+
+  font-size: 1.7rem;
+  font-family: 'Jua';
+
+  > :first-child {
+    margin-top: 2.5rem;
+  }
+`;
+
+const Status = styled.div`
+  display: flex;
+  margin: 2rem 0 0 0;
+
+  font-size: 1.5rem;
+
+  > img {
+    width: 2.5rem;
+    height: 2.5rem;
+    margin-top: -0.6rem;
+  }
+  > p {
+    margin-left: 0.8rem;
+  }
+  > p:first-of-type {
+    margin-left: 1rem;
+  }
+`;
+
 const ButtonTitle = styled.button`
   display: block;
   width: 10rem;
-  margin: 3.4rem auto 0;
+  margin: 3.5rem auto 0;
   padding-top: 0.4rem;
 
-  border: 0.5rem solid #c6a692;
+  border: 0.3rem solid #c6a692;
   border-radius: 3rem;
 
   font-size: 2rem;
