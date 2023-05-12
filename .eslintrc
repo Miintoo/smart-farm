@@ -14,5 +14,8 @@
         "endOfLine": "auto"
       }
     ]
+  },
+  "parserOptions": {
+    "ecmaVersion": 2020
   }
 }

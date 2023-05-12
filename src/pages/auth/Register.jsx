@@ -20,7 +20,7 @@ export default function Register() {
   const onSubmit = async (data) => {
     delete data.passwordConfirm;
     try {
-      await axios.post('http://34.64.88.23/api/register', data);
+      await axios.post('https://reactjs.kr/api/register', data);
       setIsOpen(true);
     } catch (error) {
       throw Error('회원가입이 실패 했습니다.');

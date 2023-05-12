@@ -40,7 +40,7 @@ const NavWrapper = styled.div`
 
 const UL = styled.ul`
   display: flex;
-  gap: 10rem;
+  gap: 7vw;
 `;
 
 const Li = styled.li`

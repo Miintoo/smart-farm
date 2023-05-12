@@ -7,13 +7,22 @@ export default function DHTInfo() {
   const location = useLocation();
   const [temp, setTemp] = useState(0);
   const [humid, setHumid] = useState(0);
-  const [device, setDevice] = useState('');
+  // const [device, setDevice] = useState('');
 
+  const infoContent = {
+    subTitle: '화분 주변의 온도와 습도를 측정하여 보여줍니다.',
+    sensor: ['온도', '습도'],
+    good: ['15~20도', '75~85%'],
+    normal: ['10~14도, 21~25도', '65~74%, 86~95%']
+  };
+
+  const device = location.state?.device;
+  console.log(device);
   useEffect(() => {
     // 최초 데이터 받아오기
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://34.64.88.23/api/devices/dht', {
+        const response = await axios.get('https://reactjs.kr/api/devices/dht', {
           params: {
             deviceId: device.deviceId
           }
@@ -25,7 +34,7 @@ export default function DHTInfo() {
         const currentData = response.data.data[response.data.data.length - 1];
         setTemp(currentData.temperature);
         setHumid(currentData.humidity);
-        setDevice(location.state.device);
+        // setDevice(location.state.device);
       } catch (error) {
         throw new Error('온습도 값을 받아오지 못했습니다.');
       }
@@ -36,7 +45,7 @@ export default function DHTInfo() {
     // 일정 주기로 데이터 받아오기
     // const intervalData = setInterval(async () => {
     //   try {
-    //     const response = await axios.get('http://34.64.88.23/api/devices/dht', {
+    //     const response = await axios.get('https://reactjs.kr/api/devices/dht', {
     //       params: {
     //         deviceId: 1
     //       }
@@ -59,5 +68,5 @@ export default function DHTInfo() {
     // };
   }, []);
 
-  return <SensorInfoTemplate sensorName="온습도" unit="º" sensorData={[temp, humid]} />;
+  return <SensorInfoTemplate sensorName="온습도" unit="º" sensorData={[temp, humid]} infoContent={infoContent} />;
 }

@@ -8,8 +8,9 @@ import SensorMenu from './SensorMenu';
 import SensorStatus from './SensorStatus';
 import SensorOnOff from './SensorOnOff';
 import SensorInfo from './SensorInfo';
+import SensorInfoModal from './SensorInfoModal';
 
-export default function SensorInfoTemplate2({ sensorName, sensorData, unit }) {
+export default function SensorInfoTemplate({ sensorName, sensorData, unit, infoContent }) {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -17,6 +18,7 @@ export default function SensorInfoTemplate2({ sensorName, sensorData, unit }) {
   const [isOpen, setIsOpen] = useState(false);
   const [deviceName, setDeviceName] = useState('');
   const [isDht, setIsDht] = useState(false);
+  const [infoOpen, setInfoOpen] = useState(false);
 
   const dhtProps = isDht ? { dht: true } : {};
 
@@ -29,6 +31,7 @@ export default function SensorInfoTemplate2({ sensorName, sensorData, unit }) {
     }
   };
 
+  console.log(infoContent);
   useEffect(() => {
     if (sensorName === '온습도') {
       setIsDht(true);
@@ -37,13 +40,17 @@ export default function SensorInfoTemplate2({ sensorName, sensorData, unit }) {
     setDeviceName(location.state.device.name);
   }, []);
 
+  const handleDetailClick = () => {
+    navigate(`${location.pathname}/detail`);
+  };
+
   const handleModalClick = () => {
     setIsOpen(false);
     navigate('/');
   };
 
-  const handleClick = () => {
-    navigate(`${location.pathname}/detail`);
+  const handleInfoModalClick = () => {
+    setInfoOpen(!infoOpen);
   };
 
   return (
@@ -63,8 +70,10 @@ export default function SensorInfoTemplate2({ sensorName, sensorData, unit }) {
             <SensorInfoWrapper {...dhtProps}>
               <InfoModal>
                 {sensorName} 정보
-                <img alt={`${sensorName} 정보`} src="/images/question.png" />
-                <button type="button" onClick={handleClick}>
+                <button type="button" onClick={handleInfoModalClick}>
+                  <img alt={`${sensorName} 정보`} src="/images/question.png" />
+                </button>
+                <button type="button" onClick={handleDetailClick}>
                   <img alt={`${sensorName} 상세`} src="/images/rightArrow.png" />
                 </button>
               </InfoModal>
@@ -85,6 +94,16 @@ export default function SensorInfoTemplate2({ sensorName, sensorData, unit }) {
       </Container>
       {isOpen ? (
         <ModalOneButton title="인가된 사용자가 아닙니다." buttonDescription="확인" onClick={handleModalClick} />
+      ) : (
+        ''
+      )}
+      {infoOpen ? (
+        <SensorInfoModal
+          title={sensorName}
+          buttonDescription="확인"
+          onClick={handleInfoModalClick}
+          infoContent={infoContent}
+        />
       ) : (
         ''
       )}
@@ -159,7 +178,6 @@ const SensorInfoWrapper = styled.div`
   width: calc(100% - 4.8rem);
   height: 38rem;
   /* height: 65%; */
-
   max-height: calc(75vh - 9rem);
   border: 0.2rem solid #c6a692;
   border-radius: 1rem;
@@ -180,19 +198,26 @@ const InfoModal = styled.div`
   font-size: 1.5rem;
   line-height: 2.5rem;
 
-  > img:first-of-type {
+  > button:first-of-type {
     position: absolute;
-    margin: 0.2rem 0 0 1rem;
-    width: 2rem;
-    height: 2rem;
 
-    cursor: pointer;
-  }
-
-  > button {
-    position: absolute;
+    margin: 0.1rem 0 0 1rem;
     border: none;
 
+    background: #fff;
+
+    cursor: pointer;
+
+    > img {
+      width: 2rem;
+      height: 2rem;
+    }
+  }
+
+  > button:last-child {
+    position: absolute;
+
+    border: none;
     margin: 0.2rem 0 0 5rem;
 
     background: #fff;
