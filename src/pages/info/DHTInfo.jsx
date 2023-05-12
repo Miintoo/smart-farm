@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import queryString from 'query-string';
 import instance from '../../utils/auth/interceptor';
 import SensorInfoTemplate from '../../components/info/SensorInfoTemplate';
 
@@ -9,21 +10,28 @@ export default function DHTInfo() {
   const [humid, setHumid] = useState(0);
   // const [device, setDevice] = useState('');
 
+  const query = queryString.parse(location.search);
+  const { deviceId } = query;
+  const { deviceName } = query;
+
+  // const deviceName = location.search;
+  // const [searchParams, setSearchParams] = useSearchParams();
+  // const deviceName = useParams();
+
+  console.log(query);
   const infoContent = {
     sensor: ['온도', '습도'],
     good: ['15~20도', '75~85%'],
     normal: ['10~14도, 21~25도', '65~74%, 86~95%']
   };
 
-  const device = location.state?.device;
-  console.log(device);
   useEffect(() => {
     // 최초 데이터 받아오기
     const fetchData = async () => {
       try {
         const response = await instance.get('/devices/dht', {
           params: {
-            deviceId: device.deviceId
+            deviceId
           }
         });
 
@@ -67,5 +75,14 @@ export default function DHTInfo() {
     // };
   }, []);
 
-  return <SensorInfoTemplate sensorName="온습도" unit="º" sensorData={[temp, humid]} infoContent={infoContent} />;
+  return (
+    <SensorInfoTemplate
+      deviceName={deviceName}
+      deviceId={deviceId}
+      sensorName="온습도"
+      unit="º"
+      sensorData={[temp, humid]}
+      infoContent={infoContent}
+    />
+  );
 }

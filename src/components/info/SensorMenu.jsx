@@ -3,11 +3,15 @@ import { NavLink } from 'react-router-dom';
 import styled from '@emotion/styled';
 import mediaQuery from '../../utils/breakPointUI';
 
-function sensorMenu({ menuType }) {
+function sensorMenu({ menuType, deviceId, deviceName }) {
   let customLink = [];
 
   if (menuType === 'info') {
-    customLink = ['/dht', '/soil', '/lux'];
+    customLink = [
+      `/dht?deviceName=${deviceName}&deviceId=${deviceId}`,
+      `/soil?deviceName=${deviceName}&deviceId=${deviceId}`,
+      `/lux?deviceName=${deviceName}&deviceId=${deviceId}`
+    ];
   } else {
     // menuType === "detail"
     customLink = ['/dht/detail', '/soil/detail', '/lux/detail'];

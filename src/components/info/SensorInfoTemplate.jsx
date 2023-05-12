@@ -9,13 +9,12 @@ import SensorStatus from './SensorStatus';
 import SensorOnOff from './SensorOnOff';
 import SensorInfo from './SensorInfo';
 
-export default function SensorInfoTemplate({ sensorName, sensorData, unit, infoContent }) {
+export default function SensorInfoTemplate({ deviceName, deviceId, sensorName, sensorData, unit, infoContent }) {
   const navigate = useNavigate();
   const location = useLocation();
 
   const [users, setUsers] = useState({});
   const [isOpen, setIsOpen] = useState(false);
-  const [deviceName, setDeviceName] = useState('');
   const [isDht, setIsDht] = useState(false);
   const [infoOpen, setInfoOpen] = useState(false);
 
@@ -35,7 +34,6 @@ export default function SensorInfoTemplate({ sensorName, sensorData, unit, infoC
       setIsDht(true);
     }
     takeUser();
-    setDeviceName(location.state.device.name);
   }, []);
 
   const handleDetailClick = () => {
@@ -57,7 +55,7 @@ export default function SensorInfoTemplate({ sensorName, sensorData, unit, infoC
         <Sidebar users={users} />
         {/* <Wrapper> */}
         <ContentWrapper>
-          <SensorMenu menuType="info" />
+          <SensorMenu menuType="info" deviceId={deviceId} deviceName={deviceName} />
           <DeviceInfoWrapper>
             <DeviceName>디바이스: {deviceName}</DeviceName>
             <SensorStatusWrapper {...dhtProps}>

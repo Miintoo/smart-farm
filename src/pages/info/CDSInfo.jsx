@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
-// import styled from '@emotion/styled';
-// import SensorMenu from '../../components/info/SensorMenu';
-// import SensorStatus from '../../components/info/SensorStatus';
-// import SensorOnOff from '../../components/info/SensorOnOff';
-// import SensorInfo from '../../components/info/SensorInfo';
+import queryString from 'query-string';
+import { useLocation } from 'react-router-dom';
 import SensorInfoTemplate from '../../components/info/SensorInfoTemplate';
 
 export default function CDSInfo() {
+  const location = useLocation();
   const [cds, setCDS] = useState(70);
-  const deviceName = '상추';
+  const query = queryString.parse(location.search);
+  const { deviceId } = query;
+  const { deviceName } = query;
 
   useEffect(() => {
     const test = setInterval(() => {
@@ -18,5 +18,5 @@ export default function CDSInfo() {
     return () => clearInterval(test);
   }, [cds]);
 
-  return <SensorInfoTemplate deviceName={deviceName} sensorName="조도" unit="%" sensorData={cds} />;
+  return <SensorInfoTemplate deviceId={deviceId} deviceName={deviceName} sensorName="조도" unit="%" sensorData={cds} />;
 }
