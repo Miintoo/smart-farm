@@ -5,7 +5,6 @@ import instance from '../../utils/auth/interceptor';
 import Sidebar from '../../components/common/Sidebar';
 import DeviceItem from '../../components/main/DeviceItem';
 import ModalOneButton from '../../components/common/ModalOneButton';
-import instance from '../../utils/auth/interceptor';
 import mediaQuery from '../../utils/breakPointUI';
 
 export default function Main() {

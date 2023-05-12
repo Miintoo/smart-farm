@@ -5,7 +5,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import mediaQuery from '../../utils/breakPointUI';
 import validation from '../../utils/validation';
-import AuthModalOneButton from '../../components/common/ModalOneButton';
+import ModalOneButton from '../../components/common/ModalOneButton';
 
 export default function Register() {
   const navigate = useNavigate();
@@ -93,7 +93,7 @@ export default function Register() {
         </RegisterForm>
       </RegisterBox>
       {isOpen ? (
-        <AuthModalOneButton title="회원가입이 완료 되었습니다!" buttonDescription="확인" onClick={handleClick} />
+        <ModalOneButton title="회원가입이 완료 되었습니다!" buttonDescription="확인" onClick={handleClick} />
       ) : (
         ''
       )}
