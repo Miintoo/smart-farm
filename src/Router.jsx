@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-// import silentRefresh from './utils/auth/silentRefresh';
 import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
 import Main from './pages/main/Main';
@@ -13,12 +12,6 @@ import SoilDetail from './pages/info/SoilDetail';
 import CDSDetail from './pages/info/CDSDetail';
 
 export default function Router() {
-  // useEffect(() => {
-  //   console.log('화면 새로고침');
-  //   silentRefresh();
-  // }, []);
-  // silentRefresh();
-
   return (
     <BrowserRouter>
       <Routes>

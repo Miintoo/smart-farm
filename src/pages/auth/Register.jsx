@@ -102,15 +102,16 @@ export default function Register() {
 }
 
 const RegisterBox = styled.div`
-  width: 52vw;
-  margin: auto;
-  padding: 7rem 0;
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
 
+  width: 52vw;
+  padding: 7rem 0;
   border: 0.6rem solid #c6a692;
+  margin: auto;
+
+  transform: translate(-50%, -50%);
 
   ${mediaQuery[1]} {
     width: 78vw;
@@ -162,8 +163,10 @@ const PhoneBox = styled.div`
 
 const InputLabel = styled.label`
   display: block;
-  font-size: 2rem;
+
   color: #6c5d53;
+
+  font-size: 2rem;
 
   ${mediaQuery[1]} {
     font-size: 1.4rem;
@@ -182,7 +185,6 @@ const InputBox = styled.input`
   height: 2.8rem;
   padding-left: 0.2rem;
   margin: 0.4rem 0 0.6rem 0;
-
   border: 0.2rem solid rgba(0, 0, 0, 0.2);
   border-radius: 0.2rem;
 
@@ -200,24 +202,23 @@ const InputNameBox = styled(InputBox)`
 const InputButton = styled.button`
   width: 100%;
   height: 4rem;
-
   margin-top: 2.4rem;
-
   border: 0.4rem solid #c6a692;
   border-radius: 3rem;
+
   background-color: white;
-
-  font-size: 1.9rem;
-  font-family: 'Jua';
-
   color: #c6a692;
+
+  font-family: 'Jua';
+  font-size: 1.9rem;
 `;
 
 const AlertSmall = styled.small`
   display: block;
   margin-bottom: 1rem;
 
+  color: red;
+
   font-family: 'Jua';
   font-size: 1.2rem;
-  color: red;
 `;

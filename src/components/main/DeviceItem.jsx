@@ -1,16 +1,11 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { useNavigate } from 'react-router-dom';
+import mediaQuery from '../../utils/breakPointUI';
 
-export default function DashBoard({ device }) {
-  const navigate = useNavigate();
-
-  const handleDeviceClick = () => {
-    navigate(`/dht?deviceName=${device.name}&deviceId=${device.deviceId}`);
-  };
+export default function DeviceItem({ device }) {
   return (
     <Container>
-      <DeviceInfo onClick={handleDeviceClick}>
+      <DeviceInfo>
         <DeviceName>{device.name}</DeviceName>
         <SerialNumber>{device.deviceId}</SerialNumber>
       </DeviceInfo>
@@ -20,20 +15,30 @@ export default function DashBoard({ device }) {
 
 const Container = styled.div`
   position: relative;
-  width: 18rem;
-  height: 18rem;
 
-  margin: 7rem 4rem;
+  width: 17rem;
+  height: 17rem;
   padding: 2rem;
-
+  margin: 6rem 4rem;
   border-radius: 3rem;
+
   background-color: #c6a692;
 
   cursor: pointer;
 
   &:hover {
-    scale: 1.03;
     transition: 0.2s ease-out;
+    scale: 1.03;
+  }
+
+  ${mediaQuery[2]} {
+    width: 18.6rem;
+    height: 18.6rem;
+  }
+
+  ${mediaQuery[1]} {
+    width: 21rem;
+    height: 21rem;
   }
 `;
 
@@ -41,22 +46,32 @@ const DeviceInfo = styled.div`
   position: absolute;
   top: 50%;
   left: 50%;
+
   transform: translate(-50%, -50%);
 `;
 
 const DeviceName = styled.span`
   display: block;
-  margin-bottom: 1.8rem;
+  width: 16rem;
+  margin-bottom: 1.4rem;
+
+  color: #6c5d53;
 
   font-family: 'Jua';
   font-size: 2.6rem;
-  color: #6c5d53;
+  text-align: center;
+
+  ${mediaQuery[1]} {
+    font-size: 2rem;
+  }
 `;
 
 const SerialNumber = styled.span`
   display: block;
-  text-align: center;
+
+  color: #8d8c8c;
+
   font-family: 'Jua';
   font-size: 2.6rem;
-  color: #8d8c8c;
+  text-align: center;
 `;

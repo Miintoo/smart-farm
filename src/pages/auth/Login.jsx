@@ -68,15 +68,15 @@ export default function Login() {
 
 // css 부분
 const LoginBox = styled.div`
-  width: 60rem;
-  height: 48rem;
-
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
 
+  width: 69rem;
+  height: 60vh;
   border: 0.6rem solid #c6a692;
+
+  transform: translate(-50%, -50%);
 
   ${mediaQuery[2]} {
     width: 60rem;
@@ -95,18 +95,23 @@ const LoginBox = styled.div`
 
 const LoginTitle = styled.h2`
   height: 7rem;
-  margin-top: 9rem;
+  margin-top: 10.5rem;
   margin-bottom: 2rem;
 
-  text-align: center;
+  color: #c6a692;
+
   font-family: 'Jua';
   font-size: 6rem;
+  text-align: center;
 
-  color: #c6a692;
+  ${mediaQuery[2]} {
+    margin-top: 9rem;
+  }
 
   ${mediaQuery[1]} {
     margin-top: 8.8rem;
     margin-bottom: 0rem;
+
     font-size: 4rem;
   }
 `;
@@ -127,8 +132,8 @@ const LoginForm = styled.form`
 const LoginInputBox = styled.input`
   width: 100%;
   height: 4.9rem;
-  margin: 0.5rem 0 0.2rem 0;
   padding-left: 1.2rem;
+  margin: 0.5rem 0 0.2rem 0;
   border: 0.15rem solid rgba(0, 0, 0, 0.1);
   border-radius: 0.2rem;
 
@@ -144,15 +149,15 @@ const LoginButton = styled.button`
   width: 100%;
   height: 4.8rem;
   margin-top: 2rem;
+  border: 0.3rem solid #c6a692;
+  border-radius: 0.9rem;
+
+  background-color: white;
+  color: #c6a692;
 
   font-family: 'Jua';
   font-size: 2.6rem;
   font-weight: 200;
-  color: #c6a692;
-  background-color: white;
-
-  border: 0.3rem solid #c6a692;
-  border-radius: 0.9rem;
 `;
 
 const InfoButtonContainer = styled.ul`
@@ -160,8 +165,10 @@ const InfoButtonContainer = styled.ul`
   justify-content: space-evenly;
   width: 45%;
   margin: auto;
+
   font-size: 0.8rem;
   font-weight: bold;
+
   opacity: 0.3;
 
   ${mediaQuery[1]} {
@@ -175,10 +182,12 @@ const InfoButtonContainer = styled.ul`
 
 const InfoButtonItem = styled.li`
   margin-top: 1.2rem;
+
   font-family: 'Jua';
   font-size: 1.4rem;
 
   cursor: pointer;
+
   &:hover {
     transition: 0.2s ease-out;
     color: #c6a692;
