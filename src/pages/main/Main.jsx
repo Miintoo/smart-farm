@@ -27,7 +27,7 @@ export default function Main() {
       const response = await instance.get('/devices');
       setDevices([...devices, ...response.data.data]);
     } catch (error) {
-      throw Error('디바이스를 불러올 수 없습니다.');
+      Error('디바이스를 불러올 수 없습니다.');
     }
   };
 
@@ -47,7 +47,7 @@ export default function Main() {
         <Sidebar users={users} />
         <MainContent>
           {devices.map((item) => (
-            <DeviceItem device={item} />
+            <DeviceItem device={item} key={item.deviceId} />
           ))}
         </MainContent>
         <AddButton>추가하기</AddButton>

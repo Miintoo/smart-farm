@@ -1,8 +1,15 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { useLocation, useNavigate } from 'react-router-dom';
+import queryString from 'query-string';
 import mediaQuery from '../../utils/breakPointUI';
 
 export default function MyPage() {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const query = queryString.parse(location.search);
+  const { userName } = query;
   return (
     <Container>
       <Title>회원 정보</Title>
@@ -10,17 +17,23 @@ export default function MyPage() {
         <InfoContent>
           <ProfileContainer>
             <ProfileImage src="images/profile.jpg" alt="프로파일 이미지 입니다." />
-            <ProfileName>김민혁 농부</ProfileName>
+            <ProfileName>{userName} 농부</ProfileName>
           </ProfileContainer>
           <ButtonList>
             <li>
-              <Button type="button">비밀번호 변경</Button>
+              <Button type="button" onClick={() => navigate(`/change/password${location.search}`)}>
+                비밀번호 변경
+              </Button>
             </li>
             <li>
-              <Button type="button">회원정보 수정</Button>
+              <Button type="button" onClick={() => navigate(`/change/userinfo${location.search}`)}>
+                회원정보 수정
+              </Button>
             </li>
             <li>
-              <Button type="button">회원탈퇴</Button>
+              <Button type="button" onClick={() => navigate(`/signout${location.search}`)}>
+                회원탈퇴
+              </Button>
             </li>
           </ButtonList>
         </InfoContent>

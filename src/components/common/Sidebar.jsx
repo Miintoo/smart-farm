@@ -29,7 +29,11 @@ export default function Sidebar({ users }) {
       <SidebarImage src="images/Sidebar.png" alt="사이드바 버튼" onClick={handleSidebarButton} />
       <SidebarContainer>
         <ProfileContainer>
-          <ProfileImage onClick={() => navigate('/mypage')} src="images/profile.jpg" alt="프로파일 이미지 입니다." />
+          <ProfileImage
+            onClick={() => navigate(`/mypage?userName=${users.name}`)}
+            src="images/profile.jpg"
+            alt="프로파일 이미지 입니다."
+          />
           <ProfileName>{users.name} 농부</ProfileName>
         </ProfileContainer>
         <ButtonContainer>
@@ -96,6 +100,7 @@ const ProfileImage = styled.img`
 
   &:hover {
     transition: 0.2s ease-out;
+    scale: 1.1;
     opacity: 0.6;
   }
 `;
