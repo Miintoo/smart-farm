@@ -1,6 +1,5 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-// import axios from 'axios';
 import styled from '@emotion/styled';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';

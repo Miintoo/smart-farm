@@ -16,7 +16,7 @@ export default function MyPage() {
       <InfoContainer>
         <InfoContent>
           <ProfileContainer>
-            <ProfileImage src="images/profile.jpg" alt="프로파일 이미지 입니다." />
+            <ProfileImage src="/images/profile.jpg" alt="프로파일 이미지 입니다." />
             <ProfileName>{userName} 농부</ProfileName>
           </ProfileContainer>
           <ButtonList>

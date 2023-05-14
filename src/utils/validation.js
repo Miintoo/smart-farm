@@ -36,6 +36,14 @@ export default function validation(action) {
           message: '전화번호 형식에 맞지 않습니다.'
         }
       };
+    case 'deviceName':
+      return {
+        required: '디바이스 이름은 필수 입력입니다.'
+      };
+    case 'id':
+      return {
+        required: '시리얼 넘버는 필수 입력입니다.'
+      };
     default:
       return Error('알맞은 명령이 없습니다.');
   }

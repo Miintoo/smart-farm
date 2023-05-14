@@ -6,19 +6,25 @@ import Sidebar from '../../components/common/Sidebar';
 import DeviceItem from '../../components/main/DeviceItem';
 import ModalOneButton from '../../components/common/ModalOneButton';
 import mediaQuery from '../../utils/breakPointUI';
+import ModalAddDevice from '../../components/main/ModalAddDevice';
 
 export default function Main() {
   const navigate = useNavigate();
   const [users, setUsers] = useState({});
   const [devices, setDevices] = useState([]);
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState({
+    errorAlert: false,
+    addAlert: false
+  });
 
   const takeUser = async () => {
     try {
       const response = await instance.get('/users');
       setUsers(response.data);
     } catch (error) {
-      setIsOpen(true);
+      setIsOpen((prev) => {
+        return { ...prev, errorAlert: true };
+      });
     }
   };
 
@@ -37,8 +43,26 @@ export default function Main() {
   }, []);
 
   const handleModalClick = () => {
-    setIsOpen(false);
+    setIsOpen((prev) => {
+      return { ...prev, errorAlert: false };
+    });
     navigate('/');
+  };
+
+  const handleAddButton = () => {
+    setIsOpen((prev) => {
+      return { ...prev, addAlert: true };
+    });
+  };
+
+  const hanldeAddModalButton = () => {
+    setIsOpen((prev) => {
+      return { ...prev, addAlert: false };
+    });
+  };
+
+  const updateDevice = (data) => {
+    setDevices([...devices, ...data]);
   };
 
   return (
@@ -50,13 +74,14 @@ export default function Main() {
             <DeviceItem device={item} key={item.deviceId} />
           ))}
         </MainContent>
-        <AddButton>추가하기</AddButton>
+        <AddButton onClick={handleAddButton}>추가하기</AddButton>
       </Container>
-      {isOpen ? (
+      {isOpen.errorAlert ? (
         <ModalOneButton title="세션이 만료되었습니다." buttonDescription="확인" onClick={handleModalClick} />
       ) : (
         ''
       )}
+      {isOpen.addAlert ? <ModalAddDevice onClick={hanldeAddModalButton} updateDevice={updateDevice} /> : ''}
     </>
   );
 }
