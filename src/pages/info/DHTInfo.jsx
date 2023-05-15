@@ -27,17 +27,18 @@ export default function DHTInfo() {
             deviceId
           }
         });
-
-        const currentData = response.data.data[response.data.data.length - 1];
-        setTemp(currentData.temperature);
-        setHumid(currentData.humidity);
+        const { searchData } = response.data.data;
+        setTemp(searchData[0].temperature);
+        setHumid(searchData[0].humidity);
       } catch (error) {
         Error(error);
       }
     };
 
     fetchData();
+  }, []);
 
+  useEffect(() => {
     // 일정 주기로 데이터 받아오기
     const intervalData = setInterval(async () => {
       try {
@@ -46,10 +47,10 @@ export default function DHTInfo() {
             deviceId: 1
           }
         });
+        const { searchData } = response.data.data;
 
-        const currentData = response.data.data[response.data.data.length - 1];
-        setTemp(currentData.temperature);
-        setHumid(currentData.humidity);
+        setTemp(searchData[0].temperature);
+        setHumid(searchData[0].humidity);
       } catch (error) {
         Error('온습도 값을 받아오지 못했습니다.');
       }
