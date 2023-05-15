@@ -28,7 +28,11 @@ export default function ModalOneButton({ title, buttonDescription, onClick, info
                   <p>{infoContent.good[1]}</p>
                 </Status>
               ) : (
-                <Status>{infoContent.good[0]}</Status>
+                <Status>
+                  <img alt="좋음상태" src="images/smile.png" />
+                  <p>좋음 : </p>
+                  <p>{infoContent.good[0]}</p>
+                </Status>
               )}
               {isDht ? (
                 <Status>
@@ -39,7 +43,11 @@ export default function ModalOneButton({ title, buttonDescription, onClick, info
                   <p>{infoContent.normal[1]}</p>
                 </Status>
               ) : (
-                <Status>{infoContent.normal[0]}</Status>
+                <Status>
+                  <img alt="보통상태" src="images/normal.png" />
+                  <p>보통 : </p>
+                  <p>{infoContent.normal[0]}</p>
+                </Status>
               )}
               <Status>
                 <img alt="나쁨상태" src="images/Bad.png" />

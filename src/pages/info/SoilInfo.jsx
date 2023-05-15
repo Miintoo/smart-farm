@@ -12,6 +12,11 @@ export default function SoilInfo() {
   const { deviceId } = query;
   const { deviceName } = query;
 
+  const infoContent = {
+    good: ['1000% 이하'],
+    normal: ['1001% ~ 2000%']
+  };
+
   useEffect(() => {
     // 최초 데이터 받아오기
     const fetchData = async () => {
@@ -25,7 +30,7 @@ export default function SoilInfo() {
         const currentData = response.data.data[response.data.data.length - 1];
         setSolid(currentData.solid);
       } catch (error) {
-        throw new Error('토양수분 값을 받아오지 못했습니다.');
+        Error('토양수분 값을 받아오지 못했습니다.');
       }
     };
 
@@ -43,7 +48,7 @@ export default function SoilInfo() {
         const currentData = response.data.data[response.data.data.length - 1];
         setSolid(currentData.solid);
       } catch (error) {
-        throw new Error('토양수분 값을 받아오지 못했습니다.');
+        Error('토양수분 값을 받아오지 못했습니다.');
       }
     }, 5000);
 
@@ -61,6 +66,7 @@ export default function SoilInfo() {
         sensorName="토양수분"
         unit="%"
         sensorData={solid}
+        infoContent={infoContent}
       />
       ;
     </>

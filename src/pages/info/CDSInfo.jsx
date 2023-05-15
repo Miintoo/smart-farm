@@ -12,6 +12,11 @@ export default function CDSInfo() {
   const { deviceId } = query;
   const { deviceName } = query;
 
+  const infoContent = {
+    good: ['200lux 이상'],
+    normal: ['100~199lux']
+  };
+
   useEffect(() => {
     // 최초 데이터 받아오기
     const fetchData = async () => {
@@ -25,7 +30,7 @@ export default function CDSInfo() {
         const currentData = response.data.data[response.data.data.length - 1];
         setCDS(currentData.lux);
       } catch (error) {
-        throw new Error('조도 값을 받아오지 못했습니다.');
+        Error('조도 값을 받아오지 못했습니다.');
       }
     };
 
@@ -43,7 +48,7 @@ export default function CDSInfo() {
         const currentData = response.data.data[response.data.data.length - 1];
         setCDS(currentData.lux);
       } catch (error) {
-        throw new Error('조도 값을 받아오지 못했습니다.');
+        Error('조도 값을 받아오지 못했습니다.');
       }
     }, 5000);
 
@@ -55,7 +60,15 @@ export default function CDSInfo() {
 
   return (
     <>
-      <SensorInfoTemplate deviceId={deviceId} deviceName={deviceName} sensorName="조도" unit="lux" sensorData={cds} />;
+      <SensorInfoTemplate
+        deviceId={deviceId}
+        deviceName={deviceName}
+        sensorName="조도"
+        unit="lux"
+        sensorData={cds}
+        infoContent={infoContent}
+      />
+      ;
     </>
   );
 }

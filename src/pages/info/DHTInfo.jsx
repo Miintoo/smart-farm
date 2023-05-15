@@ -14,7 +14,6 @@ export default function DHTInfo() {
   const { deviceName } = query;
 
   const infoContent = {
-    sensor: ['온도', '습도'],
     good: ['15~20도', '75~85%'],
     normal: ['10~14도, 21~25도', '65~74%, 86~95%']
   };
