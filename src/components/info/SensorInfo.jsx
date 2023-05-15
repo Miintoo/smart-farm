@@ -70,6 +70,7 @@ export default function sensorInfo({ sensorData, sensorName, unit }) {
     cutout: '55%', // 차트의 굵기 조정(값이 클수록 좁고, 작을수록 넓음)
     // hover: data === data.datasets[0].data[0],
     responsive: true,
+    animation: { animateRotate: false }, // 차트가 시계방향으로 그리면서 나오는 애니메이션 제거
     plugins: {
       tooltip: {
         enabled: false // tooltip 사용 x
