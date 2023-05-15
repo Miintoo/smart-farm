@@ -7,6 +7,7 @@ import instance from '../../utils/auth/interceptor';
 export default function SoilInfo() {
   const location = useLocation();
   const [solid, setSolid] = useState(0);
+  const [actuator, setActuator] = useState(0); // 0: 꺼짐, 1: 켜짐
 
   const query = queryString.parse(location.search);
   const { deviceId } = query;
@@ -26,16 +27,18 @@ export default function SoilInfo() {
             deviceId
           }
         });
-
-        const currentData = response.data.data[response.data.data.length - 1];
-        setSolid(currentData.solid);
+        const { deviceStatus, searchData } = response.data.data;
+        setSolid(searchData[0].solid);
+        setActuator(deviceStatus.pump);
       } catch (error) {
         Error('토양수분 값을 받아오지 못했습니다.');
       }
     };
 
     fetchData();
+  }, []);
 
+  useEffect(() => {
     // 일정 주기로 데이터 받아오기
     const intervalData = setInterval(async () => {
       try {
@@ -45,8 +48,9 @@ export default function SoilInfo() {
           }
         });
 
-        const currentData = response.data.data[response.data.data.length - 1];
-        setSolid(currentData.solid);
+        const { deviceStatus, searchData } = response.data.data;
+        setSolid(searchData[0].solid);
+        setActuator(deviceStatus.pump);
       } catch (error) {
         Error('토양수분 값을 받아오지 못했습니다.');
       }
@@ -67,6 +71,7 @@ export default function SoilInfo() {
         unit="%"
         sensorData={solid}
         infoContent={infoContent}
+        actuator={actuator}
       />
       ;
     </>
