@@ -7,6 +7,7 @@ import instance from '../../utils/auth/interceptor';
 export default function CDSInfo() {
   const location = useLocation();
   const [cds, setCDS] = useState(0);
+  const [actuator, setActuator] = useState(0); // 0: 꺼짐, 1: 켜짐
 
   const query = queryString.parse(location.search);
   const { deviceId } = query;
@@ -26,16 +27,19 @@ export default function CDSInfo() {
             deviceId
           }
         });
+        const { deviceStatus, searchData } = response.data.data;
 
-        const currentData = response.data.data[response.data.data.length - 1];
-        setCDS(currentData.lux);
+        setCDS(searchData[0].lux);
+        setActuator(deviceStatus.led);
       } catch (error) {
         Error('조도 값을 받아오지 못했습니다.');
       }
     };
 
     fetchData();
+  }, []);
 
+  useEffect(() => {
     // 일정 주기로 데이터 받아오기
     const intervalData = setInterval(async () => {
       try {
@@ -45,8 +49,10 @@ export default function CDSInfo() {
           }
         });
 
-        const currentData = response.data.data[response.data.data.length - 1];
-        setCDS(currentData.lux);
+        const { deviceStatus, searchData } = response.data.data;
+
+        setCDS(searchData[0].lux);
+        setActuator(deviceStatus.led);
       } catch (error) {
         Error('조도 값을 받아오지 못했습니다.');
       }
@@ -67,6 +73,7 @@ export default function CDSInfo() {
         unit="lux"
         sensorData={cds}
         infoContent={infoContent}
+        actuator={actuator}
       />
       ;
     </>
