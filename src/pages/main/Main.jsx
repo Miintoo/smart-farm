@@ -42,27 +42,32 @@ export default function Main() {
     takeDevice();
   }, []);
 
-  const handleModalClick = () => {
+  const handleErrorModalClick = () => {
     setIsOpen((prev) => {
       return { ...prev, errorAlert: false };
     });
     navigate('/');
   };
 
-  const handleAddButton = () => {
+  const handleAddModalClick = () => {
     setIsOpen((prev) => {
       return { ...prev, addAlert: true };
     });
   };
 
-  const hanldeAddModalButton = () => {
+  const hanldeAddModalClose = () => {
     setIsOpen((prev) => {
       return { ...prev, addAlert: false };
     });
   };
 
-  const updateDevice = (data) => {
+  const handleDeviceUpdate = (data) => {
     setDevices([...devices, ...data]);
+  };
+
+  const handleDeviceDelete = (deviceId) => {
+    const newDeviceData = devices.filter((device) => device.deviceId !== deviceId);
+    setDevices([...devices, newDeviceData]);
   };
 
   return (
@@ -71,17 +76,17 @@ export default function Main() {
         <Sidebar users={users} />
         <MainContent>
           {devices.map((item) => (
-            <DeviceItem device={item} key={item.deviceId} />
+            <DeviceItem device={item} key={item.deviceId} handleDeleteDevice={handleDeviceDelete} />
           ))}
         </MainContent>
-        <AddButton onClick={handleAddButton}>추가하기</AddButton>
+        <AddButton onClick={handleAddModalClick}>추가하기</AddButton>
       </Container>
       {isOpen.errorAlert ? (
-        <ModalOneButton title="세션이 만료되었습니다." buttonDescription="확인" onClick={handleModalClick} />
+        <ModalOneButton title="세션이 만료되었습니다." buttonDescription="확인" onClick={handleErrorModalClick} />
       ) : (
         ''
       )}
-      {isOpen.addAlert ? <ModalAddDevice onClick={hanldeAddModalButton} updateDevice={updateDevice} /> : ''}
+      {isOpen.addAlert && <ModalAddDevice onClick={hanldeAddModalClose} onUpdateDevice={handleDeviceUpdate} />}
     </>
   );
 }
@@ -94,23 +99,19 @@ const Container = styled.div`
   display: flex;
   overflow: scroll;
   overflow-x: hidden;
-  width: 70vw;
+  width: 60vw;
   height: 75vh;
   border: 0.5rem solid #c6a692;
 
   transform: translate(-50%, -50%);
 
-  ${mediaQuery[3]} {
-    width: 75vw;
-  }
-
   ${mediaQuery[2]} {
-    width: 80vw;
+    width: 75vw;
   }
 
   ${mediaQuery[1]} {
     overflow: scroll;
-    width: 99vw;
+    width: 90vw;
     border: none;
   }
 `;

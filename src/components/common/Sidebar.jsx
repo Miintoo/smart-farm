@@ -31,7 +31,7 @@ export default function Sidebar({ users }) {
         <ProfileContainer>
           <ProfileImage
             onClick={() => navigate(`/mypage?userName=${users.name}`)}
-            src="images/profile.jpg"
+            src="/images/profile.jpg"
             alt="프로파일 이미지 입니다."
           />
           <ProfileName>{users.name} 농부</ProfileName>

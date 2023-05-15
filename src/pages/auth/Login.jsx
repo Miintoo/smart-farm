@@ -14,7 +14,7 @@ export default function Login() {
     register,
     handleSubmit,
     formState: { isSubmitting, isDirty, errors }
-  } = useForm();
+  } = useForm({ mode: 'onblur' });
 
   // 로그인시 처리 로직
   const onSubmit = async (data) => {

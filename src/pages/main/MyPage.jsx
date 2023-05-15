@@ -48,9 +48,13 @@ const Container = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
 
-  width: 70vw;
+  width: 60vw;
   height: 75vh;
   border: 0.4rem solid #dfd2ca;
+
+  ${mediaQuery[2]} {
+    width: 75vw;
+  }
 
   ${mediaQuery[1]} {
     width: 90vw;

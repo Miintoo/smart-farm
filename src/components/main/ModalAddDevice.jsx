@@ -3,8 +3,9 @@ import styled from '@emotion/styled';
 import { useForm } from 'react-hook-form';
 import validation from '../../utils/validation';
 import instance from '../../utils/auth/interceptor';
+import mediaQuery from '../../utils/breakPointUI';
 
-export default function ModalAddDevice({ onClick, updateDevice }) {
+export default function ModalAddDevice({ onClick, onUpdateDevice }) {
   const {
     register,
     handleSubmit,
@@ -14,8 +15,8 @@ export default function ModalAddDevice({ onClick, updateDevice }) {
   const onSubmit = async (data) => {
     try {
       const response = await instance.post('/devices', data);
-      updateDevice(response);
       onClick();
+      onUpdateDevice(response);
     } catch (error) {
       Error('제품이 정상적으로 등록되지 않았습니다.');
     }
@@ -24,26 +25,27 @@ export default function ModalAddDevice({ onClick, updateDevice }) {
   return (
     <>
       <Container>
+        <CancelButton src="/images/cancel.png" alt="지우기버튼" onClick={onClick} />
         <ContentContainer>
           <Title>추가 제품의 정보를 입력해주세요!</Title>
           <Form onSubmit={handleSubmit(onSubmit)}>
             <DeviceInput
               type="text"
               placeholder="디바이스 이름"
-              name="deviceName"
-              aria-invalid={!isDirty ? undefined : errors.deviceName ? 'true' : 'false'}
-              {...register('deviceName', validation('deviceName'))}
+              name="name"
+              aria-invalid={!isDirty ? undefined : errors.name ? 'true' : 'false'}
+              {...register('name', validation('deviceName'))}
             />
-            {errors.deviceName && <AlertSmall>{errors.deviceName.message}</AlertSmall>}
+            {errors.name && <AlertSmall>{errors.name.message}</AlertSmall>}
 
             <DeviceInput
               type="text"
               placeholder="시리얼 번호"
-              name="id"
-              aria-invalid={!isDirty ? undefined : errors.id ? 'true' : 'false'}
-              {...register('id', validation('id'))}
+              name="deviceId"
+              aria-invalid={!isDirty ? undefined : errors.deviceId ? 'true' : 'false'}
+              {...register('deviceId', validation('id'))}
             />
-            {errors.id && <AlertSmall>{errors.id.message}</AlertSmall>}
+            {errors.deviceId && <AlertSmall>{errors.deviceId.message}</AlertSmall>}
 
             <ButtonTitle type="submit" disabled={isSubmitting}>
               입력
@@ -63,7 +65,7 @@ const Container = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
 
-  width: 40vw;
+  width: 30vw;
   height: 40vh;
   padding: 0rem 2rem;
   border: 1rem solid #c6a692;
@@ -72,6 +74,34 @@ const Container = styled.div`
   background-color: white;
 
   box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+
+  ${mediaQuery[2]} {
+    width: 52vw;
+  }
+
+  ${mediaQuery[1]} {
+    width: 28rem;
+  }
+
+  ${mediaQuery[0]} {
+    width: 90vw;
+  }
+`;
+
+const CancelButton = styled.img`
+  position: absolute;
+  top: 0.3rem;
+  right: 0.6rem;
+
+  width: 2rem;
+  height: 3rem;
+
+  cursor: pointer;
+
+  &:hover {
+    transition: 0.2s ease-out;
+    opacity: 0.4;
+  }
 `;
 
 const ContentContainer = styled.div`
@@ -85,14 +115,18 @@ const ContentContainer = styled.div`
 
 const Title = styled.h2`
   width: 80%;
-  margin: auto;
   padding-bottom: 3rem;
+  margin: 2rem auto;
 
   color: #c6a692;
 
   text-align: center;
   font-size: 2.6rem;
   font-family: 'Jua';
+
+  ${mediaQuery[1]} {
+    font-size: 2rem;
+  }
 `;
 
 const Form = styled.form`
