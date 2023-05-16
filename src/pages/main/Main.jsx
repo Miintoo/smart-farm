@@ -76,15 +76,13 @@ export default function Main() {
         <Sidebar users={users} />
         <MainContent>
           {devices.map((item) => (
-            <DeviceItem device={item} key={item.deviceId} handleDeleteDevice={handleDeviceDelete} />
+            <DeviceItem device={item} key={item.deviceId} onDeleteDevice={handleDeviceDelete} />
           ))}
         </MainContent>
         <AddButton onClick={handleAddModalClick}>추가하기</AddButton>
       </Container>
-      {isOpen.errorAlert ? (
+      {isOpen.errorAlert && (
         <ModalOneButton title="세션이 만료되었습니다." buttonDescription="확인" onClick={handleErrorModalClick} />
-      ) : (
-        ''
       )}
       {isOpen.addAlert && <ModalAddDevice onClick={hanldeAddModalClose} onUpdateDevice={handleDeviceUpdate} />}
     </>
@@ -95,6 +93,7 @@ const Container = styled.div`
   position: absolute;
   top: 50%;
   left: 50%;
+  transform: translate(-50%, -50%);
 
   display: flex;
   overflow: scroll;
@@ -102,8 +101,6 @@ const Container = styled.div`
   width: 60vw;
   height: 75vh;
   border: 0.5rem solid #c6a692;
-
-  transform: translate(-50%, -50%);
 
   ${mediaQuery[2]} {
     width: 75vw;

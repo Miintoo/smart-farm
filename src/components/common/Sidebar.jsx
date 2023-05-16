@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+// import PropsTypes from 'prop-types';
 import ModalOneButton from './ModalOneButton';
 import mediaQuery from '../../utils/breakPointUI';
 
@@ -41,10 +42,16 @@ export default function Sidebar({ users }) {
           <ButtonList onClick={handleLogout}>로그아웃</ButtonList>
         </ButtonContainer>
       </SidebarContainer>
-      {isOpen ? <ModalOneButton title="로그아웃 됐습니다." buttonDescription="확인" onClick={handleModalClick} /> : ''}
+      {isOpen && <ModalOneButton title="로그아웃 됐습니다." buttonDescription="확인" onClick={handleModalClick} />}
     </>
   );
 }
+
+// Sidebar.propTypes = {
+//   users: PropsTypes.shape({
+//     name: PropsTypes.string
+//   })
+// };
 
 const SidebarImage = styled.img`
   display: none;

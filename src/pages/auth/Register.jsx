@@ -18,9 +18,9 @@ export default function Register() {
   } = useForm({ mode: 'onBlur' });
 
   const onSubmit = async (data) => {
-    delete data.passwordConfirm;
+    const { passwordConfirm, ...filterData } = data;
     try {
-      await axios.post('https://reactjs.kr/api/register', data);
+      await axios.post('https://reactjs.kr/api/register', filterData);
       setIsOpen(true);
     } catch (error) {
       throw Error('회원가입이 실패 했습니다.');
@@ -92,11 +92,7 @@ export default function Register() {
           </InputButton>
         </RegisterForm>
       </RegisterBox>
-      {isOpen ? (
-        <ModalOneButton title="회원가입이 완료 되었습니다!" buttonDescription="확인" onClick={handleClick} />
-      ) : (
-        ''
-      )}
+      {isOpen && <ModalOneButton title="회원가입이 완료 되었습니다!" buttonDescription="확인" onClick={handleClick} />}
     </>
   );
 }
