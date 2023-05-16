@@ -80,7 +80,8 @@ export default function SoilInfo() {
         unit="%"
         sensorData={solid}
         infoContent={infoContent}
-        actuator={actuator}
+        actuatorStatus={actuator}
+        actuatorType="펌프"
         status={status}
       />
       ;

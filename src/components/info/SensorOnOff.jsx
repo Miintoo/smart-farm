@@ -1,10 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
+import queryString from 'query-string';
+import { useLocation } from 'react-router-dom';
 import mediaQuery from '../../utils/breakPointUI';
+import instance from '../../utils/auth/interceptor';
 
-export default function SensorOnOff({ actuatorType }) {
-  const actuatorState = 1; // actuator on/off 값 받아와서 useState로 관리 0: 꺼짐, 1: 켜짐
+export default function SensorOnOff({ actuatorType, actuatorStatus }) {
+  const location = useLocation();
+  const [actuator, setActuator] = useState(actuatorStatus);
+  console.log('11', actuatorStatus);
+  const query = queryString.parse(location.search);
+  const { deviceId } = query;
+
   const onOffStatus = [
     {
       imgUrl: 'images/Off.png',
@@ -16,10 +24,41 @@ export default function SensorOnOff({ actuatorType }) {
     }
   ];
 
+  const sensor = actuatorType === '펌프' ? 'solid' : 'lux';
+
+  const handleActuator = async () => {
+    let temp;
+
+    if (actuator === 0) {
+      temp = 1;
+    } else {
+      temp = 0;
+    }
+
+    try {
+      const response = await instance.post(`/devices/${sensor}`, null, {
+        params: {
+          deviceId,
+          active: temp
+        }
+      });
+
+      if (sensor === 'solid') {
+        const { solid } = response.data.data;
+        setActuator(solid);
+      } else {
+        const { led } = response.data.data;
+        setActuator(led);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
-    <Status>
-      <StatusImage alt="펌프상태" src={onOffStatus[actuatorState].imgUrl} />
-      <StatusMessage isActive={actuatorState}>{onOffStatus[actuatorState].onOffMessage}</StatusMessage>
+    <Status onClick={handleActuator}>
+      <StatusImage alt={`${onOffStatus[actuator]?.onOffMessage}`} src={onOffStatus[actuator]?.imgUrl} />
+      <StatusMessage isActive={actuator}>{onOffStatus[actuator]?.onOffMessage}</StatusMessage>
     </Status>
   );
 }

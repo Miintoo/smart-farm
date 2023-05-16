@@ -17,7 +17,9 @@ export default function SensorInfoTemplate({
   sensorData,
   unit,
   infoContent,
-  status
+  status,
+  actuatorStatus,
+  actuatorType
 }) {
   const navigate = useNavigate();
   const location = useLocation();
@@ -68,7 +70,11 @@ export default function SensorInfoTemplate({
             <DeviceName>디바이스: {deviceName}</DeviceName>
             <SensorStatusWrapper {...dhtProps}>
               <SensorStatus status={status[0]} />
-              {isDht ? <SensorStatus status={status[1]} /> : <SensorOnOff actuatorType="펌프" />}
+              {isDht ? (
+                <SensorStatus status={status[1]} />
+              ) : (
+                <SensorOnOff actuatorType={actuatorType} actuatorStatus={actuatorStatus} />
+              )}
             </SensorStatusWrapper>
 
             <SensorInfoWrapper {...dhtProps}>

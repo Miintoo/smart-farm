@@ -8,7 +8,7 @@ export default function CDSInfo() {
   const location = useLocation();
   const [cds, setCDS] = useState(0);
   const [actuator, setActuator] = useState(0); // 0: 꺼짐, 1: 켜짐
-
+  console.log(actuator);
   const query = queryString.parse(location.search);
   const { deviceId } = query;
   const { deviceName } = query;
@@ -82,7 +82,8 @@ export default function CDSInfo() {
         unit="lux"
         sensorData={cds}
         infoContent={infoContent}
-        actuator={actuator}
+        actuatorStatus={actuator}
+        actuatorType="led"
         status={status}
       />
       ;
