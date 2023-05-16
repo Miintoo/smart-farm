@@ -9,7 +9,8 @@ import instance from '../../utils/auth/interceptor';
 export default function SensorOnOff({ actuatorType, actuatorStatus }) {
   const location = useLocation();
   const [actuator, setActuator] = useState(actuatorStatus);
-  console.log('11', actuatorStatus);
+
+  console.log('SensorOnOff', actuatorStatus);
   const query = queryString.parse(location.search);
   const { deviceId } = query;
 
@@ -44,8 +45,10 @@ export default function SensorOnOff({ actuatorType, actuatorStatus }) {
       });
 
       if (sensor === 'solid') {
-        const { solid } = response.data.data;
-        setActuator(solid);
+        console.log('response', response.data);
+        const { pump } = response.data.data;
+        console.log('res', pump);
+        setActuator(pump);
       } else {
         const { led } = response.data.data;
         setActuator(led);

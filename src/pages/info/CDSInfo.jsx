@@ -8,7 +8,8 @@ export default function CDSInfo() {
   const location = useLocation();
   const [cds, setCDS] = useState(0);
   const [actuator, setActuator] = useState(0); // 0: 꺼짐, 1: 켜짐
-  console.log(actuator);
+  const [loading, setLoading] = useState(true);
+
   const query = queryString.parse(location.search);
   const { deviceId } = query;
   const { deviceName } = query;
@@ -40,6 +41,7 @@ export default function CDSInfo() {
 
         setCDS(searchData[0].lux);
         setActuator(deviceStatus.led);
+        setLoading(false);
       } catch (error) {
         Error('조도 값을 받아오지 못했습니다.');
       }
@@ -62,6 +64,7 @@ export default function CDSInfo() {
 
         setCDS(searchData[0].lux);
         setActuator(deviceStatus.led);
+        setLoading(false);
       } catch (error) {
         Error('조도 값을 받아오지 못했습니다.');
       }
@@ -74,19 +77,22 @@ export default function CDSInfo() {
   }, []);
 
   return (
-    <>
-      <SensorInfoTemplate
-        deviceId={deviceId}
-        deviceName={deviceName}
-        sensorName="조도"
-        unit="lux"
-        sensorData={cds}
-        infoContent={infoContent}
-        actuatorStatus={actuator}
-        actuatorType="led"
-        status={status}
-      />
-      ;
-    </>
+    <div>
+      {loading ? (
+        'loading...'
+      ) : (
+        <SensorInfoTemplate
+          deviceId={deviceId}
+          deviceName={deviceName}
+          sensorName="조도"
+          unit="lux"
+          sensorData={cds}
+          infoContent={infoContent}
+          actuatorStatus={actuator}
+          actuatorType="led"
+          status={status}
+        />
+      )}
+    </div>
   );
 }

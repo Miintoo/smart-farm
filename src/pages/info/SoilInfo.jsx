@@ -8,7 +8,9 @@ export default function SoilInfo() {
   const location = useLocation();
   const [solid, setSolid] = useState(0);
   const [actuator, setActuator] = useState(0); // 0: 꺼짐, 1: 켜짐
+  const [loading, setLoading] = useState(true);
 
+  console.log('solid', actuator);
   const query = queryString.parse(location.search);
   const { deviceId } = query;
   const { deviceName } = query;
@@ -39,6 +41,7 @@ export default function SoilInfo() {
         const { deviceStatus, searchData } = response.data.data;
         setSolid(searchData[0].solid);
         setActuator(deviceStatus.pump);
+        setLoading(false);
       } catch (error) {
         Error('토양수분 값을 받아오지 못했습니다.');
       }
@@ -60,6 +63,7 @@ export default function SoilInfo() {
         const { deviceStatus, searchData } = response.data.data;
         setSolid(searchData[0].solid);
         setActuator(deviceStatus.pump);
+        setLoading(false);
       } catch (error) {
         Error('토양수분 값을 받아오지 못했습니다.');
       }
@@ -72,19 +76,22 @@ export default function SoilInfo() {
   }, []);
 
   return (
-    <>
-      <SensorInfoTemplate
-        deviceId={deviceId}
-        deviceName={deviceName}
-        sensorName="토양수분"
-        unit="%"
-        sensorData={solid}
-        infoContent={infoContent}
-        actuatorStatus={actuator}
-        actuatorType="펌프"
-        status={status}
-      />
-      ;
-    </>
+    <div>
+      {loading ? (
+        'loading...'
+      ) : (
+        <SensorInfoTemplate
+          deviceId={deviceId}
+          deviceName={deviceName}
+          sensorName="토양수분"
+          unit="%"
+          sensorData={solid}
+          infoContent={infoContent}
+          actuatorStatus={actuator}
+          actuatorType="펌프"
+          status={status}
+        />
+      )}
+    </div>
   );
 }
