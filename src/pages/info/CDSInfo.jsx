@@ -18,6 +18,15 @@ export default function CDSInfo() {
     normal: ['100~199lux']
   };
 
+  const status = [];
+  if (cds >= 500) {
+    status[0] = 'good';
+  } else if (cds >= 201 && cds <= 499) {
+    status[0] = 'normal';
+  } else {
+    status[0] = 'bad';
+  }
+
   useEffect(() => {
     // 최초 데이터 받아오기
     const fetchData = async () => {
@@ -74,6 +83,7 @@ export default function CDSInfo() {
         sensorData={cds}
         infoContent={infoContent}
         actuator={actuator}
+        status={status}
       />
       ;
     </>

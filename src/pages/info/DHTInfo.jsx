@@ -18,6 +18,27 @@ export default function DHTInfo() {
     normal: ['10~14도, 21~25도', '65~74%, 86~95%']
   };
 
+  const status = [];
+  if (temp >= 15 && temp <= 20) {
+    status[0] = 'good';
+  } else if (temp >= 10 && temp <= 14) {
+    status[0] = 'normal';
+  } else if (temp >= 21 && temp <= 25) {
+    status[0] = 'normal';
+  } else {
+    status[0] = 'bad';
+  }
+
+  if (humid >= 75 && humid <= 85) {
+    status[1] = 'good';
+  } else if (humid >= 65 && humid <= 74) {
+    status[1] = 'normal';
+  } else if (humid >= 86 && humid <= 95) {
+    status[1] = 'normal';
+  } else {
+    status[1] = 'bad';
+  }
+
   useEffect(() => {
     // 최초 데이터 받아오기
     const fetchData = async () => {
@@ -70,6 +91,7 @@ export default function DHTInfo() {
       unit="º"
       sensorData={[temp, humid]}
       infoContent={infoContent}
+      status={status}
     />
   );
 }

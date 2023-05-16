@@ -14,9 +14,18 @@ export default function SoilInfo() {
   const { deviceName } = query;
 
   const infoContent = {
-    good: ['1000% 이하'],
-    normal: ['1001% ~ 2000%']
+    good: ['2000% 이하'],
+    normal: ['2001% ~ 3000%']
   };
+
+  const status = [];
+  if (solid <= 2000) {
+    status[0] = 'good';
+  } else if (solid >= 2001 && solid <= 3000) {
+    status[0] = 'normal';
+  } else {
+    status[0] = 'bad';
+  }
 
   useEffect(() => {
     // 최초 데이터 받아오기
@@ -72,6 +81,7 @@ export default function SoilInfo() {
         sensorData={solid}
         infoContent={infoContent}
         actuator={actuator}
+        status={status}
       />
       ;
     </>

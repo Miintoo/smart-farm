@@ -38,7 +38,6 @@ const Status = styled.button`
   box-sizing: border-box;
   width: 100%;
   height: 7rem;
-  margin-left: 1.6rem;
 
   background: #ffffff;
 
@@ -50,7 +49,7 @@ const Status = styled.button`
 
   ${mediaQuery[1]} {
     height: 5rem;
-    margin: 0.5rem 0 0 0;
+    /* margin: 0.5rem 0 0 0; */
   }
 `;
 

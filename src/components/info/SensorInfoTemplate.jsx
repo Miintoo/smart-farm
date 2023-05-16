@@ -10,7 +10,15 @@ import SensorOnOff from './SensorOnOff';
 import SensorInfo from './SensorInfo';
 import mediaQuery from '../../utils/breakPointUI';
 
-export default function SensorInfoTemplate({ deviceName, deviceId, sensorName, sensorData, unit, infoContent }) {
+export default function SensorInfoTemplate({
+  deviceName,
+  deviceId,
+  sensorName,
+  sensorData,
+  unit,
+  infoContent,
+  status
+}) {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -59,8 +67,8 @@ export default function SensorInfoTemplate({ deviceName, deviceId, sensorName, s
           <DeviceInfoWrapper>
             <DeviceName>디바이스: {deviceName}</DeviceName>
             <SensorStatusWrapper {...dhtProps}>
-              <SensorStatus />
-              {isDht ? '' : <SensorOnOff actuatorType="펌프" />}
+              <SensorStatus status={status[0]} />
+              {isDht ? <SensorStatus status={status[1]} /> : <SensorOnOff actuatorType="펌프" />}
             </SensorStatusWrapper>
 
             <SensorInfoWrapper {...dhtProps}>
@@ -181,10 +189,12 @@ const SensorStatusWrapper = styled.div`
   display: flex;
   width: calc(100% - 4.8rem);
   margin: 5.6rem 2.4rem;
+  gap: 1.6rem;
 
   ${mediaQuery[1]} {
     flex-direction: column;
     margin: 4.5rem 2.4rem;
+    gap: 0.5rem;
   }
 `;
 
@@ -206,10 +216,12 @@ const SensorInfoWrapper = styled.div`
   }
 
   ${mediaQuery[1]} {
-    margin-top: ${(props) => (props.dht ? '10rem' : '15.6rem')};
+    /* margin-top: ${(props) => (props.dht ? '10rem' : '15.6rem')}; */
+    margin-top: ${(props) => (props.dht ? '15.6rem' : '15.6rem')};
 
     height: 50rem;
-    max-height: ${(props) => (props.dht ? 'calc(63vh - 15rem)' : 'calc(63vh - 20.5rem)')};
+    /* max-height: ${(props) => (props.dht ? 'calc(63vh - 15rem)' : 'calc(63vh - 20.5rem)')} */
+    max-height: ${(props) => (props.dht ? 'calc(63vh - 20.5rem)' : 'calc(63vh - 20.5rem)')};
   }
 `;
 

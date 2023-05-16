@@ -2,11 +2,35 @@ import React from 'react';
 import styled from '@emotion/styled';
 import mediaQuery from '../../utils/breakPointUI';
 
-function sensorStatus() {
+function sensorStatus({ status }) {
+  let index;
+  if (status === 'good') {
+    index = 0;
+  } else if (status === 'normal') {
+    index = 1;
+  } else {
+    index = 2;
+  }
+
+  const statusList = [
+    {
+      imgUrl: 'images/smile.png',
+      statusMessage: '좋음'
+    },
+    {
+      imgUrl: 'images/normal.png',
+      statusMessage: '보통'
+    },
+    {
+      imgUrl: 'images/Bad.png',
+      statusMessage: '나쁨'
+    }
+  ];
+
   return (
     <Status>
-      <StatusImage alt="좋음상태" src="images/smile.png" />
-      <StatusMessage>좋음</StatusMessage>
+      <StatusImage alt={`${statusList[index].statusMessage} 상태`} src={statusList[index].imgUrl} />
+      <StatusMessage>{statusList[index].statusMessage}</StatusMessage>
     </Status>
   );
 }
@@ -44,7 +68,7 @@ const StatusImage = styled.img`
 `;
 
 const StatusMessage = styled.p`
-  margin: 0.2rem 0 0 1.8rem;
+  margin: 0.3rem 0 0 1.8rem;
 
   color: #c6a692;
 
