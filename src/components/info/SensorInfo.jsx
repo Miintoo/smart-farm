@@ -17,7 +17,7 @@ export default function sensorInfo({ sensorData, sensorName, unit }) {
   } else {
     gaugeColor = '#60B044';
   }
-  console.log(sensorName);
+
   const data = {
     labels: '',
     datasets: [

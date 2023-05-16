@@ -304,9 +304,8 @@ const GraphWrapper = styled.div`
   align-items: center;
   justify-content: space-around;
   width: calc(100% - 4.8rem);
-  height: 100%;
-  /* margin: 5rem 0 0 2.4rem; */
-  margin-left: 2.4rem;
+  height: 80%;
+  margin: 3.5rem 0 0 2.4rem;
 
   ${mediaQuery[1]} {
     flex-direction: column;
