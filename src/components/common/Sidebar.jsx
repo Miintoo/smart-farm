@@ -52,10 +52,12 @@ Sidebar.propTypes = {
 };
 
 const SidebarImage = styled.img`
+  position: fixed;
+
   display: none;
   width: 3rem;
   height: 3rem;
-  margin-left: 0.5rem;
+  margin: 0.5rem 0 0 0.5rem;
 
   cursor: pointer;
 

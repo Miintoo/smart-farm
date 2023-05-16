@@ -8,6 +8,7 @@ import SensorMenu from './SensorMenu';
 import SensorStatus from './SensorStatus';
 import SensorOnOff from './SensorOnOff';
 import SensorInfo from './SensorInfo';
+import mediaQuery from '../../utils/breakPointUI';
 
 export default function SensorInfoTemplate({ deviceName, deviceId, sensorName, sensorData, unit, infoContent }) {
   const navigate = useNavigate();
@@ -53,7 +54,6 @@ export default function SensorInfoTemplate({ deviceName, deviceId, sensorName, s
     <>
       <Container>
         <Sidebar users={users} />
-        {/* <Wrapper> */}
         <ContentWrapper>
           <SensorMenu menuType="info" deviceId={deviceId} deviceName={deviceName} />
           <DeviceInfoWrapper>
@@ -76,17 +76,16 @@ export default function SensorInfoTemplate({ deviceName, deviceId, sensorName, s
               <GraphWrapper>
                 {isDht ? (
                   <>
-                    <SensorInfo sensorData={sensorData[0]} sensorName="온도" unit="º" />
-                    <SensorInfo sensorData={sensorData[1]} sensorName="습도" unit="%" />
+                    <SensorInfo sensorData={sensorData[0]} sensorName="온도" unit="º" isDht={isDht} />
+                    <SensorInfo sensorData={sensorData[1]} sensorName="습도" unit="%" isDht={isDht} />
                   </>
                 ) : (
-                  <SensorInfo sensorData={sensorData} sensorName={sensorName} unit={unit} />
+                  <SensorInfo sensorData={sensorData} sensorName={sensorName} unit={unit} isDht={isDht} />
                 )}
               </GraphWrapper>
             </SensorInfoWrapper>
           </DeviceInfoWrapper>
         </ContentWrapper>
-        {/* </Wrapper> */}
       </Container>
       {isOpen ? (
         <ModalOneButton title="인가된 사용자가 아닙니다." buttonDescription="확인" onClick={handleModalClick} />
@@ -117,32 +116,44 @@ const Container = styled.div`
   width: 60vw;
   height: 75vh;
   border: 0.5rem solid #c6a692;
-`;
 
-// const Wrapper = styled.div`
-//   position: relative;
-//   margin: 0 auto;
-//   width: 100%;
-// `;
+  ${mediaQuery[3]} {
+    width: 75vw;
+  }
+
+  ${mediaQuery[1]} {
+    width: 90vw;
+  }
+
+  ${mediaQuery[0]} {
+    width: 100%;
+    border: none;
+  }
+`;
 
 const ContentWrapper = styled.div`
   position: relative;
+
   flex: 1;
   width: 100%;
-  /* position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%); */
 `;
 
 const DeviceInfoWrapper = styled.div`
   position: relative;
   width: 90%;
-  height: 55rem;
+  height: 60rem;
+  max-height: calc(63vh - 3rem);
   border-radius: 1rem;
   margin: 0 auto;
 
   background: #f0e7e2;
+
+  ${mediaQuery[3]} {
+    height: 53rem;
+  }
+  ${mediaQuery[1]} {
+    height: 60rem;
+  }
 `;
 
 const DeviceName = styled.p`
@@ -155,6 +166,13 @@ const DeviceName = styled.p`
   font-family: 'Jua', sans-serif;
   font-size: 2rem;
   line-height: 1.8rem;
+
+  ${mediaQuery[1]} {
+    font-size: 1.3rem;
+    line-height: 1.8rem;
+
+    margin: 1.5rem 0 0 2.6rem;
+  }
 `;
 
 const SensorStatusWrapper = styled.div`
@@ -162,24 +180,37 @@ const SensorStatusWrapper = styled.div`
 
   display: flex;
   width: calc(100% - 4.8rem);
-  height: 10rem;
-  /* height: 13%; */
-
   margin: 5.6rem 2.4rem;
+
+  ${mediaQuery[1]} {
+    flex-direction: column;
+    margin: 4.5rem 2.4rem;
+  }
 `;
 
 const SensorInfoWrapper = styled.div`
   position: absolute;
 
   width: calc(100% - 4.8rem);
-  height: 38rem;
-  /* height: 65%; */
-  max-height: calc(75vh - 9rem);
+  height: 53rem;
+  max-height: calc(100% - 16rem);
   border: 0.2rem solid #c6a692;
   border-radius: 1rem;
-  margin: 14.5rem 0 0 2.4rem;
+  margin: 14rem 0 0 2.4rem;
 
   background: #ffffff;
+
+  ${mediaQuery[3]} {
+    height: 38rem;
+    margin: 12.5rem 0 0 2.4rem;
+  }
+
+  ${mediaQuery[1]} {
+    margin-top: ${(props) => (props.dht ? '10rem' : '15.6rem')};
+
+    height: 50rem;
+    max-height: ${(props) => (props.dht ? 'calc(63vh - 15rem)' : 'calc(63vh - 20.5rem)')};
+  }
 `;
 
 const InfoModal = styled.div`
@@ -223,6 +254,47 @@ const InfoModal = styled.div`
       height: 1.8rem;
     }
   }
+
+  ${mediaQuery[3]} {
+    right: 9rem;
+
+    > button:first-of-type {
+      margin-left: 0.8rem;
+      > img {
+        width: 1.8rem;
+        height: 1.8rem;
+      }
+    }
+    > button:last-child {
+      margin: 0.2rem 0 0 5rem;
+      > img {
+        width: 1.6rem;
+        height: 1.6rem;
+      }
+    }
+  }
+
+  ${mediaQuery[1]} {
+    right: 7rem;
+
+    font-size: 1.3rem;
+    line-height: 1.3rem;
+
+    > button:first-of-type {
+      margin: -0.3rem 0 0 0.2rem;
+      > img {
+        width: 1.5rem;
+        height: 1.5rem;
+      }
+    }
+    > button:last-child {
+      margin: -0.3rem 0 0 3.5rem;
+      > img {
+        width: 1.4rem;
+        height: 1.4rem;
+      }
+    }
+  }
 `;
 
 const GraphWrapper = styled.div`
@@ -232,6 +304,12 @@ const GraphWrapper = styled.div`
   align-items: center;
   justify-content: space-around;
   width: calc(100% - 4.8rem);
-  height: 85%;
-  margin: 5rem 0 0 2.4rem;
+  height: 100%;
+  /* margin: 5rem 0 0 2.4rem; */
+  margin-left: 2.4rem;
+
+  ${mediaQuery[1]} {
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
 `;

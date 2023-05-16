@@ -38,13 +38,25 @@ const NavWrapper = styled.div`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  height: 14vh;
+  height: 12vh;
   margin: 0 auto;
+
+  ${mediaQuery[1]} {
+    height: 11vh;
+  }
 `;
 
 const UL = styled.ul`
   display: flex;
   gap: 7vw;
+
+  ${mediaQuery[3]} {
+    gap: 6vw;
+  }
+
+  ${mediaQuery[1]} {
+    gap: 11vw;
+  }
 `;
 
 const Li = styled.li`
@@ -64,29 +76,17 @@ const Li = styled.li`
       background: #c6a692;
       color: #ffffff;
     }
+  }
 
-    ${mediaQuery[2]} {
-      font-size: 3rem;
-      line-height: 2.5rem;
-    }
+  ${mediaQuery[1]} {
+    > a {
+      padding: 0.5rem 1rem 0.4rem;
 
-    ${mediaQuery[1]} {
-      padding: 0.9rem 1rem 0.5rem;
-      font-size: 2.8rem;
-      line-height: 2.3rem;
+      font-size: 1.7rem;
+      line-height: 1.7rem;
 
       &.active {
-        border-radius: 1.3rem;
-      }
-    }
-
-    ${mediaQuery[0]} {
-      padding: 0.7rem 1rem 0.5rem;
-      font-size: 2rem;
-      line-height: 2rem;
-
-      &.active {
-        border-radius: 1.1rem;
+        border-radius: 1rem;
       }
     }
   }

@@ -1,13 +1,13 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { Doughnut } from 'react-chartjs-2';
-import { Chart as ChartJS, ArcElement, Legend } from 'chart.js';
+import { Chart as ChartJS, ArcElement } from 'chart.js';
 import mediaQuery from '../../utils/breakPointUI';
 
-ChartJS.register(ArcElement, Legend);
+ChartJS.register(ArcElement);
 export default function sensorInfo({ sensorData, sensorName, unit }) {
   let gaugeColor = '#ced4da';
-  // console.log(Doughnut);
+
   if (sensorData < 30) {
     gaugeColor = '#FF0000';
   } else if (sensorData < 60) {
@@ -17,7 +17,7 @@ export default function sensorInfo({ sensorData, sensorName, unit }) {
   } else {
     gaugeColor = '#60B044';
   }
-
+  console.log(sensorName);
   const data = {
     labels: '',
     datasets: [
@@ -30,6 +30,8 @@ export default function sensorInfo({ sensorData, sensorName, unit }) {
     ]
   };
 
+  const notDhtProps = sensorName === '토양수분' || sensorName === '조도' ? { notDht: true } : {};
+
   // chart 가운데 text 구현
   const deviceValue = {
     id: 'deviceValue',
@@ -40,7 +42,9 @@ export default function sensorInfo({ sensorData, sensorName, unit }) {
       ctx.save();
 
       if (window.innerWidth <= 360) {
-        ctx.font = '0.8rem sans-serif';
+        ctx.font = 'bold 1rem sans-serif';
+      } else if (window.innerWidth <= 500) {
+        ctx.font = 'bold 1.3rem sans-serif';
       } else {
         ctx.font = 'bold 1.5rem sans-serif';
       }
@@ -69,7 +73,7 @@ export default function sensorInfo({ sensorData, sensorName, unit }) {
     circumference: 180, // 180도만큼 보여줌
     cutout: '55%', // 차트의 굵기 조정(값이 클수록 좁고, 작을수록 넓음)
     // hover: data === data.datasets[0].data[0],
-    responsive: true,
+    // responsive: false,
     animation: { animateRotate: false }, // 차트가 시계방향으로 그리면서 나오는 애니메이션 제거
     plugins: {
       tooltip: {
@@ -79,22 +83,23 @@ export default function sensorInfo({ sensorData, sensorName, unit }) {
   };
 
   return (
-    <Wrapper>
+    <Wrapper {...notDhtProps}>
       <Doughnut data={data} options={options} plugins={[deviceValue]} />
     </Wrapper>
   );
 }
 
 const Wrapper = styled.div`
-  width: 40%;
-  /* height: 40%; */
+  width: ${(props) => (props.notDht ? '25rem' : '20rem')};
+  height: ${(props) => (props.notDht ? '20rem' : '10rem')};
 
-  ${mediaQuery[1]} {
-    width: 50%;
+  ${mediaQuery[3]} {
+    width: ${(props) => (props.notDht ? '25rem' : '18rem')};
+    height: ${(props) => (props.notDht ? '18rem' : '10rem')};
   }
 
-  ${mediaQuery[0]} {
-    width: 80%;
-    /* height: 7.2rem; */
+  ${mediaQuery[1]} {
+    width: ${(props) => (props.notDht ? '18rem' : '15rem')};
+    height: ${(props) => (props.notDht ? '12rem' : '10rem')};
   }
 `;
