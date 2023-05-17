@@ -112,12 +112,12 @@ export default function sensorInfo({ sensorData, sensorName, unit, status }) {
 }
 
 const Wrapper = styled.div`
-  width: ${(props) => (props.isDht ? '20rem' : '25rem')};
-  height: ${(props) => (props.isDht ? '10rem' : '20rem')};
+  width: ${(props) => (props.isDht ? '20rem' : '24rem')};
+  height: ${(props) => (props.isDht ? '18rem' : '21rem')};
 
   ${mediaQuery[3]} {
-    width: ${(props) => (props.isDht ? '18rem' : '25rem')};
-    height: ${(props) => (props.isDht ? '15rem' : '18rem')};
+    width: ${(props) => (props.isDht ? '18rem' : '21rem')};
+    height: ${(props) => (props.isDht ? '15rem' : '17rem')};
   }
 
   ${mediaQuery[1]} {
@@ -126,7 +126,7 @@ const Wrapper = styled.div`
   }
 
   ${mediaQuery[0]} {
-    width: ${(props) => (props.isDht ? '12rem' : '15rem')};
+    width: ${(props) => (props.isDht ? '12rem' : '14rem')};
     height: ${(props) => (props.isDht ? '10rem' : '10rem')};
   }
 `;
