@@ -13,20 +13,22 @@ import mediaQuery from '../../utils/breakPointUI';
 export default function SensorInfoTemplate({
   deviceName,
   deviceId,
+  isDht,
   sensorName,
   sensorData,
   unit,
   infoContent,
   status,
   actuatorStatus,
-  actuatorType
+  actuatorType,
+  setActuator
 }) {
   const navigate = useNavigate();
   const location = useLocation();
 
   const [users, setUsers] = useState({});
   const [isOpen, setIsOpen] = useState(false);
-  const [isDht, setIsDht] = useState(false);
+  // const [isDht, setIsDht] = useState(false);
   const [infoOpen, setInfoOpen] = useState(false);
 
   const dhtProps = isDht ? { dht: true } : {};
@@ -41,9 +43,9 @@ export default function SensorInfoTemplate({
   };
 
   useEffect(() => {
-    if (sensorName === '온습도') {
-      setIsDht(true);
-    }
+    // if (sensorName === '온습도') {
+    //   setIsDht(true);
+    // }
     takeUser();
   }, []);
 
@@ -68,12 +70,12 @@ export default function SensorInfoTemplate({
           <SensorMenu menuType="info" deviceId={deviceId} deviceName={deviceName} />
           <DeviceInfoWrapper>
             <DeviceName>디바이스: {deviceName}</DeviceName>
-            <SensorStatusWrapper {...dhtProps}>
+            <SensorStatusWrapper>
               <SensorStatus status={status[0]} />
               {isDht ? (
                 <SensorStatus status={status[1]} />
               ) : (
-                <SensorOnOff actuatorType={actuatorType} actuatorStatus={actuatorStatus} />
+                <SensorOnOff actuatorType={actuatorType} actuatorStatus={actuatorStatus} setActuator={setActuator} />
               )}
             </SensorStatusWrapper>
 
@@ -90,11 +92,11 @@ export default function SensorInfoTemplate({
               <GraphWrapper>
                 {isDht ? (
                   <>
-                    <SensorInfo sensorData={sensorData[0]} sensorName="온도" unit="º" isDht={isDht} />
-                    <SensorInfo sensorData={sensorData[1]} sensorName="습도" unit="%" isDht={isDht} />
+                    <SensorInfo sensorData={sensorData[0]} sensorName="온도" unit="º" />
+                    <SensorInfo sensorData={sensorData[1]} sensorName="습도" unit="%" />
                   </>
                 ) : (
-                  <SensorInfo sensorData={sensorData} sensorName={sensorName} unit={unit} isDht={isDht} />
+                  <SensorInfo sensorData={sensorData} sensorName={sensorName} unit={unit} />
                 )}
               </GraphWrapper>
             </SensorInfoWrapper>
@@ -222,12 +224,9 @@ const SensorInfoWrapper = styled.div`
   }
 
   ${mediaQuery[1]} {
-    /* margin-top: ${(props) => (props.dht ? '10rem' : '15.6rem')}; */
-    margin-top: ${(props) => (props.dht ? '15.6rem' : '15.6rem')};
-
     height: 50rem;
-    /* max-height: ${(props) => (props.dht ? 'calc(63vh - 15rem)' : 'calc(63vh - 20.5rem)')} */
-    max-height: ${(props) => (props.dht ? 'calc(63vh - 20.5rem)' : 'calc(63vh - 20.5rem)')};
+    max-height: calc(63vh - 20.5rem);
+    margin-top: 15.6rem;
   }
 `;
 

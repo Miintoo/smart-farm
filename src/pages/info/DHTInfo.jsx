@@ -87,6 +87,7 @@ export default function DHTInfo() {
     <SensorInfoTemplate
       deviceName={deviceName}
       deviceId={deviceId}
+      isDht="true"
       sensorName="온습도"
       unit="º"
       sensorData={[temp, humid]}

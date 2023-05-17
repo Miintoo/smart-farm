@@ -6,11 +6,10 @@ import { useLocation } from 'react-router-dom';
 import mediaQuery from '../../utils/breakPointUI';
 import instance from '../../utils/auth/interceptor';
 
-export default function SensorOnOff({ actuatorType, actuatorStatus }) {
+export default function SensorOnOff({ actuatorType, actuatorStatus, setActuator }) {
   const location = useLocation();
-  const [actuator, setActuator] = useState(actuatorStatus);
+  const [loading, setLoading] = useState(false);
 
-  console.log('SensorOnOff', actuatorStatus);
   const query = queryString.parse(location.search);
   const { deviceId } = query;
 
@@ -28,47 +27,55 @@ export default function SensorOnOff({ actuatorType, actuatorStatus }) {
   const sensor = actuatorType === '펌프' ? 'solid' : 'lux';
 
   const handleActuator = async () => {
-    let temp;
-
-    if (actuator === 0) {
-      temp = 1;
-    } else {
-      temp = 0;
-    }
-
     try {
+      setLoading(true);
       const response = await instance.post(`/devices/${sensor}`, null, {
         params: {
           deviceId,
-          active: temp
+          active: Number(!actuatorStatus)
         }
       });
 
       if (sensor === 'solid') {
-        console.log('response', response.data);
         const { pump } = response.data.data;
-        console.log('res', pump);
         setActuator(pump);
       } else {
         const { led } = response.data.data;
         setActuator(led);
       }
     } catch (error) {
-      console.log(error);
+      Error(error);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <Status onClick={handleActuator}>
-      <StatusImage alt={`${onOffStatus[actuator]?.onOffMessage}`} src={onOffStatus[actuator]?.imgUrl} />
-      <StatusMessage isActive={actuator}>{onOffStatus[actuator]?.onOffMessage}</StatusMessage>
-    </Status>
+    <Container>
+      {loading ? (
+        <Status>
+          <p className="loadingMessage">loading...</p>
+        </Status>
+      ) : (
+        <Status onClick={handleActuator}>
+          <StatusImage
+            alt={`${onOffStatus[actuatorStatus]?.onOffMessage} 이미지`}
+            src={onOffStatus[actuatorStatus]?.imgUrl}
+          />
+          <StatusMessage isActive={actuatorStatus}>{onOffStatus[actuatorStatus]?.onOffMessage}</StatusMessage>
+        </Status>
+      )}
+    </Container>
   );
 }
 
 SensorOnOff.propTypes = {
   actuatorType: PropTypes.string.isRequired
 };
+
+const Container = styled.div`
+  width: 100%;
+`;
 
 const Status = styled.button`
   position: relative;
@@ -85,13 +92,16 @@ const Status = styled.button`
 
   cursor: pointer;
 
+  > .loadingMessage {
+    margin-left: 2rem;
+  }
+
   ${mediaQuery[3]} {
     height: 6rem;
   }
 
   ${mediaQuery[1]} {
     height: 5rem;
-    /* margin: 0.5rem 0 0 0; */
   }
 `;
 

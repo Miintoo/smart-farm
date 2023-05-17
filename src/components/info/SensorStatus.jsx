@@ -8,7 +8,7 @@ function sensorStatus({ status }) {
     index = 0;
   } else if (status === 'normal') {
     index = 1;
-  } else {
+  } else if (status === 'bad') {
     index = 2;
   }
 
@@ -29,8 +29,8 @@ function sensorStatus({ status }) {
 
   return (
     <Status>
-      <StatusImage alt={`${statusList[index].statusMessage} 상태`} src={statusList[index].imgUrl} />
-      <StatusMessage>{statusList[index].statusMessage}</StatusMessage>
+      <StatusImage alt={`${statusList[index]?.statusMessage} 이미지`} src={statusList[index]?.imgUrl} />
+      <StatusMessage>{statusList[index]?.statusMessage}</StatusMessage>
     </Status>
   );
 }
@@ -41,7 +41,7 @@ const Status = styled.div`
   box-sizing: border-box;
   border: 0.2rem solid #c6a692;
   border-radius: 1rem;
-  width: 100%;
+  width: 50%;
   height: 7rem;
 
   background: #ffffff;
