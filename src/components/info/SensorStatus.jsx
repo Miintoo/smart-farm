@@ -41,7 +41,7 @@ const Status = styled.div`
   box-sizing: border-box;
   border: 0.2rem solid #c6a692;
   border-radius: 1rem;
-  width: 50%;
+  width: 100%;
   height: 7rem;
 
   background: #ffffff;

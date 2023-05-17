@@ -14,14 +14,14 @@ export default function SoilInfo() {
   const { deviceName } = query;
 
   const infoContent = {
-    good: ['2000% 이하'],
-    normal: ['2001% ~ 3000%']
+    good: ['51% 이상'],
+    normal: ['25% ~ 50%']
   };
 
   const status = [];
-  if (solid <= 2000) {
+  if (solid >= 51) {
     status[0] = 'good';
-  } else if (solid >= 2001 && solid <= 3000) {
+  } else if (solid >= 20 && solid <= 25) {
     status[0] = 'normal';
   } else {
     status[0] = 'bad';

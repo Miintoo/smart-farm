@@ -5,17 +5,26 @@ import { Chart as ChartJS, ArcElement } from 'chart.js';
 import mediaQuery from '../../utils/breakPointUI';
 
 ChartJS.register(ArcElement);
-export default function sensorInfo({ sensorData, sensorName, unit }) {
+export default function sensorInfo({ sensorData, sensorName, unit, status }) {
   let gaugeColor = '#ced4da';
 
-  if (sensorData < 30) {
-    gaugeColor = '#FF0000';
-  } else if (sensorData < 60) {
-    gaugeColor = '#F97600';
-  } else if (sensorData < 90) {
-    gaugeColor = '#F6C600';
-  } else {
+  if (status === 'good') {
     gaugeColor = '#60B044';
+  } else if (status === 'normal') {
+    gaugeColor = '#F97600';
+  } else {
+    gaugeColor = '#FF0000';
+  }
+
+  let maxValue;
+  if (sensorName === '온도') {
+    maxValue = 50;
+  } else if (sensorName === '습도') {
+    maxValue = 100;
+  } else if (sensorName === '토양수분') {
+    maxValue = 100;
+  } else {
+    maxValue = 3000;
   }
 
   const data = {
@@ -23,7 +32,7 @@ export default function sensorInfo({ sensorData, sensorName, unit }) {
     datasets: [
       {
         label: `${sensorName}`,
-        data: [sensorData, 100 - sensorData],
+        data: [sensorData, maxValue - sensorData],
         backgroundColor: [gaugeColor, '#ced4da'],
         borderWidth: 1
       }

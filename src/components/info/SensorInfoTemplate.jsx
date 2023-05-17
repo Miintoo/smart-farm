@@ -92,11 +92,11 @@ export default function SensorInfoTemplate({
               <GraphWrapper>
                 {isDht ? (
                   <>
-                    <SensorInfo sensorData={sensorData[0]} sensorName="온도" unit="º" />
-                    <SensorInfo sensorData={sensorData[1]} sensorName="습도" unit="%" />
+                    <SensorInfo sensorData={sensorData[0]} sensorName="온도" unit="º" status={status[0]} />
+                    <SensorInfo sensorData={sensorData[1]} sensorName="습도" unit="%" status={status[1]} />
                   </>
                 ) : (
-                  <SensorInfo sensorData={sensorData} sensorName={sensorName} unit={unit} />
+                  <SensorInfo sensorData={sensorData} sensorName={sensorName} unit={unit} status={status[0]} />
                 )}
               </GraphWrapper>
             </SensorInfoWrapper>

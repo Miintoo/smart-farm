@@ -14,14 +14,14 @@ export default function CDSInfo() {
   const { deviceName } = query;
 
   const infoContent = {
-    good: ['200lux 이상'],
-    normal: ['100~199lux']
+    good: ['1000lux 이상'],
+    normal: ['500~999lux']
   };
 
   const status = [];
-  if (cds >= 500) {
+  if (cds >= 1000) {
     status[0] = 'good';
-  } else if (cds >= 201 && cds <= 499) {
+  } else if (cds >= 500 && cds <= 999) {
     status[0] = 'normal';
   } else {
     status[0] = 'bad';
