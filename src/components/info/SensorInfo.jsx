@@ -16,23 +16,23 @@ export default function sensorInfo({ sensorData, sensorName, unit, status }) {
     gaugeColor = '#FF0000';
   }
 
-  let maxValue;
+  let maxValue = 100;
+  let minValue = 0;
   if (sensorName === '온도') {
+    minValue = -20;
     maxValue = 50;
-  } else if (sensorName === '습도') {
-    maxValue = 100;
-  } else if (sensorName === '토양수분') {
-    maxValue = 100;
-  } else {
+  } else if (sensorName === '조도') {
     maxValue = 3000;
   }
+
+  const sensorValue = sensorData - minValue;
 
   const data = {
     labels: '',
     datasets: [
       {
         label: `${sensorName}`,
-        data: [sensorData, maxValue - sensorData],
+        data: [sensorValue, maxValue - minValue - sensorValue],
         backgroundColor: [gaugeColor, '#ced4da'],
         borderWidth: 1
       }
@@ -41,11 +41,14 @@ export default function sensorInfo({ sensorData, sensorName, unit, status }) {
 
   const DhtProps = sensorName === '온도' || sensorName === '습도' ? { isDht: true } : {};
 
-  // chart 가운데 text 구현
+  // chart 가운데, 최소, 최대 text 구현
   const deviceValue = {
     id: 'deviceValue',
     beforeDatasetsDraw(chart) {
-      const { ctx } = chart;
+      const {
+        ctx,
+        chartArea: { left, right }
+      } = chart;
       const chartData = chart.data;
 
       ctx.save();
@@ -67,10 +70,21 @@ export default function sensorInfo({ sensorData, sensorName, unit, status }) {
         chart.getDatasetMeta(0).data[0].y / 1.3
       );
       ctx.fillText(
-        `${chartData.datasets[0].data[0]}${unit}`,
+        `${chartData.datasets[0].data[0] + minValue}${unit}`,
         chart.getDatasetMeta(0).data[0].x,
         chart.getDatasetMeta(0).data[0].y / 1.08
       );
+
+      function labels(text, alignment, position) {
+        ctx.font = '1rem sans-serif';
+        ctx.fillStyle = 'black';
+        ctx.textBaseline = 'top';
+        ctx.textAlign = alignment;
+        ctx.fillText(text, position, chart.getDatasetMeta(0).data[0].y + 5);
+      }
+
+      labels(minValue, 'left', left + 2);
+      labels(maxValue, 'right', right - 2);
     }
   };
 

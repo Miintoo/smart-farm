@@ -21,7 +21,7 @@ export default function SoilInfo() {
   const status = [];
   if (solid >= 51) {
     status[0] = 'good';
-  } else if (solid >= 20 && solid <= 25) {
+  } else if (solid >= 25 && solid <= 50) {
     status[0] = 'normal';
   } else {
     status[0] = 'bad';
