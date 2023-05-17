@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
+import PropsTypes from 'prop-types';
 
 export default function ModalOneButton({ title, buttonDescription, onClick, infoContent }) {
   const [isDht, setIsDht] = useState(false);
@@ -55,6 +56,18 @@ export default function ModalOneButton({ title, buttonDescription, onClick, info
     </>
   );
 }
+
+ModalOneButton.propTypes = {
+  title: PropsTypes.string,
+  buttonDescription: PropsTypes.string,
+  onClick: PropsTypes.func.isRequired,
+  infoContent: PropsTypes.arrayOf(PropsTypes.string).isRequired
+};
+
+ModalOneButton.defaultProps = {
+  title: '제목',
+  buttonDescription: '내용'
+};
 
 const Container = styled.div`
   position: absolute;

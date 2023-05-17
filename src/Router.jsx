@@ -13,10 +13,8 @@ import CDSInfo from './pages/info/CDSInfo';
 import DHTDetail from './pages/info/DHTDetail';
 import SoilDetail from './pages/info/SoilDetail';
 import CDSDetail from './pages/info/CDSDetail';
-import silentRefresh from './utils/auth/silentRefresh';
 
 export default function Router() {
-  silentRefresh();
   return (
     <BrowserRouter>
       <Routes>

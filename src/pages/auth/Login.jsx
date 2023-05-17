@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import styled from '@emotion/styled';
@@ -14,13 +15,15 @@ export default function Login() {
     register,
     handleSubmit,
     formState: { isSubmitting, isDirty, errors }
-  } = useForm({ mode: 'onblur' });
+  } = useForm({ mode: 'onBlur' });
 
   // 로그인시 처리 로직
-  const onSubmit = async (data) => {
+  const onSubmit = async (value) => {
     try {
-      const accessToken = await axios.post('/login', data);
-      loginSuccess(accessToken.data.data);
+      const {
+        data: { auth }
+      } = await axios.post('/login', value);
+      loginSuccess(auth);
       navigate('/main');
     } catch (error) {
       Error('axios 로그인 실패');
@@ -35,7 +38,7 @@ export default function Login() {
           name="email"
           placeholder="email"
           aria-invalid={!isDirty ? undefined : errors.email ? 'true' : 'false'}
-          {...register('email', validation('email'))}
+          {...register('email', validation.email)}
         />
         {errors.email && <AlertSmall>{errors.email.message}</AlertSmall>}
         <LoginInputBox
@@ -43,7 +46,7 @@ export default function Login() {
           type="password"
           placeholder="password"
           aria-invalid={!isDirty ? undefined : errors.password ? 'true' : 'false'}
-          {...register('password', validation('password'))}
+          {...register('password', validation.password)}
         />
         {errors.password && <AlertSmall role="alert">{errors.password.message}</AlertSmall>}
         <LoginButton type="submit" disabled={isSubmitting}>

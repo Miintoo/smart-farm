@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from '@emotion/styled';
+import shortid from 'shortid';
 import instance from '../../utils/auth/interceptor';
 import Sidebar from '../../components/common/Sidebar';
 import DeviceItem from '../../components/main/DeviceItem';
@@ -76,7 +77,7 @@ export default function Main() {
         <Sidebar users={users} />
         <MainContent>
           {devices.map((item) => (
-            <DeviceItem device={item} key={item.deviceId} onDeleteDevice={handleDeviceDelete} />
+            <DeviceItem device={item} key={shortid.generate()} onDeleteDevice={handleDeviceDelete} />
           ))}
         </MainContent>
         <AddButton onClick={handleAddModalClick}>추가하기</AddButton>

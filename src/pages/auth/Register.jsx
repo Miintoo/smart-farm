@@ -20,7 +20,7 @@ export default function Register() {
   const onSubmit = async (data) => {
     const { passwordConfirm, ...filterData } = data;
     try {
-      await axios.post('https://reactjs.kr/api/register', filterData);
+      await axios.post('/register', filterData);
       setIsOpen(true);
     } catch (error) {
       throw Error('회원가입이 실패 했습니다.');
@@ -42,7 +42,7 @@ export default function Register() {
             id="email"
             name="email"
             aria-invalid={!isDirty ? undefined : errors.email ? 'true' : 'false'}
-            {...register('email', validation('email'))}
+            {...register('email', validation.email)}
           />
           {errors.email && <AlertSmall>{errors.email.message}</AlertSmall>}
 
@@ -52,7 +52,7 @@ export default function Register() {
             name="password"
             type="password"
             aria-invalid={!isDirty ? undefined : errors.password ? 'true' : 'false'}
-            {...register('password', validation('password'))}
+            {...register('password', validation.password)}
           />
           {errors.password && <AlertSmall role="alert">{errors.password.message}</AlertSmall>}
 
@@ -78,12 +78,12 @@ export default function Register() {
           <NamePhoneBox>
             <NameBox>
               <InputNameLabel htmlFor="name">이름</InputNameLabel>
-              <InputNameBox id="name" type="text" {...register('name', validation('name'))} />
+              <InputNameBox id="name" type="text" {...register('name', validation.name)} />
               {errors.name && <AlertSmall role="alert">{errors.name.message}</AlertSmall>}
             </NameBox>
             <PhoneBox>
               <InputPhoneLabel htmlFor="phone">전화번호</InputPhoneLabel>
-              <InputBox id="phone" type="text" {...register('phone', validation('phone'))} />
+              <InputBox id="phone" type="text" {...register('phone', validation.phone)} />
               {errors.phone && <AlertSmall role="alert">{errors.phone.message}</AlertSmall>}
             </PhoneBox>
           </NamePhoneBox>

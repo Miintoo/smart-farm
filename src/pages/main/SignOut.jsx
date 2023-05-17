@@ -42,7 +42,7 @@ export default function SignOut() {
               type="password"
               placeholder="password"
               aria-invalid={!isDirty ? undefined : errors.password ? 'true' : 'false'}
-              {...register('password', validation('password'))}
+              {...register('password', validation.password)}
             />
             {errors.password && <AlertSmall role="alert">{errors.password.message}</AlertSmall>}
             <Button type="submit" disabled={isSubmitting}>

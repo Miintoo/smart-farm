@@ -1,11 +1,13 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { useNavigate } from 'react-router-dom';
+import PropsTypes from 'prop-types';
 import mediaQuery from '../../utils/breakPointUI';
 import instance from '../../utils/auth/interceptor';
 
-export default function DeviceItem({ device, keyValue, onDeleteDevice }) {
+export default function DeviceItem({ device, onDeleteDevice }) {
   const navigate = useNavigate();
+  const statusCode = device.status;
 
   const handleDelete = async () => {
     try {
@@ -21,26 +23,74 @@ export default function DeviceItem({ device, keyValue, onDeleteDevice }) {
   };
 
   return (
-    <Container key={keyValue}>
-      <CancelButton src="/images/cancel.png" alt="취소 버튼" onClick={handleDelete} />
-      <DeviceInfo onClick={handleDeviceClick}>
-        <DeviceName>{device.name}</DeviceName>
-        <SerialNumber>{device.deviceId}</SerialNumber>
-      </DeviceInfo>
-    </Container>
+    <div>
+      {statusCode ? (
+        <ContainerOn>
+          <CancelButton src="/images/cancel.png" alt="취소 버튼" onClick={handleDelete} />
+          <DeviceInfo onClick={handleDeviceClick}>
+            <DeviceName>{device.name}</DeviceName>
+            <SerialNumber>{device.deviceId}</SerialNumber>
+          </DeviceInfo>
+        </ContainerOn>
+      ) : (
+        <ContainerOff>
+          <CancelButton src="/images/cancel.png" alt="취소 버튼" onClick={handleDelete} />
+          <DeviceInfo onClick={handleDeviceClick}>
+            <DeviceName>{device.name}</DeviceName>
+            <SerialNumber>{device.deviceId}</SerialNumber>
+          </DeviceInfo>
+        </ContainerOff>
+      )}
+    </div>
   );
 }
 
-const Container = styled.div`
+DeviceItem.propTypes = {
+  device: PropsTypes.object.isRequired,
+  onDeleteDevice: PropsTypes.func.isRequired
+};
+
+const ContainerOn = styled.div`
   position: relative;
 
   width: 17rem;
   height: 17rem;
   padding: 2rem;
   margin: 6rem 4rem;
+  border: 0.5rem solid green;
   border-radius: 3rem;
 
-  background-color: #c6a692;
+  background-color: #dfd2ca;
+
+  cursor: pointer;
+
+  &:hover {
+    transition: 0.2s ease-out;
+    scale: 1.03;
+  }
+
+  ${mediaQuery[2]} {
+    width: 18.6rem;
+    height: 18.6rem;
+  }
+
+  ${mediaQuery[1]} {
+    width: 21rem;
+    height: 21rem;
+  }
+`;
+
+const ContainerOff = styled.div`
+  position: relative;
+
+  width: 17rem;
+  height: 17rem;
+  padding: 2rem;
+  margin: 6rem 4rem;
+  border: 0.5rem solid red;
+  border-radius: 3rem;
+
+  background-color: #dfd2ca;
 
   cursor: pointer;
 
@@ -89,7 +139,7 @@ const DeviceName = styled.span`
   width: 16rem;
   margin-bottom: 1.4rem;
 
-  color: #6c5d53;
+  color: black;
 
   font-family: 'Jua';
   font-size: 2.6rem;
@@ -103,7 +153,7 @@ const DeviceName = styled.span`
 const SerialNumber = styled.span`
   display: block;
 
-  color: #8d8c8c;
+  color: black;
 
   font-family: 'Jua';
   font-size: 2.6rem;

@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { useForm } from 'react-hook-form';
+import PropsTypes from 'prop-types';
 import validation from '../../utils/validation';
 import instance from '../../utils/auth/interceptor';
 import mediaQuery from '../../utils/breakPointUI';
@@ -15,6 +16,7 @@ export default function ModalAddDevice({ onClick, onUpdateDevice }) {
   const onSubmit = async (data) => {
     try {
       const response = await instance.post('/devices', data);
+      console.log(response);
       onClick();
       onUpdateDevice(response);
     } catch (error) {
@@ -34,7 +36,7 @@ export default function ModalAddDevice({ onClick, onUpdateDevice }) {
               placeholder="디바이스 이름"
               name="name"
               aria-invalid={!isDirty ? undefined : errors.name ? 'true' : 'false'}
-              {...register('name', validation('deviceName'))}
+              {...register('name', validation.deviceName)}
             />
             {errors.name && <AlertSmall>{errors.name.message}</AlertSmall>}
 
@@ -43,7 +45,7 @@ export default function ModalAddDevice({ onClick, onUpdateDevice }) {
               placeholder="시리얼 번호"
               name="deviceId"
               aria-invalid={!isDirty ? undefined : errors.deviceId ? 'true' : 'false'}
-              {...register('deviceId', validation('id'))}
+              {...register('deviceId', validation.id)}
             />
             {errors.deviceId && <AlertSmall>{errors.deviceId.message}</AlertSmall>}
 
@@ -57,6 +59,11 @@ export default function ModalAddDevice({ onClick, onUpdateDevice }) {
     </>
   );
 }
+
+ModalAddDevice.propTypes = {
+  onClick: PropsTypes.func.isRequired,
+  onUpdateDevice: PropsTypes.func.isRequired
+};
 
 const Container = styled.div`
   position: absolute;

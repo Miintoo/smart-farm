@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-// import PropsTypes from 'prop-types';
+import PropsTypes from 'prop-types';
 import ModalOneButton from './ModalOneButton';
 import mediaQuery from '../../utils/breakPointUI';
 
@@ -47,11 +47,9 @@ export default function Sidebar({ users }) {
   );
 }
 
-// Sidebar.propTypes = {
-//   users: PropsTypes.shape({
-//     name: PropsTypes.string
-//   })
-// };
+Sidebar.propTypes = {
+  users: PropsTypes.object.isRequired
+};
 
 const SidebarImage = styled.img`
   display: none;

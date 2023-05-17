@@ -57,7 +57,7 @@ export default function ChangeUserInfo() {
               id="name"
               type="text"
               aria-invalid={!isDirty ? undefined : errors.name ? 'true' : 'false'}
-              {...register('name', validation('name'))}
+              {...register('name', validation.name)}
             />
             {errors.name && <AlertSmall role="alert">{errors.name.message}</AlertSmall>}
             <Label htmlFor="phone">전화번호</Label>
@@ -65,7 +65,7 @@ export default function ChangeUserInfo() {
               id="phone"
               type="text"
               aria-invalid={!isDirty ? undefined : errors.phone ? 'true' : 'false'}
-              {...register('phone', validation('phone'))}
+              {...register('phone', validation.phone)}
             />
             {errors.phone && <AlertSmall role="alert">{errors.phone.message}</AlertSmall>}
             <Button type="submit" disabled={isSubmitting}>
