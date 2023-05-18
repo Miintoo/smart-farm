@@ -13,12 +13,14 @@ export default function ModalAddDevice({ onClick, onUpdateDevice }) {
     formState: { isSubmitting, isDirty, errors }
   } = useForm({ mode: 'onBlur' });
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (value) => {
     try {
-      const response = await instance.post('/devices', data);
-      console.log(response);
+      const {
+        data: { data }
+      } = await instance.post('/devices', value);
+      console.log(data);
       onClick();
-      onUpdateDevice(response);
+      onUpdateDevice(data);
     } catch (error) {
       Error('제품이 정상적으로 등록되지 않았습니다.');
     }

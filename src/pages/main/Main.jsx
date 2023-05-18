@@ -63,12 +63,12 @@ export default function Main() {
   };
 
   const handleDeviceUpdate = (data) => {
-    setDevices([...devices, ...data]);
+    setDevices([...devices, data]);
   };
 
   const handleDeviceDelete = (deviceId) => {
     const newDeviceData = devices.filter((device) => device.deviceId !== deviceId);
-    setDevices([...devices, newDeviceData]);
+    setDevices(newDeviceData);
   };
 
   return (

@@ -11,8 +11,10 @@ export default function DeviceItem({ device, onDeleteDevice }) {
 
   const handleDelete = async () => {
     try {
-      await instance.put('/devices', { deviceId: device.deviceId });
-      onDeleteDevice(device.deviceId);
+      const {
+        data: { data }
+      } = await instance.put('/devices', { deviceId: device.deviceId });
+      onDeleteDevice(data.deviceId);
     } catch (error) {
       Error('올바른 요청이 아닙니다.');
     }
