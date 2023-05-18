@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import styled from '@emotion/styled';
 import instance from '../../utils/auth/interceptor';
 import Sidebar from '../common/Sidebar';
@@ -14,52 +14,36 @@ export default function SensorInfoTemplate({
   deviceName,
   deviceId,
   isDht,
+  actuatorType,
+  actuatorStatus,
+  setActuator,
   sensorName,
   sensorData,
   unit,
   infoContent,
-  status,
-  actuatorStatus,
-  actuatorType,
-  setActuator
+  status
 }) {
   const navigate = useNavigate();
-  const location = useLocation();
-
   const [users, setUsers] = useState({});
   const [isOpen, setIsOpen] = useState(false);
-  // const [isDht, setIsDht] = useState(false);
   const [infoOpen, setInfoOpen] = useState(false);
 
-  const dhtProps = isDht ? { dht: true } : {};
-
-  const takeUser = async () => {
-    try {
-      const usersData = await instance.get('/users');
-      setUsers(usersData.data);
-    } catch (error) {
-      setIsOpen(true);
-    }
-  };
-
   useEffect(() => {
-    // if (sensorName === '온습도') {
-    //   setIsDht(true);
-    // }
+    const takeUser = async () => {
+      try {
+        const usersData = await instance.get('/users');
+        setUsers(usersData.data);
+      } catch (error) {
+        setIsOpen(true);
+      }
+    };
+
     takeUser();
   }, []);
-
-  const handleDetailClick = () => {
-    navigate(`${location.pathname}/detail`);
-  };
 
   const handleModalClick = () => {
     setIsOpen(false);
     navigate('/');
-  };
-
-  const handleInfoModalClick = () => {
-    setInfoOpen(!infoOpen);
   };
 
   return (
@@ -67,27 +51,30 @@ export default function SensorInfoTemplate({
       <Container>
         <Sidebar users={users} />
         <ContentWrapper>
-          <SensorMenu menuType="info" deviceId={deviceId} deviceName={deviceName} />
+          <SensorMenu deviceId={deviceId} deviceName={deviceName} />
           <DeviceInfoWrapper>
             <DeviceName>디바이스: {deviceName}</DeviceName>
             <SensorStatusWrapper>
-              <SensorStatus status={status[0]} />
               {isDht ? (
-                <SensorStatus status={status[1]} />
+                <>
+                  <SensorStatus status={status[0]} sensorName="온도" />
+                  <SensorStatus status={status[1]} sensorName="습도" />
+                </>
               ) : (
-                <SensorOnOff actuatorType={actuatorType} actuatorStatus={actuatorStatus} setActuator={setActuator} />
+                <>
+                  <SensorStatus status={status[0]} sensorName={sensorName} />
+                  <SensorOnOff actuatorType={actuatorType} actuatorStatus={actuatorStatus} setActuator={setActuator} />
+                </>
               )}
             </SensorStatusWrapper>
-
-            <SensorInfoWrapper {...dhtProps}>
+            <SensorInfoWrapper>
               <InfoModal>
-                {sensorName} 정보
-                <button type="button" onClick={handleInfoModalClick}>
-                  <img alt={`${sensorName} 정보`} src="/images/question.png" />
-                </button>
-                <button type="button" onClick={handleDetailClick}>
-                  <img alt={`${sensorName} 상세`} src="/images/rightArrow.png" />
-                </button>
+                <span>{sensorName} 정보</span>
+                <InfoImage
+                  alt={`${sensorName} 정보`}
+                  src="/images/question.png"
+                  onClick={() => setInfoOpen(!infoOpen)}
+                />
               </InfoModal>
               <GraphWrapper>
                 {isDht ? (
@@ -103,20 +90,16 @@ export default function SensorInfoTemplate({
           </DeviceInfoWrapper>
         </ContentWrapper>
       </Container>
-      {isOpen ? (
+      {isOpen && (
         <ModalOneButton title="인가된 사용자가 아닙니다." buttonDescription="확인" onClick={handleModalClick} />
-      ) : (
-        ''
       )}
-      {infoOpen ? (
+      {infoOpen && (
         <ModalOneButton
           title={sensorName}
           buttonDescription="확인"
-          onClick={handleInfoModalClick}
+          onClick={() => setInfoOpen(!infoOpen)}
           infoContent={infoContent}
         />
-      ) : (
-        ''
       )}
     </>
   );
@@ -156,6 +139,7 @@ const ContentWrapper = styled.div`
 
 const DeviceInfoWrapper = styled.div`
   position: relative;
+
   width: 90%;
   height: 60rem;
   max-height: calc(63vh - 3rem);
@@ -167,6 +151,7 @@ const DeviceInfoWrapper = styled.div`
   ${mediaQuery[3]} {
     height: 53rem;
   }
+
   ${mediaQuery[1]} {
     height: 60rem;
   }
@@ -184,10 +169,10 @@ const DeviceName = styled.p`
   line-height: 1.8rem;
 
   ${mediaQuery[1]} {
+    margin: 1.5rem 0 0 2.6rem;
+
     font-size: 1.3rem;
     line-height: 1.8rem;
-
-    margin: 1.5rem 0 0 2.6rem;
   }
 `;
 
@@ -232,85 +217,40 @@ const SensorInfoWrapper = styled.div`
 
 const InfoModal = styled.div`
   position: absolute;
-  right: 10rem;
+  right: 5rem;
 
   margin-top: 1.5rem;
 
   color: #c6a692;
 
-  font-family: 'Jua', sans-serif;
-  font-size: 1.5rem;
-  line-height: 2.5rem;
+  > span {
+    font-family: 'Jua', sans-serif;
+    font-size: 1.5rem;
+    line-height: 2.5rem;
 
-  > button:first-of-type {
-    position: absolute;
-
-    margin: 0.1rem 0 0 1rem;
-    border: none;
-
-    background: #fff;
-
-    cursor: pointer;
-
-    > img {
-      width: 2rem;
-      height: 2rem;
+    ${mediaQuery[1]} {
+      font-size: 1.3rem;
+      line-height: 1.3rem;
     }
   }
+`;
 
-  > button:last-child {
-    position: absolute;
+const InfoImage = styled.img`
+  position: absolute;
 
-    border: none;
-    margin: 0.2rem 0 0 5rem;
+  width: 1.9rem;
+  height: 1.8rem;
+  margin: 0.2rem 0 0 1rem;
+  border: none;
 
-    background: #fff;
+  background: #fff;
 
-    > img {
-      width: 1.8rem;
-      height: 1.8rem;
-    }
-  }
-
-  ${mediaQuery[3]} {
-    right: 9rem;
-
-    > button:first-of-type {
-      margin-left: 0.8rem;
-      > img {
-        width: 1.8rem;
-        height: 1.8rem;
-      }
-    }
-    > button:last-child {
-      margin: 0.2rem 0 0 5rem;
-      > img {
-        width: 1.6rem;
-        height: 1.6rem;
-      }
-    }
-  }
+  cursor: pointer;
 
   ${mediaQuery[1]} {
-    right: 7rem;
-
-    font-size: 1.3rem;
-    line-height: 1.3rem;
-
-    > button:first-of-type {
-      margin: -0.3rem 0 0 0.2rem;
-      > img {
-        width: 1.5rem;
-        height: 1.5rem;
-      }
-    }
-    > button:last-child {
-      margin: -0.3rem 0 0 3.5rem;
-      > img {
-        width: 1.4rem;
-        height: 1.4rem;
-      }
-    }
+    width: 1.7rem;
+    height: 1.6rem;
+    margin: -0.25rem 0 0 1.1rem;
   }
 `;
 

@@ -2,7 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import mediaQuery from '../../utils/breakPointUI';
 
-function sensorStatus({ status }) {
+function sensorStatus({ status, sensorName }) {
   let index;
   if (status === 'good') {
     index = 0;
@@ -11,11 +11,12 @@ function sensorStatus({ status }) {
   } else if (status === 'bad') {
     index = 2;
   }
+  console.log(sensorName);
 
   const statusList = [
     {
       imgUrl: 'images/smile.png',
-      statusMessage: '좋음'
+      statusMessage: sensorName === '온도' || sensorName === '습도' ? `${sensorName} 좋음` : '좋음'
     },
     {
       imgUrl: 'images/normal.png',
