@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
 import PropsTypes from 'prop-types';
+import mediaQuery from '../../utils/breakPointUI';
 
 export default function ModalOneButton({ title, buttonDescription, onClick, infoContent }) {
   const [isDht, setIsDht] = useState(false);
@@ -83,7 +84,7 @@ const Container = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
 
-  width: 30vw;
+  width: 50rem;
   height: 40vh;
 
   padding: 4rem 2rem;
@@ -95,6 +96,11 @@ const Container = styled.div`
   box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
 
   background-color: white;
+
+  ${mediaQuery[1]} {
+    width: 30rem;
+    height: 28rem;
+  }
 `;
 
 const ContentContainer = styled.div`
@@ -108,16 +114,20 @@ const ContentContainer = styled.div`
 
 const Title = styled.h2`
   width: 80%;
-  margin: auto;
-  padding-bottom: 3rem;
+  margin: 1rem auto 0;
   text-align: center;
   font-size: 2.6rem;
   font-family: 'Jua';
   color: #c6a692;
+
+  ${mediaQuery[1]} {
+    font-size: 1.8rem;
+  }
 `;
 
 const StatusStandard = styled.div`
-  margin: 0.5rem 0 0 3rem;
+  width: 77%;
+  margin: 2.5rem auto 3rem;
 
   color: #c6a692;
 
@@ -127,10 +137,18 @@ const StatusStandard = styled.div`
   > :first-child {
     margin-top: 2.5rem;
   }
+
+  ${mediaQuery[1]} {
+    width: 100%;
+    margin-left: 2rem;
+
+    font-size: 1.5rem;
+  }
 `;
 
 const Status = styled.div`
   display: flex;
+  justify-content: flex-start;
   margin: 2rem 0 0 0;
 
   font-size: 1.5rem;
@@ -139,6 +157,12 @@ const Status = styled.div`
     width: 2.5rem;
     height: 2.5rem;
     margin-top: -0.6rem;
+
+    ${mediaQuery[1]} {
+      width: 1.2rem;
+      height: 1.2rem;
+      margin-top: -0.2rem;
+    }
   }
   > p {
     margin-left: 0.8rem;
@@ -146,12 +170,16 @@ const Status = styled.div`
   > p:first-of-type {
     margin-left: 1rem;
   }
+
+  ${mediaQuery[1]} {
+    font-size: 1rem;
+  }
 `;
 
 const ButtonTitle = styled.button`
   display: block;
   width: 10rem;
-  margin: 3.5rem auto 0;
+  margin: 3rem auto 0;
   padding-top: 0.4rem;
 
   border: 0.3rem solid #c6a692;
@@ -162,6 +190,12 @@ const ButtonTitle = styled.button`
   color: #c6a692;
 
   background-color: white;
+
+  ${mediaQuery[1]} {
+    width: 8rem;
+
+    font-size: 1.5rem;
+  }
 `;
 
 const ModalBackdrop = styled.div`
