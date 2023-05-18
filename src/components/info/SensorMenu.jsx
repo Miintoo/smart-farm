@@ -4,11 +4,8 @@ import styled from '@emotion/styled';
 import mediaQuery from '../../utils/breakPointUI';
 
 function sensorMenu({ deviceId, deviceName }) {
-  const customLink = [
-    `/dht?deviceName=${deviceName}&deviceId=${deviceId}`,
-    `/soil?deviceName=${deviceName}&deviceId=${deviceId}`,
-    `/lux?deviceName=${deviceName}&deviceId=${deviceId}`
-  ];
+  const linkList = ['dht', 'soil', 'lux'];
+  const customLink = linkList.map((path) => `/${path}?deviceName=${deviceName}&deviceId=${deviceId}`);
 
   return (
     <NavWrapper>
