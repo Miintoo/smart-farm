@@ -1,15 +1,15 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { useLocation, useNavigate } from 'react-router-dom';
-import queryString from 'query-string';
+import { useSearchParams, useNavigate, useLocation } from 'react-router-dom';
 import mediaQuery from '../../utils/breakPointUI';
 
 export default function MyPage() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const query = queryString.parse(location.search);
-  const { userName } = query;
+  const [searchParams] = useSearchParams();
+  const userName = searchParams.get('userName');
+
   return (
     <Container>
       <Title>회원 정보</Title>
@@ -184,7 +184,7 @@ const Button = styled.button`
   line-height: 4rem;
 
   &:hover {
-    transition 0.4s ease-out;
+    transition: 0.4s ease-out;
     scale: 1.1;
   }
 

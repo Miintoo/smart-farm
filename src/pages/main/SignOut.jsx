@@ -166,7 +166,7 @@ const Button = styled.button`
   line-height: 4rem;
 
   &:hover {
-    transition 0.4s ease-out;
+    transition: 0.4s ease-out;
     scale: 1.1;
   }
 `;
