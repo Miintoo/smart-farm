@@ -9,6 +9,8 @@ import mediaQuery from '../../utils/breakPointUI';
 export default function Sidebar({ users }) {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
+  const [sideBarOpen, setSideBarOpen] = useState(false);
+
   const handleLogout = async () => {
     try {
       await axios.get('/logout');
@@ -23,12 +25,19 @@ export default function Sidebar({ users }) {
     navigate('/');
   };
 
-  const handleSidebarButton = () => {};
+  const handleSidebarButton = () => {
+    setSideBarOpen(!sideBarOpen);
+  };
 
   return (
     <>
-      <SidebarImage src="images/Sidebar.png" alt="사이드바 버튼" onClick={handleSidebarButton} />
-      <SidebarContainer>
+      <SidebarImage
+        src="images/Sidebar.png"
+        alt="사이드바 버튼"
+        onClick={handleSidebarButton}
+        className={sideBarOpen ? 'isActive' : ''}
+      />
+      <SidebarContainer className={sideBarOpen ? 'isActive' : ''}>
         <ProfileContainer>
           <ProfileImage
             onClick={() => navigate(`/mypage?userName=${users.name}`)}
@@ -41,7 +50,14 @@ export default function Sidebar({ users }) {
           <ButtonList onClick={() => navigate('/main')}>메인으로 가기</ButtonList>
           <ButtonList onClick={handleLogout}>로그아웃</ButtonList>
         </ButtonContainer>
+        <SidebarCancelImage
+          src="images/cancel.png"
+          alt="사이드바 닫힘 버튼"
+          onClick={handleSidebarButton}
+          className={sideBarOpen ? 'isActive' : ''}
+        />
       </SidebarContainer>
+      <SidebarBackDrop className={sideBarOpen ? 'isActive' : ''} />
       {isOpen && <ModalOneButton title="로그아웃 됐습니다." buttonDescription="확인" onClick={handleModalClick} />}
     </>
   );
@@ -60,6 +76,7 @@ const SidebarImage = styled.img`
   margin: 0.5rem 0 0 0.5rem;
 
   cursor: pointer;
+  z-index: 2;
 
   &:hover {
     transition: 0.2s ease-out;
@@ -67,25 +84,37 @@ const SidebarImage = styled.img`
   }
   ${mediaQuery[2]} {
     display: block;
+
+    &.isActive {
+      display: none;
+    }
   }
 
   ${mediaQuery[1]} {
     position: absolute;
+
     margin-left: 1rem;
   }
 `;
 
 const SidebarContainer = styled.nav`
   position: sticky;
-  top: 0;
 
-  flex: 0.4;
+  width: 30%;
   height: 100%;
 
   background-color: #dfd2ca;
 
+  z-index: 2;
+
   ${mediaQuery[2]} {
+    position: fixed;
+
     display: none;
+
+    &.isActive {
+      display: block;
+    }
   }
 `;
 
@@ -139,5 +168,40 @@ const ButtonList = styled.li`
   &:hover {
     transition: 0.2s ease-out;
     color: #646464;
+  }
+`;
+
+const SidebarCancelImage = styled.img`
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+
+  display: none;
+  width: 1.8rem;
+  height: 2.5rem;
+
+  cursor: pointer;
+
+  &:hover {
+    transition: 0.2s ease-out;
+    opacity: 0.6;
+  }
+
+  &.isActive {
+    display: block;
+  }
+`;
+
+const SidebarBackDrop = styled.div`
+  position: absolute;
+
+  &.isActive {
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0, 0, 0, 0.4);
+
+    pointer-events: none;
+    z-index: 1;
   }
 `;
