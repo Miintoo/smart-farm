@@ -1,18 +1,15 @@
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
-import queryString from 'query-string';
-import { useLocation } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import mediaQuery from '../../utils/breakPointUI';
 import instance from '../../utils/auth/interceptor';
 
 export default function SensorOnOff({ actuatorType, actuatorStatus, setActuator }) {
-  const location = useLocation();
   const [loading, setLoading] = useState(false);
 
-  const query = queryString.parse(location.search);
-  const { deviceId } = query;
-
+  const [searchParams] = useSearchParams();
+  const deviceId = searchParams.get('deviceId');
   const onOffStatus = [
     {
       imgUrl: 'images/Off.png',

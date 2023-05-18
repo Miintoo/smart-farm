@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
-import queryString from 'query-string';
+import { useSearchParams } from 'react-router-dom';
 import instance from '../../utils/auth/interceptor';
 import SensorInfoTemplate from '../../components/info/SensorInfoTemplate';
 
 export default function DHTInfo() {
-  const location = useLocation();
   const [temp, setTemp] = useState(0);
   const [humid, setHumid] = useState(0);
 
-  const query = queryString.parse(location.search);
-  const { deviceId } = query;
-  const { deviceName } = query;
+  const [searchParams] = useSearchParams();
+  const deviceId = searchParams.get('deviceId');
+  const deviceName = searchParams.get('deviceName');
 
   const infoContent = {
     good: ['15~20도', '75~85%'],

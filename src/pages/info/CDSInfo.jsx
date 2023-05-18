@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import queryString from 'query-string';
-import { useLocation } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import SensorInfoTemplate from '../../components/info/SensorInfoTemplate';
 import instance from '../../utils/auth/interceptor';
 
 export default function CDSInfo() {
-  const location = useLocation();
   const [cds, setCDS] = useState(0);
   const [actuator, setActuator] = useState(0); // 0: 꺼짐, 1: 켜짐
 
-  const query = queryString.parse(location.search);
-  const { deviceId } = query;
-  const { deviceName } = query;
+  const [searchParams] = useSearchParams();
+  const deviceId = searchParams.get('deviceId');
+  const deviceName = searchParams.get('deviceName');
 
   const infoContent = {
     good: ['1000lux 이상'],
