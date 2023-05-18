@@ -11,7 +11,6 @@ function sensorStatus({ status, sensorName }) {
   } else if (status === 'bad') {
     index = 2;
   }
-  console.log(sensorName);
 
   const statusList = [
     {
@@ -20,11 +19,11 @@ function sensorStatus({ status, sensorName }) {
     },
     {
       imgUrl: 'images/normal.png',
-      statusMessage: '보통'
+      statusMessage: sensorName === '온도' || sensorName === '습도' ? `${sensorName} 보통` : '보통'
     },
     {
       imgUrl: 'images/Bad.png',
-      statusMessage: '나쁨'
+      statusMessage: sensorName === '온도' || sensorName === '습도' ? `${sensorName} 나쁨` : '나쁨'
     }
   ];
 
