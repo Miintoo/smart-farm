@@ -18,7 +18,6 @@ export default function ModalAddDevice({ onClick, onUpdateDevice }) {
       const {
         data: { data }
       } = await instance.post('/devices', value);
-      console.log(data);
       onClick();
       onUpdateDevice(data);
     } catch (error) {
