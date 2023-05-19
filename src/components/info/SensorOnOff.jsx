@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import PropsTypes from 'prop-types';
 import { useSearchParams } from 'react-router-dom';
+import { BeatLoader } from 'react-spinners';
 import mediaQuery from '../../utils/breakPointUI';
 import instance from '../../utils/auth/interceptor';
 
@@ -51,7 +52,7 @@ export default function SensorOnOff({ actuatorType, actuatorStatus, setActuator 
     <Container>
       {loading ? (
         <Status>
-          <p className="loadingMessage">loading...</p>
+          <BeatLoader className="loadingStatus" color="#c6a692" size="0.7rem" loading={loading} />
         </Status>
       ) : (
         <Status onClick={handleActuator}>
@@ -91,8 +92,11 @@ const Status = styled.button`
 
   cursor: pointer;
 
-  > .loadingMessage {
-    margin-left: 2rem;
+  > .loadingStatus {
+    margin: 0 auto;
+    ${mediaQuery[1]} {
+      margin-left: 1rem;
+    }
   }
 
   ${mediaQuery[3]} {
