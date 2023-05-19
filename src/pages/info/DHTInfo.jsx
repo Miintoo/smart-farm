@@ -44,7 +44,7 @@ export default function DHTInfo() {
       try {
         const response = await instance.get('/devices/dht', {
           params: {
-            deviceId: 1
+            deviceId
           }
         });
         const { searchData } = response.data.data;

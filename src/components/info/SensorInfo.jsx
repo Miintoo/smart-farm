@@ -23,7 +23,7 @@ export default function SensorInfo({ sensorData, sensorName, unit, status }) {
     minValue = -20;
     maxValue = 50;
   } else if (sensorName === '조도') {
-    maxValue = 3000;
+    maxValue = 1500;
   }
 
   const sensorValue = sensorData - minValue;
