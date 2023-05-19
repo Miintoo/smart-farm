@@ -66,12 +66,12 @@ export default function SensorInfoTemplate({
                 <SensorStatusWrapper>
                   {isDht === 'true' ? (
                     <>
-                      <SensorStatus status={status[0]} sensorName="온도" loading={loading} />
-                      <SensorStatus status={status[1]} sensorName="습도" loading={loading} />
+                      <SensorStatus status={status[0]} sensorName="온도" />
+                      <SensorStatus status={status[1]} sensorName="습도" />
                     </>
                   ) : (
                     <>
-                      <SensorStatus status={status[0]} sensorName={sensorName} loading={loading} />
+                      <SensorStatus status={status[0]} sensorName={sensorName} />
                       <SensorOnOff
                         actuatorType={actuatorType}
                         actuatorStatus={actuatorStatus}
@@ -131,7 +131,8 @@ SensorInfoTemplate.PropsTypes = {
   sensorData: PropsTypes.number.isRequired,
   unit: PropsTypes.oneOfType([PropsTypes.string, PropsTypes.arrayOf(PropsTypes.string)]).isRequired,
   infoContent: PropsTypes.objectOf(PropsTypes.arrayOf(PropsTypes.string)).isRequired,
-  status: PropsTypes.arrayOf(PropsTypes.string).isRequired
+  status: PropsTypes.arrayOf(PropsTypes.string).isRequired,
+  loading: PropsTypes.bool.isRequired
 };
 
 const Container = styled.div`
