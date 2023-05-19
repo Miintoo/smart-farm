@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from '@emotion/styled';
 import PropsTypes from 'prop-types';
+import { ClipLoader } from 'react-spinners';
 import instance from '../../utils/auth/interceptor';
 import Sidebar from '../common/Sidebar';
 import ModalOneButton from '../common/ModalOneButton';
@@ -22,7 +23,8 @@ export default function SensorInfoTemplate({
   sensorData,
   unit,
   infoContent,
-  status
+  status,
+  loading
 }) {
   const navigate = useNavigate();
   const [users, setUsers] = useState({});
@@ -55,39 +57,51 @@ export default function SensorInfoTemplate({
           <SensorMenu deviceId={deviceId} deviceName={deviceName} />
           <DeviceInfoWrapper>
             <DeviceName>디바이스: {deviceName}</DeviceName>
-            <SensorStatusWrapper>
-              {isDht === 'true' ? (
-                <>
-                  <SensorStatus status={status[0]} sensorName="온도" />
-                  <SensorStatus status={status[1]} sensorName="습도" />
-                </>
-              ) : (
-                <>
-                  <SensorStatus status={status[0]} sensorName={sensorName} />
-                  <SensorOnOff actuatorType={actuatorType} actuatorStatus={actuatorStatus} setActuator={setActuator} />
-                </>
-              )}
-            </SensorStatusWrapper>
-            <SensorInfoWrapper>
-              <InfoModal>
-                <span>{sensorName} 정보</span>
-                <InfoImage
-                  alt={`${sensorName} 정보`}
-                  src="/images/question.png"
-                  onClick={() => setInfoOpen(!infoOpen)}
-                />
-              </InfoModal>
-              <GraphWrapper>
-                {isDht === 'true' ? (
-                  <>
-                    <SensorInfo sensorData={sensorData[0]} sensorName="온도" unit={unit[0]} status={status[0]} />
-                    <SensorInfo sensorData={sensorData[1]} sensorName="습도" unit={unit[1]} status={status[1]} />
-                  </>
-                ) : (
-                  <SensorInfo sensorData={sensorData} sensorName={sensorName} unit={unit} status={status[0]} />
-                )}
-              </GraphWrapper>
-            </SensorInfoWrapper>
+            {loading ? (
+              <LoadingSpinner>
+                <ClipLoader className="loadingStatus" color="#c6a692" size="3rem" loading={loading} margin="auto" />
+              </LoadingSpinner>
+            ) : (
+              <>
+                <SensorStatusWrapper>
+                  {isDht === 'true' ? (
+                    <>
+                      <SensorStatus status={status[0]} sensorName="온도" loading={loading} />
+                      <SensorStatus status={status[1]} sensorName="습도" loading={loading} />
+                    </>
+                  ) : (
+                    <>
+                      <SensorStatus status={status[0]} sensorName={sensorName} loading={loading} />
+                      <SensorOnOff
+                        actuatorType={actuatorType}
+                        actuatorStatus={actuatorStatus}
+                        setActuator={setActuator}
+                      />
+                    </>
+                  )}
+                </SensorStatusWrapper>
+                <SensorInfoWrapper>
+                  <InfoModal>
+                    <span>{sensorName} 정보</span>
+                    <InfoImage
+                      alt={`${sensorName} 정보`}
+                      src="/images/question.png"
+                      onClick={() => setInfoOpen(!infoOpen)}
+                    />
+                  </InfoModal>
+                  <GraphWrapper>
+                    {isDht === 'true' ? (
+                      <>
+                        <SensorInfo sensorData={sensorData[0]} sensorName="온도" unit={unit[0]} status={status[0]} />
+                        <SensorInfo sensorData={sensorData[1]} sensorName="습도" unit={unit[1]} status={status[1]} />
+                      </>
+                    ) : (
+                      <SensorInfo sensorData={sensorData} sensorName={sensorName} unit={unit} status={status[0]} />
+                    )}
+                  </GraphWrapper>
+                </SensorInfoWrapper>
+              </>
+            )}
           </DeviceInfoWrapper>
         </ContentWrapper>
       </Container>
@@ -189,6 +203,13 @@ const DeviceName = styled.p`
     font-size: 1.3rem;
     line-height: 1.8rem;
   }
+`;
+
+const LoadingSpinner = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 `;
 
 const SensorStatusWrapper = styled.div`

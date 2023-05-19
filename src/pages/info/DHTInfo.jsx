@@ -6,6 +6,7 @@ import SensorInfoTemplate from '../../components/info/SensorInfoTemplate';
 export default function DHTInfo() {
   const [temp, setTemp] = useState(0);
   const [humid, setHumid] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   const [searchParams] = useSearchParams();
   const deviceId = searchParams.get('deviceId');
@@ -38,26 +39,6 @@ export default function DHTInfo() {
   }
 
   useEffect(() => {
-    // 최초 데이터 받아오기
-    const fetchData = async () => {
-      try {
-        const response = await instance.get('/devices/dht', {
-          params: {
-            deviceId
-          }
-        });
-        const { searchData } = response.data.data;
-        setTemp(searchData[0].temperature);
-        setHumid(searchData[0].humidity);
-      } catch (error) {
-        Error(error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  useEffect(() => {
     // 일정 주기로 데이터 받아오기
     const intervalData = setInterval(async () => {
       try {
@@ -81,6 +62,29 @@ export default function DHTInfo() {
     };
   }, []);
 
+  useEffect(() => {
+    // 최초 데이터 받아오기
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        const response = await instance.get('/devices/dht', {
+          params: {
+            deviceId
+          }
+        });
+        const { searchData } = response.data.data;
+        setTemp(searchData[0].temperature);
+        setHumid(searchData[0].humidity);
+      } catch (error) {
+        Error(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <SensorInfoTemplate
       deviceName={deviceName}
@@ -91,6 +95,7 @@ export default function DHTInfo() {
       sensorData={[temp, humid]}
       infoContent={infoContent}
       status={status}
+      loading={loading}
     />
   );
 }
