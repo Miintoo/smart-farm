@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import PropsTypes from 'prop-types';
 import mediaQuery from '../../utils/breakPointUI';
 
-function sensorStatus({ status, sensorName }) {
+export default function SensorStatus({ status, sensorName }) {
   let index;
   if (status === 'good') {
     index = 0;
@@ -34,6 +35,11 @@ function sensorStatus({ status, sensorName }) {
     </Status>
   );
 }
+
+SensorStatus.PropsTypes = {
+  sensorName: PropsTypes.string.isRequired,
+  status: PropsTypes.string.isRequired
+};
 
 const Status = styled.div`
   display: flex;
@@ -83,5 +89,3 @@ const StatusMessage = styled.p`
     line-height: 1.3rem;
   }
 `;
-
-export default sensorStatus;

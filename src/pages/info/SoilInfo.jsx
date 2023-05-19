@@ -73,6 +73,7 @@ export default function SoilInfo() {
     <SensorInfoTemplate
       deviceId={deviceId}
       deviceName={deviceName}
+      isDht="false"
       sensorName="토양수분"
       unit="%"
       sensorData={solid}

@@ -87,7 +87,7 @@ export default function DHTInfo() {
       deviceId={deviceId}
       isDht="true"
       sensorName="온습도"
-      unit="º"
+      unit={['º', '%']}
       sensorData={[temp, humid]}
       infoContent={infoContent}
       status={status}

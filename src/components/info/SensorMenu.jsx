@@ -1,9 +1,10 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from '@emotion/styled';
+import PropsTypes from 'prop-types';
 import mediaQuery from '../../utils/breakPointUI';
 
-function sensorMenu({ deviceId, deviceName }) {
+export default function SensorMenu({ deviceId, deviceName }) {
   const linkList = ['dht', 'soil', 'lux'];
   const customLink = linkList.map((path) => `/${path}?deviceName=${deviceName}&deviceId=${deviceId}`);
 
@@ -23,6 +24,11 @@ function sensorMenu({ deviceId, deviceName }) {
     </NavWrapper>
   );
 }
+
+SensorMenu.PropsTypes = {
+  deviceName: PropsTypes.string.isRequired,
+  deviceId: PropsTypes.number.isRequired
+};
 
 const NavWrapper = styled.div`
   display: flex;
@@ -81,5 +87,3 @@ const Li = styled.li`
     }
   }
 `;
-
-export default sensorMenu;

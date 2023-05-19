@@ -70,7 +70,7 @@ ModalOneButton.propTypes = {
   title: PropsTypes.string,
   buttonDescription: PropsTypes.string,
   onClick: PropsTypes.func.isRequired,
-  infoContent: PropsTypes.arrayOf(PropsTypes.string).isRequired
+  infoContent: PropsTypes.objectOf(PropsTypes.arrayOf(PropsTypes.string)).isRequired
 };
 
 ModalOneButton.defaultProps = {

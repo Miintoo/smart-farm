@@ -2,10 +2,11 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { Doughnut } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement } from 'chart.js';
+import PropsTypes from 'prop-types';
 import mediaQuery from '../../utils/breakPointUI';
 
 ChartJS.register(ArcElement);
-export default function sensorInfo({ sensorData, sensorName, unit, status }) {
+export default function SensorInfo({ sensorData, sensorName, unit, status }) {
   let gaugeColor = '#ced4da';
 
   if (status === 'good') {
@@ -110,6 +111,13 @@ export default function sensorInfo({ sensorData, sensorName, unit, status }) {
     </Wrapper>
   );
 }
+
+SensorInfo.PropsTypes = {
+  sensorName: PropsTypes.string.isRequired,
+  sensorData: PropsTypes.number.isRequired,
+  unit: PropsTypes.string.isRequired,
+  status: PropsTypes.string.isRequired
+};
 
 const Wrapper = styled.div`
   width: ${(props) => (props.isDht ? '20rem' : '24rem')};

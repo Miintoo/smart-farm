@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from '@emotion/styled';
+import PropsTypes from 'prop-types';
 import instance from '../../utils/auth/interceptor';
 import Sidebar from '../common/Sidebar';
 import ModalOneButton from '../common/ModalOneButton';
@@ -55,7 +56,7 @@ export default function SensorInfoTemplate({
           <DeviceInfoWrapper>
             <DeviceName>디바이스: {deviceName}</DeviceName>
             <SensorStatusWrapper>
-              {isDht ? (
+              {isDht === 'true' ? (
                 <>
                   <SensorStatus status={status[0]} sensorName="온도" />
                   <SensorStatus status={status[1]} sensorName="습도" />
@@ -77,10 +78,10 @@ export default function SensorInfoTemplate({
                 />
               </InfoModal>
               <GraphWrapper>
-                {isDht ? (
+                {isDht === 'true' ? (
                   <>
-                    <SensorInfo sensorData={sensorData[0]} sensorName="온도" unit="º" status={status[0]} />
-                    <SensorInfo sensorData={sensorData[1]} sensorName="습도" unit="%" status={status[1]} />
+                    <SensorInfo sensorData={sensorData[0]} sensorName="온도" unit={unit[0]} status={status[0]} />
+                    <SensorInfo sensorData={sensorData[1]} sensorName="습도" unit={unit[1]} status={status[1]} />
                   </>
                 ) : (
                   <SensorInfo sensorData={sensorData} sensorName={sensorName} unit={unit} status={status[0]} />
@@ -104,6 +105,20 @@ export default function SensorInfoTemplate({
     </>
   );
 }
+
+SensorInfoTemplate.PropsTypes = {
+  deviceName: PropsTypes.string.isRequired,
+  deviceId: PropsTypes.number.isRequired,
+  isDht: PropsTypes.bool.isRequired,
+  actuatorType: PropsTypes.string,
+  actuatorStatus: PropsTypes.number,
+  setActuator: PropsTypes.func,
+  sensorName: PropsTypes.string.isRequired,
+  sensorData: PropsTypes.number.isRequired,
+  unit: PropsTypes.oneOfType([PropsTypes.string, PropsTypes.arrayOf(PropsTypes.string)]).isRequired,
+  infoContent: PropsTypes.objectOf(PropsTypes.arrayOf(PropsTypes.string)).isRequired,
+  status: PropsTypes.arrayOf(PropsTypes.string).isRequired
+};
 
 const Container = styled.div`
   position: absolute;

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
-import PropTypes from 'prop-types';
+import PropsTypes from 'prop-types';
 import { useSearchParams } from 'react-router-dom';
 import mediaQuery from '../../utils/breakPointUI';
 import instance from '../../utils/auth/interceptor';
@@ -66,8 +66,10 @@ export default function SensorOnOff({ actuatorType, actuatorStatus, setActuator 
   );
 }
 
-SensorOnOff.propTypes = {
-  actuatorType: PropTypes.string.isRequired
+SensorOnOff.PropsTypes = {
+  actuatorType: PropsTypes.string.isRequired,
+  actuatorStatus: PropsTypes.number.isRequired,
+  setActuator: PropsTypes.func.isRequired
 };
 
 const Container = styled.div`

@@ -83,6 +83,7 @@ export default function CDSInfo() {
       actuatorType="led"
       status={status}
       setActuator={setActuator}
+      isDht="false"
     />
   );
 }
