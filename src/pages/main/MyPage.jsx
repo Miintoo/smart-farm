@@ -10,10 +10,15 @@ export default function MyPage() {
   const [searchParams] = useSearchParams();
   const userName = searchParams.get('userName');
 
+  const handleBackButton = () => {
+    navigate('/main');
+  };
+
   return (
     <Container>
       <Title>회원 정보</Title>
       <InfoContainer>
+        <BackButton src="/images/rightArrow.png" alt="뒤로가기 버튼" onClick={handleBackButton} />
         <InfoContent>
           <ProfileContainer>
             <ProfileImage src="/images/profile.jpg" alt="프로파일 이미지 입니다." />
@@ -63,6 +68,20 @@ const Container = styled.div`
   ${mediaQuery[0]} {
     width: 100%;
     border: none;
+  }
+`;
+
+const BackButton = styled.img`
+  position: absolute;
+  top: 1.5rem;
+  left: 1rem;
+  transform: scaleX(-1);
+
+  cursor: pointer;
+
+  &:hover {
+    transition: all 0.2s ease-out;
+    opacity: 0.6;
   }
 `;
 

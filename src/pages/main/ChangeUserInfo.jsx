@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import styled from '@emotion/styled';
+import { useNavigate } from 'react-router-dom';
 import validation from '../../utils/validation';
 import mediaQuery from '../../utils/breakPointUI';
 import instance from '../../utils/auth/interceptor';
 
 export default function ChangeUserInfo() {
+  const navigate = useNavigate();
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
 
@@ -41,10 +43,15 @@ export default function ChangeUserInfo() {
     }
   };
 
+  const handleBackButton = () => {
+    navigate(-1);
+  };
+
   return (
     <Container>
       <Title>회원정보 수정</Title>
       <InfoContainer>
+        <BackButton src="/images/rightArrow.png" alt="뒤로가기 버튼" onClick={handleBackButton} />
         <InfoContainerItem>
           <ProfileContainer>
             <ProfileImage src="/images/profile.jpg" alt="프로파일 이미지 입니다." />
@@ -95,6 +102,20 @@ const Container = styled.div`
   ${mediaQuery[0]} {
     width: 100%;
     border: none;
+  }
+`;
+
+const BackButton = styled.img`
+  position: absolute;
+  top: 1.5rem;
+  left: 1rem;
+  transform: scaleX(-1);
+
+  cursor: pointer;
+
+  &:hover {
+    transition: all 0.2s ease-out;
+    opacity: 0.6;
   }
 `;
 

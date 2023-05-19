@@ -13,6 +13,7 @@ export default function Main() {
   const navigate = useNavigate();
   const [users, setUsers] = useState({});
   const [devices, setDevices] = useState([]);
+  const [sideBarOpen, setSideBarOpen] = useState(false);
   const [isOpen, setIsOpen] = useState({
     errorAlert: false,
     addAlert: false
@@ -71,10 +72,14 @@ export default function Main() {
     setDevices(newDeviceData);
   };
 
+  const handleSidebarOpen = () => {
+    setSideBarOpen(!sideBarOpen);
+  };
+
   return (
     <>
-      <Container>
-        <Sidebar users={users} />
+      <Container className={sideBarOpen ? 'isActive' : ''}>
+        <Sidebar users={users} onSidebarOpen={handleSidebarOpen} />
         <MainContent>
           {devices.map((item) => (
             <DeviceItem device={item} key={shortid.generate()} onDeleteDevice={handleDeviceDelete} />
@@ -102,6 +107,10 @@ const Container = styled.div`
   width: 60vw;
   height: 75vh;
   border: 0.5rem solid #c6a692;
+
+  &.isActive {
+    overflow: hidden;
+  }
 
   ${mediaQuery[2]} {
     width: 75vw;

@@ -1,3 +1,4 @@
+/* eslint-disable react/require-default-props */
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import axios from 'axios';
@@ -6,7 +7,7 @@ import PropsTypes from 'prop-types';
 import ModalOneButton from './ModalOneButton';
 import mediaQuery from '../../utils/breakPointUI';
 
-export default function Sidebar({ users }) {
+export default function Sidebar({ users, onSidebarOpen }) {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const [sideBarOpen, setSideBarOpen] = useState(false);
@@ -14,6 +15,7 @@ export default function Sidebar({ users }) {
   const handleLogout = async () => {
     try {
       await axios.get('/logout');
+      axios.defaults.headers.common.Authorization = '';
       setIsOpen(true);
     } catch (error) {
       throw Error('로그아웃이 성공하지 않았습니다.');
@@ -27,6 +29,7 @@ export default function Sidebar({ users }) {
 
   const handleSidebarButton = () => {
     setSideBarOpen(!sideBarOpen);
+    if (onSidebarOpen) onSidebarOpen();
   };
 
   return (
@@ -64,7 +67,8 @@ export default function Sidebar({ users }) {
 }
 
 Sidebar.propTypes = {
-  users: PropsTypes.object.isRequired
+  users: PropsTypes.object.isRequired,
+  onSidebarOpen: PropsTypes.func
 };
 
 const SidebarImage = styled.img`
@@ -99,6 +103,7 @@ const SidebarImage = styled.img`
 
 const SidebarContainer = styled.nav`
   position: sticky;
+  top: 0;
 
   width: 30%;
   height: 100%;
@@ -108,13 +113,23 @@ const SidebarContainer = styled.nav`
   z-index: 2;
 
   ${mediaQuery[2]} {
-    position: fixed;
+    position: sticky;
 
     display: none;
 
     &.isActive {
+      position: fixed;
       display: block;
+      align-self: flex-start;
     }
+  }
+
+  ${mediaQuery[1]} {
+    width: 45%;
+  }
+
+  ${mediaQuery[0]} {
+    width: 50%;
   }
 `;
 
@@ -193,15 +208,13 @@ const SidebarCancelImage = styled.img`
 `;
 
 const SidebarBackDrop = styled.div`
-  position: absolute;
+  position: fixed;
 
   &.isActive {
     width: 100%;
     height: 100%;
-
     background: rgba(0, 0, 0, 0.4);
 
-    pointer-events: none;
     z-index: 1;
   }
 `;

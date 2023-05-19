@@ -30,11 +30,16 @@ export default function SignOut() {
       Error('회원탈퇴에 실패 했습니다.');
     }
   };
+
+  const handleBackButton = () => {
+    navigate(-1);
+  };
   return (
     <>
       <Container>
         <Title>회원탈퇴</Title>
         <InfoContainer>
+          <BackButton src="/images/rightArrow.png" alt="뒤로가기 버튼" onClick={handleBackButton} />
           <InfoContainerForm onSubmit={handleSubmit(onSubmit)}>
             <AlertTitle>탈퇴시 모든 회원정보가 삭제 됩니다.</AlertTitle>
             <LoginInputBox
@@ -75,6 +80,20 @@ const Container = styled.div`
   ${mediaQuery[0]} {
     width: 100%;
     border: none;
+  }
+`;
+
+const BackButton = styled.img`
+  position: absolute;
+  top: 1.5rem;
+  left: 1rem;
+  transform: scaleX(-1);
+
+  cursor: pointer;
+
+  &:hover {
+    transition: all 0.2s ease-out;
+    opacity: 0.6;
   }
 `;
 

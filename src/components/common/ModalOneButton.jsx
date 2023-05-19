@@ -67,15 +67,10 @@ export default function ModalOneButton({ title, buttonDescription, onClick, info
 }
 
 ModalOneButton.propTypes = {
-  title: PropsTypes.string,
-  buttonDescription: PropsTypes.string,
+  title: PropsTypes.string.isRequired,
+  buttonDescription: PropsTypes.string.isRequired,
   onClick: PropsTypes.func.isRequired,
   infoContent: PropsTypes.objectOf(PropsTypes.arrayOf(PropsTypes.string)).isRequired
-};
-
-ModalOneButton.defaultProps = {
-  title: '제목',
-  buttonDescription: '내용'
 };
 
 const Container = styled.div`
@@ -206,6 +201,4 @@ const ModalBackdrop = styled.div`
   bottom: 0;
   right: 0;
   background-color: rgba(0, 0, 0, 0.4);
-
-  pointer-events: none;
 `;
