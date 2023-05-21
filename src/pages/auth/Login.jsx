@@ -1,5 +1,5 @@
 /* eslint-disable no-shadow */
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import styled from '@emotion/styled';
 import { useNavigate } from 'react-router-dom';
@@ -15,8 +15,6 @@ export default function Login() {
     handleSubmit,
     formState: { isSubmitting, isDirty, errors }
   } = useForm({ mode: 'onBlur' });
-
-  useEffect(() => {}, []);
 
   // 로그인시 처리 로직
   const onSubmit = async (value) => {
