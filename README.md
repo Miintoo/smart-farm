@@ -1,5 +1,5 @@
 <div align="center">
-![header](https://capsule-render.vercel.app/api?type=waving&color=auto&height=200&section=header&text=오늘농장🍀&fontSize=40&animation=fadeIn&fontAlignY=28&fontAlign=50&desc=당신의%20시선이%20머무는%20그곳에서,%20농장이%20시작됩니다.&descAlignY=50&descAlign=50)
+<img src="https://capsule-render.vercel.app/api?type=waving&color=auto&height=200&section=header&text=오늘농장🍀&fontSize=40&animation=fadeIn&fontAlignY=28&fontAlign=50&desc=당신의%20시선이%20머무는%20그곳에서,%20농장이%20시작됩니다.&descAlignY=50&descAlign=50" />
 </div>
 
 <h2>🔍 서비스 소개 </h2>
@@ -24,5 +24,5 @@
 <img src="https://lh3.googleusercontent.com/fife/APg5EOY0EahJW_bQfqNF4n3uowujrZClYw8ZkhjncLSSZswE_31n4mbGTnm7KfyriSIgZJaNmuTdwxDl43SA341cJ_IQoPj8g69gzmAjqOzxhnXr0A397TY9jX9WWBTKDGuY_yOFYTxs1TunAfWQxmFn1tDSvDGs0caKe78YwRBpGELJjFLHoIw6pw2zr5EC1ZqbSdsXVtjJVCS-X0D_JYqGshS7ArPBt0IAJwbUvxhVbR6mr7Rm4GMQDse90XU-lss9jScgOkKfmZaUU6gHpEdGxIK8qHjocXQkguFvkn89tjTXKP546WkZo8C7_PRL9QAgqne7-SrC_VycRO1yei4zd5huZZGdWzCsEd4LPwB-PvyZ4u0vxQ85TCVOzqwPHLSGrj3FT3vAUTzzBzjh3rPHW4e8gDe4w_w55q16tRrQFnB48yNddolXiaclQLPs8yZw9Xq00H9lAEFFnNEvRyvTWPNOEhAQOd21KdtZZ9YVk6HXsmTXFBXDXTjKPmwWuzDMXmxuzCdeRF3vWUj9SFy_iwxBX3xo0TATtMpLNSVz6VF6LX2tuUMcYKH4-dri6Jyf9Fpz-EN12WJTcx4ePz0MqPgTULewJ_2HjaDm2xUVIizWPdeszUMRALJSz8KxKAjA24t5vUulnGTDkQDu4YJQxZPJkorByaD11jkzQKt-ypuSlvS1KZBJeIoemwoxJcFWaIFEia5-jH-H3y0R7urz9ERz44dE7BGsySsz03xv1VxVRcexFItHMu0tFUgJ3jf3C3MmJVH6WdQdKjoThGYXGhge60MiYMHFK5WWCH2F9oPyZFaYzRMtMWliRK-8raaG0tTaCQ3BkdBnGWG1rjFJ52pQmCQP2--ICKsGQH9tLDoV3XQR_oU1iEFXnGtcYneLtahkTNN2lVWOuffDJAuxV1jgkn69EqtMaemmHp1vGUfwwvoJsq7jU5Dg6Tczc36zz6TToxhZBzBlMyiqdkw1SdmrsZqAkxAnDi7emGyoNKyEwcE_GtV0q6Dz7J_keAo26GAGeNpHXyyU_uXh_W9H0w8ssuY-5lSAO8CcYCNvXwVR0PYMQdIVwbyzCBI6aZ5J7DMn49vyENY809i7uCbWQfinJYWNpRe5wjgy__zkXGkolpGZU7z6MqRrR_YcBv40W1Q7q56ozTEe7zIl7GXvMLas3I_o4mNNgvymm3oRtcI5PATIaGAKiAr7dO3Rz8hxc8jxo9bJ_2BbTz33lyrmWZF-YH8JetwE8n5f1AfHrrOaUgjkMskOflT79sX6bomdVSpINwhFy8HbP9WvIn_WIwBQ864IMCVeKBJL6fV4GtaUyzGq0MuR12_9svpx-clBMaoMX9w2_bBYFqItiFtPpxDyxd_tUtcBGEnJvNILJbLzZIehKlAL4Hm2KYK4HSL3P4jmCVGIHIIzuh-KG6iKnwbCqRcbthilGBw_9n9pcRy0CyeI8i2ytmTgNfQ4zGIwB5ngMepPyVeOlG-LtE4qBVHwWbb3ij3Bfhh0nTnG0GLNkqfq8m719ouyxiNyLtE=w702-h937" alt="infra">
 </div>
 <div align="center">
-![Footer](https://capsule-render.vercel.app/api?type=waving&color=auto&height=200&section=footer)
+<img src="https://capsule-render.vercel.app/api?type=waving&color=auto&height=200&section=footer" />
 </div>
