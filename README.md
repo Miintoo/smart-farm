@@ -3,7 +3,12 @@
 </div>
 
 <h2>🔍 서비스 소개 </h2>
+
+![image](https://github.com/Miintoo/smart-farm/assets/96560613/0d41130d-ac0c-4691-82be-08caef39f89f) 
+
 <h3>식물을 잘 키우기 위한 최적의 조건을 제공하는 IoT 서비스 플랫폼입니다!</h3>
+
+[프로젝트 구경하기](https://reactjs.kr/)
 
 <h2>✨ 팀 소개</h2>
 <div align="center">
@@ -23,6 +28,28 @@
 
 <img src="https://lh3.googleusercontent.com/fife/APg5EOY0EahJW_bQfqNF4n3uowujrZClYw8ZkhjncLSSZswE_31n4mbGTnm7KfyriSIgZJaNmuTdwxDl43SA341cJ_IQoPj8g69gzmAjqOzxhnXr0A397TY9jX9WWBTKDGuY_yOFYTxs1TunAfWQxmFn1tDSvDGs0caKe78YwRBpGELJjFLHoIw6pw2zr5EC1ZqbSdsXVtjJVCS-X0D_JYqGshS7ArPBt0IAJwbUvxhVbR6mr7Rm4GMQDse90XU-lss9jScgOkKfmZaUU6gHpEdGxIK8qHjocXQkguFvkn89tjTXKP546WkZo8C7_PRL9QAgqne7-SrC_VycRO1yei4zd5huZZGdWzCsEd4LPwB-PvyZ4u0vxQ85TCVOzqwPHLSGrj3FT3vAUTzzBzjh3rPHW4e8gDe4w_w55q16tRrQFnB48yNddolXiaclQLPs8yZw9Xq00H9lAEFFnNEvRyvTWPNOEhAQOd21KdtZZ9YVk6HXsmTXFBXDXTjKPmwWuzDMXmxuzCdeRF3vWUj9SFy_iwxBX3xo0TATtMpLNSVz6VF6LX2tuUMcYKH4-dri6Jyf9Fpz-EN12WJTcx4ePz0MqPgTULewJ_2HjaDm2xUVIizWPdeszUMRALJSz8KxKAjA24t5vUulnGTDkQDu4YJQxZPJkorByaD11jkzQKt-ypuSlvS1KZBJeIoemwoxJcFWaIFEia5-jH-H3y0R7urz9ERz44dE7BGsySsz03xv1VxVRcexFItHMu0tFUgJ3jf3C3MmJVH6WdQdKjoThGYXGhge60MiYMHFK5WWCH2F9oPyZFaYzRMtMWliRK-8raaG0tTaCQ3BkdBnGWG1rjFJ52pQmCQP2--ICKsGQH9tLDoV3XQR_oU1iEFXnGtcYneLtahkTNN2lVWOuffDJAuxV1jgkn69EqtMaemmHp1vGUfwwvoJsq7jU5Dg6Tczc36zz6TToxhZBzBlMyiqdkw1SdmrsZqAkxAnDi7emGyoNKyEwcE_GtV0q6Dz7J_keAo26GAGeNpHXyyU_uXh_W9H0w8ssuY-5lSAO8CcYCNvXwVR0PYMQdIVwbyzCBI6aZ5J7DMn49vyENY809i7uCbWQfinJYWNpRe5wjgy__zkXGkolpGZU7z6MqRrR_YcBv40W1Q7q56ozTEe7zIl7GXvMLas3I_o4mNNgvymm3oRtcI5PATIaGAKiAr7dO3Rz8hxc8jxo9bJ_2BbTz33lyrmWZF-YH8JetwE8n5f1AfHrrOaUgjkMskOflT79sX6bomdVSpINwhFy8HbP9WvIn_WIwBQ864IMCVeKBJL6fV4GtaUyzGq0MuR12_9svpx-clBMaoMX9w2_bBYFqItiFtPpxDyxd_tUtcBGEnJvNILJbLzZIehKlAL4Hm2KYK4HSL3P4jmCVGIHIIzuh-KG6iKnwbCqRcbthilGBw_9n9pcRy0CyeI8i2ytmTgNfQ4zGIwB5ngMepPyVeOlG-LtE4qBVHwWbb3ij3Bfhh0nTnG0GLNkqfq8m719ouyxiNyLtE=w702-h937" alt="infra">
 </div>
+
+## 💡 팀 문화
+
+#### 1. 상대방에게 배려는 필수!
+
+상대를 배려하는 말투 사용하기! 
+ex) 혹시~, ~해주시면 좋을꺼 같에요., ~하는거 어떠세요? 
+
+#### 2. 매일 아침 스크럼
+
+매일 아침마다 어떤 부분을 개발하고 있고 어떤 부분이 어렵고 등의 스크럼시간 진행
+
+#### 3. 코드 통일
+
+코드 컨벤션 규칙을 정해서 동일한 코드 규칙을 기준으로 개발하기
+
+https://spotless-weather-112.notion.site/Book-Store-903a00b585a24ec1b8cb2fe8f883bbec
+
 <div align="center">
 <img src="https://capsule-render.vercel.app/api?type=waving&color=auto&height=200&section=footer" />
 </div>
+
+#### 4. 일정 기록하기
+
+미리 약속이 있는경우 달력에 기록해두고 팀원들이 알 수 있도록 기록 해두기!
