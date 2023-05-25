@@ -1,0 +1,57 @@
+pipeline {
+    agent any
+    stages {
+        stage('Git Clone') {
+            steps {
+                git branch: 'main', credentialsId: '25461883-8f70-41e2-8379-575d1425f6a4', url: 'https://kdt-gitlab.elice.io/iot_track/class_01/iot_project/team2/smart-farm-fe.git'
+            }
+        }
+        stage('FE-build') {
+            steps {
+                nodejs(nodeJSInstallationName: 'NodeJS 18.14.1') {
+                    sh ''' 
+                        npm install --save --legacy-peer-deps 
+                        CI='true' npm run build 
+                    '''
+                }
+                
+            }
+        }
+        stage('Compression') {
+            steps {
+                sh '''
+                rm -rf node_modules
+                '''
+                
+                sh '''
+                tar -cvf dist.tar build
+                '''
+            }
+        }
+        stage('Deploy') {
+            steps {
+                sh '''
+                    cp -r /var/lib/jenkins/workspace/smart-farm-fe/build /home/ubuntu/dist
+                '''
+                }
+            }
+        }
+    post {
+        success {
+            slackSend (
+                channel: '#smart-farm-fe',  
+                color: "#00ff00",
+                message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})"
+            )
+        }
+        failure {
+            slackSend (
+                channel: '#smart-farm-fe',
+                color: '#00ff00',
+                message: '배포 실패'
+            )
+        }
+    }    
+}
+    
+
