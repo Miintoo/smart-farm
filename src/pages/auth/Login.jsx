@@ -72,12 +72,11 @@ const LoginBox = styled.div`
   position: absolute;
   top: 50%;
   left: 50%;
+  transform: translate(-50%, -50%);
 
   width: 69rem;
   height: 60vh;
   border: 0.6rem solid #c6a692;
-
-  transform: translate(-50%, -50%);
 
   ${mediaQuery[2]} {
     width: 60rem;

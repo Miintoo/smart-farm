@@ -10,6 +10,7 @@ import ChangeUserInfo from './pages/main/ChangeUserInfo';
 import DHTInfo from './pages/info/DHTInfo';
 import SoilInfo from './pages/info/SoilInfo';
 import CDSInfo from './pages/info/CDSInfo';
+import NotFoundScene from './pages/NotFoundScene';
 
 export default function Router() {
   return (
@@ -25,6 +26,7 @@ export default function Router() {
         <Route path="/dht" element={<DHTInfo />} />
         <Route path="/soil" element={<SoilInfo />} />
         <Route path="/lux" element={<CDSInfo />} />
+        <Route path="*" element={<NotFoundScene />} />
       </Routes>
     </BrowserRouter>
   );
