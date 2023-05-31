@@ -50,6 +50,10 @@ https://spotless-weather-112.notion.site/Book-Store-903a00b585a24ec1b8cb2fe8f883
 
 미리 약속이 있는경우 달력에 기록해두고 팀원들이 알 수 있도록 기록 해두기!
 
+### 테스트용 아이디 비번
+- id: sando@naver.com
+- pw: 12341234
+
 
 <div align="center">
 <img src="https://capsule-render.vercel.app/api?type=waving&color=auto&height=200&section=footer" />
