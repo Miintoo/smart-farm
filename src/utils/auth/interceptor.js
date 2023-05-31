@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: 'https://reactjs.kr/api'
+  baseURL: 'http://13.125.30.182/api'
 });
 
 instance.interceptors.request.use(async (config) => {
