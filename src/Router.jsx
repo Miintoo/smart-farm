@@ -1,33 +1,36 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Login from './pages/auth/Login';
-import Register from './pages/auth/Register';
-import Main from './pages/main/Main';
-import MyPage from './pages/main/MyPage';
 import ChangePassword from './pages/auth/ChangePassword';
-import SignOut from './pages/main/SignOut';
-import ChangeUserInfo from './pages/main/ChangeUserInfo';
-import DHTInfo from './pages/info/DHTInfo';
-import SoilInfo from './pages/info/SoilInfo';
-import CDSInfo from './pages/info/CDSInfo';
-import NotFoundScene from './pages/NotFoundScene';
+
+const RegisterComponent = lazy(() => import('./pages/auth/Register'));
+const MainComponent = lazy(() => import('./pages/main/Main'));
+const MyPageComponent = lazy(() => import('./pages/main/MyPage'));
+const ChangeUserInfoComponent = lazy(() => import('./pages/main/ChangeUserInfo'));
+const SignOutComponent = lazy(() => import('./pages/main/SignOut'));
+const DHTInfoComponent = lazy(() => import('./pages/info/DHTInfo'));
+const SoilInfoComponent = lazy(() => import('./pages/info/SoilInfo'));
+const CDSInfoComponent = lazy(() => import('./pages/info/CDSInfo'));
+const NotFoundSceneComponent = lazy(() => import('./pages/NotFoundScene'));
 
 export default function Router() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/main" element={<Main />} />
-        <Route path="/mypage" element={<MyPage />} />
-        <Route path="/change/password" element={<ChangePassword />} />
-        <Route path="/change/userinfo" element={<ChangeUserInfo />} />
-        <Route path="/signout" element={<SignOut />} />
-        <Route path="/register" exact element={<Register />} />
-        <Route path="/dht" element={<DHTInfo />} />
-        <Route path="/soil" element={<SoilInfo />} />
-        <Route path="/lux" element={<CDSInfo />} />
-        <Route path="*" element={<NotFoundScene />} />
-      </Routes>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/main" element={<MainComponent />} />
+          <Route path="/mypage" element={<MyPageComponent />} />
+          <Route path="/change/password" element={<ChangePassword />} />
+          <Route path="/change/userinfo" element={<ChangeUserInfoComponent />} />
+          <Route path="/signout" element={<SignOutComponent />} />
+          <Route path="/register" exact element={<RegisterComponent />} />
+          <Route path="/dht" element={<DHTInfoComponent />} />
+          <Route path="/soil" element={<SoilInfoComponent />} />
+          <Route path="/lux" element={<CDSInfoComponent />} />
+          <Route path="*" element={<NotFoundSceneComponent />} />
+        </Routes>
+      </Suspense>
     </BrowserRouter>
   );
 }
